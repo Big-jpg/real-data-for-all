@@ -15,5 +15,14 @@ try {
     FROM suburb_sale_facts WHERE suburb_key=${suburbKey}
       AND ${sql.unsafe(`sold_date BETWEEN DATE '${from}' AND DATE '${to}'`)}`;
   if(!insight||Number(insight.sale_count)<1) throw new Error("MotherDuck insight smoke query returned no sales");
-  console.log(`MotherDuck smoke query passed: ${rows.length} months sampled and ${Number(insight.sale_count)} sale facts analysed`);
+  const dateRange=sql.unsafe(`sold_date BETWEEN DATE '${from}' AND DATE '${to}'`);
+  const propertyTypes=await sql`SELECT coalesce(nullif(property_type,''),'Other') AS segment_label,count(*)::bigint sale_count,
+    percentile_cont(.5) WITHIN GROUP(ORDER BY price_aud) FILTER(WHERE price_aud IS NOT NULL)::bigint median_price_aud
+    FROM suburb_sale_facts WHERE suburb_key=${suburbKey} AND ${dateRange}
+    GROUP BY 1 ORDER BY sale_count DESC LIMIT 5`;
+  const bedrooms=await sql`SELECT bedrooms AS segment_label,count(*)::bigint sale_count,
+    percentile_cont(.5) WITHIN GROUP(ORDER BY price_aud) FILTER(WHERE price_aud IS NOT NULL)::bigint median_price_aud
+    FROM suburb_sale_facts WHERE suburb_key=${suburbKey} AND ${dateRange} AND bedrooms BETWEEN 1 AND 6
+    GROUP BY bedrooms ORDER BY bedrooms`;
+  console.log(`MotherDuck smoke query passed: ${rows.length} months, ${Number(insight.sale_count)} facts, ${propertyTypes.length} property types, and ${bedrooms.length} bedroom groups`);
 } finally { await sql.end(); }

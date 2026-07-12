@@ -21,11 +21,11 @@ export async function GET(request:Request){
       corr(price_aud::double precision,land_size_sqm::double precision) FILTER(WHERE price_aud BETWEEN 50000 AND 20000000 AND land_size_sqm BETWEEN 50 AND 10000) land_price_correlation,
       percentile_cont(.5) WITHIN GROUP(ORDER BY land_size_sqm) FILTER(WHERE land_size_sqm BETWEEN 50 AND 10000)::bigint median_land_size_sqm
       FROM suburb_sale_facts WHERE suburb_key=${suburb_key} AND ${dateRange}`;
-    const property_types=await sql`SELECT coalesce(nullif(property_type,''),'Other') label,count(*)::bigint sale_count,
+    const property_types=await sql`SELECT coalesce(nullif(property_type,''),'Other') AS segment_label,count(*)::bigint sale_count,
       percentile_cont(.5) WITHIN GROUP(ORDER BY price_aud) FILTER(WHERE price_aud IS NOT NULL)::bigint median_price_aud
       FROM suburb_sale_facts WHERE suburb_key=${suburb_key} AND ${dateRange}
       GROUP BY 1 ORDER BY sale_count DESC LIMIT 5`;
-    const bedrooms=await sql`SELECT bedrooms label,count(*)::bigint sale_count,
+    const bedrooms=await sql`SELECT bedrooms AS segment_label,count(*)::bigint sale_count,
       percentile_cont(.5) WITHIN GROUP(ORDER BY price_aud) FILTER(WHERE price_aud IS NOT NULL)::bigint median_price_aud
       FROM suburb_sale_facts WHERE suburb_key=${suburb_key} AND ${dateRange} AND bedrooms BETWEEN 1 AND 6
       GROUP BY bedrooms ORDER BY bedrooms`;
