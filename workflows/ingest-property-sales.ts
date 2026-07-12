@@ -13,8 +13,7 @@ export async function ingestPropertySales(input: IngestRequest) {
 
 async function fetchAndRegister(input: IngestRequest) {
   "use step";
-  const response=await fetch(input.objectUrl); if(!response.ok) throw new Error(`Blob download failed: ${response.status}`);
-  const content=Buffer.from(await response.arrayBuffer());
+  const content=await readPrivateBlob(input.objectUrl);
   const sha256=sourceFileHash(content);
   if(input.expectedSha256 && input.expectedSha256!==sha256) throw new Error("Source checksum mismatch");
   const { registerFile }=await import("@/lib/db");
@@ -24,8 +23,7 @@ async function fetchAndRegister(input: IngestRequest) {
 
 async function loadRaw(fileId: string, objectUrl: string) {
   "use step";
-  const response=await fetch(objectUrl); if(!response.ok) throw new Error(`Blob download failed: ${response.status}`);
-  const rows=parseSourceCsv(Buffer.from(await response.arrayBuffer()));
+  const rows=parseSourceCsv(await readPrivateBlob(objectUrl));
   const { loadObservations }=await import("@/lib/db");
   return loadObservations(fileId,rows);
 }
@@ -33,4 +31,13 @@ async function loadRaw(fileId: string, objectUrl: string) {
 async function cleanAndCurate(fileId: string) {
   "use step";
   const { curateFile }=await import("@/lib/db"); await curateFile(fileId);
+}
+
+async function readPrivateBlob(url: string) {
+  const { get }=await import("@vercel/blob");
+  const result=await get(url,{access:"private"});
+  if(!result || result.statusCode!==200 || !result.stream) {
+    throw new Error(`Private Blob download failed${result?`: ${result.statusCode}`:""}`);
+  }
+  return Buffer.from(await new Response(result.stream).arrayBuffer());
 }
