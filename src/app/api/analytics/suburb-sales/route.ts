@@ -17,12 +17,15 @@ export async function GET(request: Request) {
   const input=parsed.data;
   const sql=motherduck();
   try {
+    const suburbFilter=input.suburb?sql`AND lower(suburb)=lower(${input.suburb})`:sql``;
+    const postcodeFilter=input.postcode?sql`AND postcode=${input.postcode}`:sql``;
+    // MotherDuck's PostgreSQL endpoint currently rejects bound strings cast to
+    // DATE. Zod has already constrained these values to strict ISO dates.
+    const fromFilter=input.from?sql.unsafe(`AND sale_month>=DATE '${input.from}'`):sql``;
+    const toFilter=input.to?sql.unsafe(`AND sale_month<=DATE '${input.to}'`):sql``;
     const rows=await sql`SELECT suburb,postcode,sale_month,sale_count,median_price_aud,average_price_aud,minimum_price_aud,maximum_price_aud
       FROM suburb_monthly_sales
-      WHERE (${input.suburb??null}::varchar IS NULL OR lower(suburb)=lower(${input.suburb??null}))
-        AND (${input.postcode??null}::varchar IS NULL OR postcode=${input.postcode??null})
-        AND (${input.from??null}::date IS NULL OR sale_month>=${input.from??null}::date)
-        AND (${input.to??null}::date IS NULL OR sale_month<=${input.to??null}::date)
+      WHERE true ${suburbFilter} ${postcodeFilter} ${fromFilter} ${toFilter}
       ORDER BY sale_month DESC,suburb,postcode LIMIT ${input.limit}`;
     return Response.json({data:rows,meta:{rows:rows.length,source:"motherduck",filters:input}},{headers:{"Cache-Control":"public, s-maxage=3600, stale-while-revalidate=86400"}});
   } finally { await sql.end(); }

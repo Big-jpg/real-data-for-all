@@ -15,8 +15,9 @@
     "db:reconcile": "tsx --env-file=.env.local scripts/reconcile.ts",
     "ingest:local": "tsx --env-file=.env.local scripts/ingest-local.ts",
     "archive:blob": "tsx --env-file=.env.local scripts/archive-blob.ts",
-    "profile": "tsx scripts/profile-data.ts"
-    ,"publish:motherduck": "tsx --env-file=.env.local scripts/publish-motherduck.ts"
+    "profile": "tsx scripts/profile-data.ts",
+    "publish:motherduck": "tsx --env-file=.env.local scripts/publish-motherduck.ts",
+    "smoke:motherduck": "tsx --env-file=.env.local scripts/smoke-motherduck.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
