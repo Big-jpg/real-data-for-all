@@ -36,6 +36,7 @@ Upload an immutable CSV to Vercel Blob, then call `POST /api/ingest` with `Autho
 ```
 
 The route returns `202` and a Vercel Workflow run ID. The Workflow state contains only file metadata; CSV bytes remain in Blob.
+If `INGEST_SECRET` is not configured, the route fails closed with HTTP 503.
 
 ## Baseline reconciliation
 
