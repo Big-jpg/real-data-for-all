@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>REA Sold Scraper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>REA Sold Scraper</h1>
+      <div class="status-bar" id="statusBar">Idle</div>
+    </header>
+
+    <!-- Add Job Form -->
+    <section class="section">
+      <h2>Add Suburb</h2>
+      <form id="addForm" autocomplete="off">
+        <div class="form-row">
+          <select id="inputState" class="sel-state">
+            <option value="" selected disabled>State...</option>
+          </select>
+          <select id="inputPostcode" class="sel-postcode" disabled>
+            <option value="" selected disabled>Postcode...</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <select id="inputSuburb" class="sel-suburb" disabled>
+            <option value="" selected disabled>Suburb...</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <select id="inputType">
+            <option value="" selected disabled>Select type...</option>
+            <option value="house">House</option>
+            <option value="unit">Unit</option>
+            <option value="land">Land</option>
+            <option value="townhouse">Townhouse</option>
+          </select>
+        </div>
+        <div class="form-row form-row--check">
+          <label class="check-label">
+            <input type="checkbox" id="inputIncludeSurrounding" checked>
+            Include surrounding suburbs
+          </label>
+          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="button" id="btnAddAll" class="btn btn-secondary" disabled>Add All</button>
+          <button type="button" id="btnClearSelections" class="btn btn-secondary">Clear</button>
+        </div>
+      </form>
+      <div id="dataStatus" class="data-status"></div>
+    </section>
+
+    <!-- Controls -->
+    <section class="section">
+      <div class="controls">
+        <button id="btnStart" class="btn btn-success">Start</button>
+        <button id="btnPause" class="btn btn-warn" disabled>Pause</button>
+        <button id="btnStop" class="btn btn-danger" disabled>Stop</button>
+        <button id="btnExportAll" class="btn btn-secondary">Export All</button>
+        <button id="btnClearDone" class="btn btn-secondary">Clear Done</button>
+        <button id="btnClearPending" class="btn btn-secondary">Clear Pending</button>
+      </div>
+    </section>
+
+    <!-- Queue -->
+    <section class="section">
+      <h2>Queue</h2>
+      <div id="queueList" class="queue-list">
+        <div class="empty-state">No suburbs in queue</div>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section class="section collapsible">
+      <h2 class="toggle-header" id="settingsToggle">Settings ▸</h2>
+      <div id="settingsPanel" class="settings-panel hidden">
+        <div class="setting-row">
+          <label for="settingDelay">Delay between pages (ms)</label>
+          <input type="number" id="settingDelay" min="1000" max="30000" step="500" value="4000">
+        </div>
+        <div class="setting-row">
+          <label for="settingMaxPages">Max pages per suburb</label>
+          <input type="number" id="settingMaxPages" min="1" max="500" step="1" value="100">
+        </div>
+        <div class="setting-row">
+          <label for="settingConcurrency">Parallel tabs</label>
+          <input type="number" id="settingConcurrency" min="1" max="4" step="1" value="2">
+        </div>
+        <div class="setting-row">
+          <button id="btnSaveSettings" class="btn btn-primary">Save Settings</button>
+          <button id="btnRefreshData" class="btn btn-secondary" type="button">Refresh Postcodes</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

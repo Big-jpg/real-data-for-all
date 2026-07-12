@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "REA Sold Scraper",
+  "version": "1.0.0",
+  "description": "Extract sold property data from realestate.com.au",
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://www.realestate.com.au/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "REA Sold Scraper"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.realestate.com.au/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {}
+}

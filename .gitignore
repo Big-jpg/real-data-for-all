@@ -1,0 +1,13 @@
+node_modules/
+.next/
+.vercel/
+.env
+.env.local
+dist/
+coverage/
+*.parquet
+*.duckdb
+*.log
+*.tsbuildinfo
+rea_sales_data_model/
+/.swc
