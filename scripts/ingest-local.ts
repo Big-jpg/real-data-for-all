@@ -3,9 +3,11 @@ import path from "node:path";
 import { curateFile, loadObservations, refreshMarts, registerFile } from "../src/lib/db";
 import { parseSourceCsv, sourceFileHash } from "../src/lib/source";
 
-const directory=path.resolve(process.argv[2]||"rea_sales_data_model");
+const args=process.argv.slice(2).filter((value)=>value!=="--");
+const directoryArg=args.find((value)=>!value.startsWith("--"));
+const directory=path.resolve(directoryArg||"rea_sales_data_model");
 const files=(await readdir(directory)).filter((f)=>f.endsWith(".csv")).sort();
-const limitArg=process.argv.find((v)=>v.startsWith("--limit="));
+const limitArg=args.find((v)=>v.startsWith("--limit="));
 const selected=limitArg?files.slice(0,Number(limitArg.split("=")[1])):files;
 let observations=0;
 for(const [index,fileName] of selected.entries()){
