@@ -1,14 +1,13 @@
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { curateFile, loadObservations, refreshMarts, registerFile } from "../src/lib/db";
+import { parseIngestArgs } from "../src/lib/cli";
 import { parseSourceCsv, sourceFileHash } from "../src/lib/source";
 
-const args=process.argv.slice(2).filter((value)=>value!=="--");
-const directoryArg=args.find((value)=>!value.startsWith("--"));
-const directory=path.resolve(directoryArg||"rea_sales_data_model");
+const args=parseIngestArgs(process.argv.slice(2));
+const directory=path.resolve(args.directory);
 const files=(await readdir(directory)).filter((f)=>f.endsWith(".csv")).sort();
-const limitArg=args.find((v)=>v.startsWith("--limit="));
-const selected=limitArg?files.slice(0,Number(limitArg.split("=")[1])):files;
+const selected=args.limit?files.slice(0,Number(args.limit)):files;
 let observations=0;
 for(const [index,fileName] of selected.entries()){
   const content=await readFile(path.join(directory,fileName)); const hash=sourceFileHash(content);

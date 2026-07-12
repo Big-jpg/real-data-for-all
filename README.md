@@ -21,6 +21,7 @@ cp .env.example .env.local
 pnpm db:migrate
 pnpm test
 pnpm ingest:local -- --limit=1
+pnpm db:status
 pnpm ingest:local
 ```
 

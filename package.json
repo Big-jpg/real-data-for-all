@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "db:migrate": "tsx --env-file=.env.local scripts/migrate.ts",
+    "db:status": "tsx --env-file=.env.local scripts/status.ts",
     "ingest:local": "tsx --env-file=.env.local scripts/ingest-local.ts",
     "profile": "tsx scripts/profile-data.ts"
     ,"publish:motherduck": "tsx --env-file=.env.local scripts/publish-motherduck.ts"
