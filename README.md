@@ -45,6 +45,14 @@ Upload an immutable CSV to Vercel Blob, then call `POST /api/ingest` with `Autho
 The route returns `202` and a Vercel Workflow run ID. The Workflow state contains only file metadata; CSV bytes remain in Blob.
 If `INGEST_SECRET` is not configured, the route fails closed with HTTP 503.
 
+## Analytics API
+
+`GET /api/analytics/suburb-sales` queries the MotherDuck monthly mart. Optional parameters are `suburb`, `postcode`, `from`, `to`, and `limit`.
+
+```text
+/api/analytics/suburb-sales?suburb=Yokine&from=2020-01-01
+```
+
 ## Baseline reconciliation
 
 The last Fabric notebook run reported 347,887 observations, 296,422 listings, 232,596 core analytical records, and 333 suburbs. The current local archive contains 347,902 rows and 347,886 unique observation keys (16 repeated observations), a one-observation drift from that earlier Fabric run. Compare the Neon counts through `/api/stats` after the full load. Differences must be explained by an explicit quality rule rather than silent deletion.

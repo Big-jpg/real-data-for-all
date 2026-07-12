@@ -4,6 +4,8 @@ const sql=database(process.env.DATABASE_URL_UNPOOLED??process.env.DATABASE_URL);
 try {
   const [counts]=await sql`SELECT
     (SELECT count(*) FROM ops.ingest_file)::int files,
+    (SELECT count(*) FROM ops.ingest_file WHERE object_url IS NOT NULL)::int archived_files,
+    (SELECT coalesce(sum(byte_size),0) FROM ops.ingest_file WHERE object_url IS NOT NULL)::bigint archived_bytes,
     (SELECT count(*) FROM raw.sale_observation)::int observations,
     (SELECT count(*) FROM core.property)::int properties,
     (SELECT count(*) FROM core.listing)::int listings,
