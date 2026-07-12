@@ -55,6 +55,8 @@ If `INGEST_SECRET` is not configured, the route fails closed with HTTP 503.
 
 The public explorer includes a deterministic snapshot studio. Visitors can render the same analytical result in Perth Warm, Microsoft Corporate, Excel Analysis, or PowerPoint Sales styles, then copy or download the styled report as a PNG. Clipboard failures fall back to a local PNG download; CSV export remains available separately.
 
+Sales velocity is defined as completed detached-house sales per month over the latest rolling 12 months. Its comparison is the percentage change in completed sale count versus the immediately preceding 12 months; it is not an inventory-turnover or days-on-market measure.
+
 ```text
 /api/analytics/suburb-sales?suburb=Yokine&from=2020-01-01
 ```
