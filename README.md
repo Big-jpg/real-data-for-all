@@ -9,7 +9,7 @@ Open, auditable analytical property-sales data for Perth. The application migrat
 3. `core.curate_file` selects the best listing observation and resolves it to a canonical property.
 4. `core.sale_event` preserves transactions independently of listing identity.
 5. `mart.suburb_monthly_sales` serves common application reads from Neon.
-6. `scripts/publish-motherduck.ts` copies the curated aggregate to MotherDuck for columnar analytics.
+6. `scripts/publish-motherduck.ts` uses the native integration token and MotherDuck PostgreSQL endpoint to publish the curated aggregate for columnar analytics.
 
 The current canonical key is a SHA-256 fingerprint of normalized address, state, and postcode. It is marked as `NORMALIZED_ADDRESS` with a confidence of `0.9000`; authoritative parcel/title identifiers can later be attached without changing `property_id` references.
 
