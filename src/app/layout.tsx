@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import "./styles.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://real-data-for-all.vercel.app"),
+  metadataBase: new URL("https://perthhousedata.com"),
   title: "Perth House Data",
   description: "Three decades of Perth house sales, open for analysis.",
+  alternates: { canonical: "/" },
   openGraph: {
+    url: "/",
     title: "Perth House Data",
     description: "Three decades of Perth house sales, open for analysis.",
     images: [{ url: "/og-perth-house-data.png", width: 1536, height: 1024, alt: "Perth House Data open house-sales history" }],

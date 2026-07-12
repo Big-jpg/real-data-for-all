@@ -2,6 +2,8 @@
 
 Open, auditable analytical detached-house sales data for Perth postcodes 6000–6200. Units, acreage, duplexes, and semi-detached properties are explicitly outside the analytical scope. The application migrates the existing Fabric medallion pipeline to immutable CSV sources, Vercel Workflow orchestration, Neon Postgres canonical records, and MotherDuck OLAP serving.
 
+Production: [perthhousedata.com](https://perthhousedata.com)
+
 ## Data flow
 
 1. A CSV is retained in private Vercel Blob and registered in `ops.ingest_file` by SHA-256. Workflow steps read it through the authenticated Blob SDK.
@@ -49,7 +51,7 @@ If `INGEST_SECRET` is not configured, the route fails closed with HTTP 503.
 
 `GET /api/analytics/suburb-sales` queries the MotherDuck monthly mart. Preferred parameters are `suburb_key`, `from`, `to`, and `limit`; `suburb` and `postcode` remain available for compatibility.
 
-`GET /api/analytics/suburb-insights` accepts `suburb_key`, `from`, and `to`. It queries the curated MotherDuck sale fact table for land-to-price correlation, plausible median land size, property-type mix, and bedroom-segment medians over the visitor's selected period.
+`GET /api/analytics/suburb-insights` accepts `suburb_key`, `from`, and `to`. It queries the curated MotherDuck sale fact table for land-to-price correlation, plausible median land size, and bedroom-segment medians over the visitor's selected period.
 
 ```text
 /api/analytics/suburb-sales?suburb=Yokine&from=2020-01-01
