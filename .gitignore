@@ -2,6 +2,7 @@ node_modules/
 .next/
 .vercel/
 .env
+.env.motherduck
 .env.local
 dist/
 coverage/
