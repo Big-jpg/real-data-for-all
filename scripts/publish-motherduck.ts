@@ -20,7 +20,8 @@ try{
   const facts=await source`SELECT d.suburb_key,s.sold_date,s.price_aud,s.land_size_sqm,s.property_type,s.bedrooms,s.bathrooms,s.car_spaces
     FROM core.sale_event s JOIN core.property p USING(property_id)
     JOIN mart.suburb_dimension d ON d.suburb_key=trim(both '-' from regexp_replace(lower(trim(p.suburb)),'[^a-z0-9]+','-','g'))
-    WHERE s.sold_date>=DATE '1990-01-01' ORDER BY d.suburb_key,s.sold_date`;
+    WHERE s.sold_date>=DATE '1990-01-01' AND p.postcode BETWEEN '6000' AND '6200'
+      AND lower(trim(s.property_type))='house' ORDER BY d.suburb_key,s.sold_date`;
 
   await target`DROP TABLE IF EXISTS suburb_dimension_next`;
   await target`CREATE TABLE suburb_dimension_next(suburb_key varchar,suburb varchar,canonical_postcode varchar,observed_postcodes varchar,sale_count bigint,postcode_confidence decimal(5,4))`;
