@@ -9,6 +9,7 @@ const oidcFile=path.resolve(process.env.VERCEL_ENV_FILE||".env.blob");
 if(existsSync(oidcFile)) {
   const pulled=parseEnv(await readFile(oidcFile,"utf8"));
   if(pulled.VERCEL_OIDC_TOKEN) process.env.VERCEL_OIDC_TOKEN=pulled.VERCEL_OIDC_TOKEN;
+  if(pulled.BLOB_STORE_ID) process.env.BLOB_STORE_ID=pulled.BLOB_STORE_ID;
 }
 if(!process.env.VERCEL_OIDC_TOKEN) throw new Error("Fresh VERCEL_OIDC_TOKEN required; run: vercel env pull .env.blob --environment=production");
 
