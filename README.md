@@ -24,7 +24,7 @@ pnpm ingest:local -- --limit=1
 pnpm ingest:local
 ```
 
-Standalone scripts require the variables in `.env.local` to be loaded by your shell. In PowerShell, the simplest deployment workflow is `vercel env pull .env.local`, then run scripts with the required variables set in the session.
+Standalone database scripts load `.env.local` explicitly. Pull the connected Production variables before the first migration with `vercel env pull .env.local --environment=production`.
 
 ## HTTP ingestion
 
