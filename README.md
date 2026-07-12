@@ -53,6 +53,8 @@ If `INGEST_SECRET` is not configured, the route fails closed with HTTP 503.
 
 `GET /api/analytics/suburb-insights` accepts `suburb_key`, `from`, and `to`. It queries the curated MotherDuck sale fact table for rolling 12-month and prior-year medians, explicit sample sizes, land-to-price correlation, plausible median land size, and bedroom-segment medians over the visitor's selected period.
 
+The public explorer includes a deterministic snapshot studio. Visitors can render the same analytical result in Perth Warm, Microsoft Corporate, Excel Analysis, or PowerPoint Sales styles, then copy or download the styled report as a PNG. Clipboard failures fall back to a local PNG download; CSV export remains available separately.
+
 ```text
 /api/analytics/suburb-sales?suburb=Yokine&from=2020-01-01
 ```
