@@ -11,7 +11,7 @@ Open, auditable analytical property-sales data for Perth. The application migrat
 5. `mart.suburb_monthly_sales` serves common application reads from Neon.
 6. `scripts/publish-motherduck.ts` uses the native integration token and MotherDuck PostgreSQL endpoint to publish the curated aggregate for columnar analytics.
 
-The current canonical key is a SHA-256 fingerprint of normalized address, state, and postcode. It is marked as `NORMALIZED_ADDRESS` with a confidence of `0.9000`; authoritative parcel/title identifiers can later be attached without changing `property_id` references.
+The current property key is a SHA-256 fingerprint of normalized address, state, and postcode. It is marked as `NORMALIZED_ADDRESS` with a confidence of `0.9000`; authoritative parcel/title identifiers can later be attached without changing `property_id` references. Analytical suburb identity is independent of postcode: `mart.suburb_dimension` assigns a normalized `suburb_key`, retains every observed postcode for lineage, and selects the sales-weighted modal postcode as display metadata. Monthly suburb statistics are recomputed from individual sale events at `suburb_key × sale_month` grain.
 
 ## Setup
 
@@ -47,7 +47,7 @@ If `INGEST_SECRET` is not configured, the route fails closed with HTTP 503.
 
 ## Analytics API
 
-`GET /api/analytics/suburb-sales` queries the MotherDuck monthly mart. Optional parameters are `suburb`, `postcode`, `from`, `to`, and `limit`.
+`GET /api/analytics/suburb-sales` queries the MotherDuck monthly mart. Preferred parameters are `suburb_key`, `from`, `to`, and `limit`; `suburb` and `postcode` remain available for compatibility.
 
 ```text
 /api/analytics/suburb-sales?suburb=Yokine&from=2020-01-01

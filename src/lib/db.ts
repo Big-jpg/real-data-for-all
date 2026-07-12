@@ -46,5 +46,8 @@ export async function curateFile(fileId: string) {
 }
 
 export async function refreshMarts() {
-  const sql=database(); try { await sql`REFRESH MATERIALIZED VIEW mart.suburb_monthly_sales`; } finally { await sql.end(); }
+  const sql=database(); try {
+    await sql`REFRESH MATERIALIZED VIEW mart.suburb_dimension`;
+    await sql`REFRESH MATERIALIZED VIEW mart.suburb_monthly_sales`;
+  } finally { await sql.end(); }
 }
