@@ -1,4 +1,4 @@
-# REA for All
+# Perth House Data
 
 Open, auditable analytical detached-house sales data for Perth postcodes 6000–6200. Units, acreage, duplexes, and semi-detached properties are explicitly outside the analytical scope. The application migrates the existing Fabric medallion pipeline to immutable CSV sources, Vercel Workflow orchestration, Neon Postgres canonical records, and MotherDuck OLAP serving.
 

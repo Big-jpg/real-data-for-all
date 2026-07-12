@@ -1,11 +1,16 @@
 import SalesExplorer from "@/components/SalesExplorer";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <main>
-      <p className="eyebrow">REA FOR ALL · PERTH</p>
-      <h1>Property history,<br />open for analysis.</h1>
-      <p className="lede">Three decades of detached-house sales across Perth postcodes 6000–6200, cleaned into canonical properties and opened for independent analysis.</p>
+      <header className="hero">
+        <Link className="brand" href="/" aria-label="Perth House Data home"><strong>Perth House Data</strong><span>Open sales history</span></Link>
+        <p className="eyebrow">30 YEARS · 330 SUBURBS · HOUSES ONLY</p>
+        <h1>What did Perth houses<br />really sell for?</h1>
+        <p className="lede">Explore three decades of detached-house sales across Perth postcodes 6000–6200—cleaned, deduplicated, and made easy to understand.</p>
+        <div className="hero-actions"><a href="#explore">Explore your suburb <span aria-hidden="true">↓</span></a><a href="#methodology">Read the methodology</a></div>
+      </header>
       <p className="scope">Houses only <i /> Units excluded <i /> Acreage excluded <i /> Duplex and semi-detached excluded</p>
       <section className="grid">
         <article><strong>347,887</strong><span>source observations</span></article>
@@ -40,7 +45,7 @@ export default function Home() {
           <div><p className="eyebrow">ABOUT THE BUILDER</p><h2>I make useful things from difficult data.</h2></div>
           <div><p>This is an independent public-interest data project: part engineering experiment, part analytical playground, and part argument for making useful information easier to explore.</p><a href="https://hypecoding.dev" target="_blank" rel="noreferrer">Visit hypecoding.dev <span aria-hidden="true">↗</span></a></div>
         </section>
-        <div className="footer-base"><strong>REA FOR ALL</strong><p>Perth detached-house sales · Postcodes 6000–6200</p><p>Independent project · Not affiliated with realestate.com.au</p></div>
+        <div className="footer-base"><strong>PERTH HOUSE DATA</strong><p>Perth detached-house sales · Postcodes 6000–6200</p><p>Independent project · Not affiliated with realestate.com.au</p></div>
       </footer>
     </main>
   );
