@@ -25,6 +25,13 @@ pnpm db:status
 pnpm ingest:local
 ```
 
+Archive the historical CSV source after pulling a fresh short-lived Blob OIDC token without overwriting the Neon credentials in `.env.local`:
+
+```bash
+vercel env pull .env.blob --environment=production
+pnpm archive:blob
+```
+
 Standalone database scripts load `.env.local` explicitly. Pull the connected Production variables before the first migration with `vercel env pull .env.local --environment=production`.
 
 ## HTTP ingestion
