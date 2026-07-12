@@ -64,7 +64,7 @@ export default function SalesExplorer(){
 
   function download(){const header=Object.keys(rows[0]||{});const csv=[header.join(","),...rows.map(row=>header.map(key=>JSON.stringify(String(row[key as keyof SaleRow]??""))).join(","))].join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download=`${selected?.suburb_key}-sales.csv`;a.click();URL.revokeObjectURL(a.href);}
 
-  return <section className="explorer" aria-label="Property sales explorer">
+  return <section className="explorer" id="explore" aria-label="Property sales explorer">
     <header className="journey-heading"><span>01</span><div><p className="eyebrow">START WITH HOME</p><h2>Which suburb do you know?</h2><p>Search your home suburb, somewhere you have lived, or a neighbourhood you are curious about.</p></div></header>
     <div className="suburb-finder">
       <label htmlFor="suburb-search">Find a Perth suburb</label>
