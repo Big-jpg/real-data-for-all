@@ -11,3 +11,6 @@ coverage/
 *.tsbuildinfo
 rea_sales_data_model/
 /.swc
+
+.vercel
+.env*.local
