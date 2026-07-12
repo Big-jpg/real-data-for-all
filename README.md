@@ -4,7 +4,7 @@ Open, auditable analytical property-sales data for Perth. The application migrat
 
 ## Data flow
 
-1. A CSV is retained in Vercel Blob and registered in `ops.ingest_file` by SHA-256.
+1. A CSV is retained in private Vercel Blob and registered in `ops.ingest_file` by SHA-256. Workflow steps read it through the authenticated Blob SDK.
 2. A durable workflow parses one bounded file and idempotently lands observations in `raw.sale_observation`.
 3. `core.curate_file` selects the best listing observation and resolves it to a canonical property.
 4. `core.sale_event` preserves transactions independently of listing identity.
