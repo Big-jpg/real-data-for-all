@@ -57,6 +57,7 @@ article span,.status{color:var(--muted)}
 .period-form button{display:block;width:100%;margin-top:2rem;padding:1.15rem;font-size:1rem}.period-form button:hover,.data-footer button:hover{transform:translateY(-1px);background:var(--rose-dark)}.period-form button:disabled{opacity:.65;cursor:wait}
 
 .results{padding-top:9vh;scroll-margin-top:3vh}.results-heading{margin:0 0 2rem 92px}.results-heading h2{font-size:clamp(2.7rem,6vw,5.7rem)}
+.result-count{display:inline-flex;margin-top:1rem;padding:.5rem .8rem;border-radius:999px;background:var(--surface-rose);color:var(--rose-dark);font-size:.73rem;font-weight:700}
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}.kpis article{min-height:170px}.kpis article span,.kpis small,figure small{color:var(--muted)}.kpis .positive{color:#8b393b}.kpis .negative{color:#b65650}
 .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
 figure{margin:0;padding:1.6rem;background:rgba(255,250,247,.86);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 35px rgba(109,55,50,.055)}

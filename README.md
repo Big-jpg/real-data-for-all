@@ -51,7 +51,7 @@ If `INGEST_SECRET` is not configured, the route fails closed with HTTP 503.
 
 `GET /api/analytics/suburb-sales` queries the MotherDuck monthly mart. Preferred parameters are `suburb_key`, `from`, `to`, and `limit`; `suburb` and `postcode` remain available for compatibility.
 
-`GET /api/analytics/suburb-insights` accepts `suburb_key`, `from`, and `to`. It queries the curated MotherDuck sale fact table for land-to-price correlation, plausible median land size, and bedroom-segment medians over the visitor's selected period.
+`GET /api/analytics/suburb-insights` accepts `suburb_key`, `from`, and `to`. It queries the curated MotherDuck sale fact table for rolling 12-month and prior-year medians, explicit sample sizes, land-to-price correlation, plausible median land size, and bedroom-segment medians over the visitor's selected period.
 
 ```text
 /api/analytics/suburb-sales?suburb=Yokine&from=2020-01-01
