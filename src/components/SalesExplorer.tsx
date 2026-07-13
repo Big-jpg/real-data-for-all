@@ -1,6 +1,6 @@
 "use client";
 
-import {FormEvent,useEffect,useMemo,useRef,useState} from "react";
+import {useEffect,useMemo,useRef,useState} from "react";
 
 type SaleRow={suburb:string;postcode:string;sale_month:string;sale_count:number|string;median_price_aud:number|string|null;average_price_aud:number|string|null;minimum_price_aud:number|string|null;maximum_price_aud:number|string|null};
 type Suburb={suburb_key:string;suburb:string;canonical_postcode:string;sale_count:number|string};
@@ -8,6 +8,7 @@ type Segment={segment_label:string|number;sale_count:number|string;median_price_
 type Rolling={current_from:string;current_to:string;prior_from:string;prior_to:string;current_sale_count:number|string;current_priced_sales:number|string;current_median_price_aud:number|string|null;prior_sale_count:number|string;prior_priced_sales:number|string;prior_median_price_aud:number|string|null};
 type Insights={summary:{sale_count:number|string;priced_sales:number|string;land_sample:number|string;land_price_correlation:number|string|null;median_land_size_sqm:number|string|null};rolling:Rolling|null;bedrooms:Segment[]};
 type SnapshotTheme="warm"|"corporate"|"excel"|"presentation";
+type BedroomFilter="all"|"1"|"2"|"3"|"4"|"5"|"6";
 
 const money=new Intl.NumberFormat("en-AU",{style:"currency",currency:"AUD",maximumFractionDigits:0});
 const number=new Intl.NumberFormat("en-AU");
@@ -21,7 +22,12 @@ const snapshotThemes:[SnapshotTheme,string,string][]=[
 const snapshotBackground:Record<SnapshotTheme,string>={warm:"#f8efea",corporate:"#eef4fb",excel:"#eef8f0",presentation:"#fff2e8"};
 
 function isoDate(date:Date){return date.toISOString().slice(0,10);}
-function datesFor(months:number){const to=new Date();const from=new Date(to);from.setMonth(from.getMonth()-months);return{from:isoDate(from),to:isoDate(to)};}
+function datesFor(months:number){
+  const now=new Date();
+  const to=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),0));
+  const from=new Date(Date.UTC(to.getUTCFullYear(),to.getUTCMonth()-months+1,1));
+  return{from:isoDate(from),to:isoDate(to)};
+}
 
 export default function SalesExplorer(){
   const [suburbs,setSuburbs]=useState<Suburb[]>([]);
@@ -29,6 +35,8 @@ export default function SalesExplorer(){
   const [selected,setSelected]=useState<Suburb|null>(null);
   const [periodIndex,setPeriodIndex]=useState(1);
   const [activePeriod,setActivePeriod]=useState(12);
+  const [bedroom,setBedroom]=useState<BedroomFilter>("all");
+  const [activeBedroom,setActiveBedroom]=useState<BedroomFilter>("all");
   const [rows,setRows]=useState<SaleRow[]>([]);
   const [insights,setInsights]=useState<Insights|null>(null);
   const [loading,setLoading]=useState(false);
@@ -36,7 +44,6 @@ export default function SalesExplorer(){
   const [snapshotTheme,setSnapshotTheme]=useState<SnapshotTheme>("warm");
   const [snapshotStatus,setSnapshotStatus]=useState("");
   const periodRef=useRef<HTMLDivElement>(null);
-  const resultsRef=useRef<HTMLDivElement>(null);
   const snapshotRef=useRef<HTMLDivElement>(null);
 
   useEffect(()=>{fetch("/api/analytics/suburbs").then(r=>r.json()).then(j=>setSuburbs(j.data)).catch(()=>setError("Suburb search is temporarily unavailable."));},[]);
@@ -52,28 +59,33 @@ export default function SalesExplorer(){
     requestAnimationFrame(()=>periodRef.current?.scrollIntoView({behavior:"smooth",block:"center"}));
   }
 
-  async function load(event:FormEvent){
-    event.preventDefault();if(!selected)return;
-    setLoading(true);setError("");
-    const range=datesFor(periods[periodIndex]);
-    const q=new URLSearchParams({suburb_key:selected.suburb_key,...range,limit:"1200"});
-    try{
-      const [salesResponse,insightResponse]=await Promise.all([
-        fetch(`/api/analytics/suburb-sales?${q}`),
-        fetch(`/api/analytics/suburb-insights?${q}`),
-      ]);
-      if(!salesResponse.ok||!insightResponse.ok)throw new Error();
-      const [salesJson,insightJson]=await Promise.all([salesResponse.json(),insightResponse.json()]);
-      setRows(salesJson.data.slice().reverse());setInsights(insightJson);setActivePeriod(periods[periodIndex]);
-      requestAnimationFrame(()=>resultsRef.current?.scrollIntoView({behavior:"smooth",block:"start"}));
-    }catch{setError("The analytical service did not respond. Please try again.");}
-    finally{setLoading(false);}
-  }
+  useEffect(()=>{
+    if(!selected)return;
+    const controller=new AbortController();
+    const timer=setTimeout(async()=>{
+      setLoading(true);setError("");
+      const range=datesFor(periods[periodIndex]);
+      const q=new URLSearchParams({suburb_key:selected.suburb_key,...range,months:String(periods[periodIndex]),limit:"1200"});
+      if(bedroom!=="all")q.set("bedrooms",bedroom);
+      try{
+        const [salesResponse,insightResponse]=await Promise.all([
+          fetch(`/api/analytics/suburb-sales?${q}`,{signal:controller.signal}),
+          fetch(`/api/analytics/suburb-insights?${q}`,{signal:controller.signal}),
+        ]);
+        if(!salesResponse.ok||!insightResponse.ok)throw new Error();
+        const [salesJson,insightJson]=await Promise.all([salesResponse.json(),insightResponse.json()]);
+        if(controller.signal.aborted)return;
+        setRows(salesJson.data.slice().reverse());setInsights(insightJson);setActivePeriod(periods[periodIndex]);setActiveBedroom(bedroom);
+      }catch{if(!controller.signal.aborted)setError("The analytical service did not respond. Please try again.");}
+      finally{if(!controller.signal.aborted)setLoading(false);}
+    },180);
+    return()=>{clearTimeout(timer);controller.abort();};
+  },[selected,periodIndex,bedroom]);
 
   const metrics=useMemo(()=>{const priced=rows.filter(r=>r.median_price_aud!=null),latest=priced.at(-1),total=rows.reduce((sum,r)=>sum+Number(r.sale_count),0);return{latest,total,months:rows.length};},[rows]);
   const rolling=insights?.rolling;
   const annualChange=rolling?.current_median_price_aud&&rolling.prior_median_price_aud?((Number(rolling.current_median_price_aud)/Number(rolling.prior_median_price_aud)-1)*100):null;
-  const salesVelocity=rolling?Number(rolling.current_sale_count)/12:null;
+  const salesVelocity=rolling?Number(rolling.current_sale_count)/activePeriod:null;
   const velocityChange=rolling&&Number(rolling.prior_sale_count)>0?((Number(rolling.current_sale_count)/Number(rolling.prior_sale_count)-1)*100):null;
   const annualPeriod=rolling?`${new Date(rolling.current_from).toLocaleDateString("en-AU",{month:"short",year:"numeric"})}–${new Date(rolling.current_to).toLocaleDateString("en-AU",{month:"short",year:"numeric"})}`:"";
   const correlation=Number(insights?.summary.land_price_correlation??0);
@@ -97,20 +109,21 @@ export default function SalesExplorer(){
 
     <div className={`period-step ${selected?"ready":"locked"}`} ref={periodRef} aria-disabled={!selected}>
       <header className="journey-heading"><span>02</span><div><p className="eyebrow">CHOOSE A WINDOW</p><h2>{selected?`How has ${selected.suburb} moved?`:"Choose a suburb to continue"}</h2><p>Recent periods keep comparisons relevant and make the first answer easy to read.</p></div></header>
-      {selected&&<form onSubmit={load} className="period-form">
-        <div className="range-value">Last <strong>{periods[periodIndex]} months</strong></div>
-        <input aria-label="Analysis period in months" type="range" min="0" max="4" step="1" value={periodIndex} onChange={e=>setPeriodIndex(Number(e.target.value))}/>
-        <div className="range-labels">{periods.map(value=><span key={value}>{value}m</span>)}</div>
-        <button type="submit" disabled={loading}>{loading?"Reading the market…":`Show me ${selected.suburb}`}</button>
-      </form>}
+      {selected&&<div className="period-form" aria-label="Dashboard slicers">
+        <div className="slicer-heading"><div><p className="eyebrow">SHARED FILTER CONTEXT</p><h3>Shape the whole view.</h3></div><p>{loading?"Updating every measure…":"Each selection updates every card, chart and segment."}</p></div>
+        <div className="slicer-grid">
+          <div className="window-slicer"><span className="slicer-label">Time window</span><div className="range-value">Last <strong>{periods[periodIndex]} months</strong></div><div className="period-options" role="group" aria-label="Time window">{periods.map((value,index)=><button type="button" key={value} aria-pressed={periodIndex===index} onClick={()=>setPeriodIndex(index)}>{value}m</button>)}</div></div>
+          <fieldset className="bedroom-slicer"><legend>Bedrooms</legend><div>{(["all","1","2","3","4","5","6"] as BedroomFilter[]).map(value=><button type="button" key={value} aria-pressed={bedroom===value} onClick={()=>setBedroom(value)}>{value==="all"?"All":value}</button>)}</div><small>Filters sale facts before every measure is calculated.</small></fieldset>
+        </div>
+      </div>}
     </div>
 
-    {(rows.length||loading||error)&&<div className="results" ref={resultsRef}>
+    {(rows.length||loading||error)&&<div className="results">
       {!loading&&rows.length>0&&<section className="snapshot-studio" aria-label="Snapshot style controls"><div><p className="eyebrow">MAKE IT YOURS</p><h3>Choose a snapshot style.</h3><p>The data stays fixed. Only the visual language changes.</p></div><div className="preset-picker" role="group" aria-label="Snapshot theme">{snapshotThemes.map(([id,name,description])=><button type="button" key={id} aria-pressed={snapshotTheme===id} data-preset={id} onClick={()=>{setSnapshotTheme(id);setSnapshotStatus("");}}><i/><strong>{name}</strong><span>{description}</span></button>)}</div><div className="snapshot-actions"><button type="button" onClick={copySnapshot}>Copy snapshot</button><button type="button" onClick={downloadSnapshot}>Download PNG</button><button type="button" onClick={download}>Download CSV</button></div><p className="snapshot-status" aria-live="polite">{snapshotStatus}</p></section>}
       <div className="snapshot" data-snapshot-theme={snapshotTheme} ref={snapshotRef}>
-        <header className="results-heading"><p className="eyebrow">YOUR FIRST READ</p><h2>{selected?.suburb} at a glance</h2><p>The latest {activePeriod} months of recorded sales, turned into a few useful signals.</p>{!loading&&rows.length>0&&<span className="result-count">{number.format(metrics.total)} house sales across {metrics.months} reported months</span>}</header>
+        <header className="results-heading"><p className="eyebrow">YOUR FIRST READ</p><h2>{selected?.suburb} at a glance</h2><p>The same filter context is applied to every number below.</p>{!loading&&rows.length>0&&<div className="filter-summary"><span>{selected?.canonical_postcode} · {selected?.suburb}</span><span>{activePeriod} months</span><span>{activeBedroom==="all"?"All bedroom counts":`${activeBedroom} bedrooms`}</span><span>{number.format(metrics.total)} sales · {metrics.months} reported months</span></div>}</header>
         {error&&<p className="error" role="alert">{error}</p>}
-        <div className="kpis" aria-busy={loading}><article><span>Rolling 12-month median</span><strong>{loading?"—":rolling?.current_median_price_aud?money.format(Number(rolling.current_median_price_aud)):"Not available"}</strong><small>{rolling?`${annualPeriod} · ${number.format(Number(rolling.current_priced_sales))} priced sales`:""}</small></article><article><span>Rolling annual movement</span><strong className={(annualChange??0)>=0?"positive":"negative"}>{loading||annualChange==null?"—":`${annualChange>=0?"+":""}${annualChange.toFixed(1)}%`}</strong><small>{rolling?.prior_median_price_aud?`Previous 12-month median ${money.format(Number(rolling.prior_median_price_aud))}`:"Comparison unavailable"}</small></article><article><span>Sales velocity</span><strong>{loading||salesVelocity==null?"—":`${salesVelocity.toFixed(1)} / mo`}</strong><small>{rolling&&velocityChange!=null?`${number.format(Number(rolling.current_sale_count))} sales in 12 months · ${velocityChange>=0?"+":""}${velocityChange.toFixed(1)}% vs prior year`:"Completed house sales per month"}</small></article><article><span>Latest monthly median</span><strong>{loading?"—":metrics.latest?money.format(Number(metrics.latest.median_price_aud)):"Not available"}</strong><small>{metrics.latest?`${number.format(Number(metrics.latest.sale_count))} sales · ${new Date(metrics.latest.sale_month).toLocaleDateString("en-AU",{month:"long",year:"numeric"})}`:""}</small></article></div>
+        <div className="kpis" aria-busy={loading}><article><span>Selected-window median</span><strong>{loading?"—":rolling?.current_median_price_aud?money.format(Number(rolling.current_median_price_aud)):"Not available"}</strong><small>{rolling?`${annualPeriod} · ${number.format(Number(rolling.current_priced_sales))} priced sales`:""}</small></article><article><span>Movement vs previous window</span><strong className={(annualChange??0)>=0?"positive":"negative"}>{loading||annualChange==null?"—":`${annualChange>=0?"+":""}${annualChange.toFixed(1)}%`}</strong><small>{rolling?.prior_median_price_aud?`Prior matching-window median ${money.format(Number(rolling.prior_median_price_aud))}`:"Comparison unavailable"}</small></article><article><span>Sales pace</span><strong>{loading||salesVelocity==null?"—":`${salesVelocity.toFixed(1)} / mo`}</strong><small>{rolling&&velocityChange!=null?`${number.format(Number(rolling.current_sale_count))} selected sales · ${velocityChange>=0?"+":""}${velocityChange.toFixed(1)}% vs prior window`:"Completed house sales per selected month"}</small></article><article><span>Latest monthly median</span><strong>{loading?"—":metrics.latest?money.format(Number(metrics.latest.median_price_aud)):"Not available"}</strong><small>{metrics.latest?`${number.format(Number(metrics.latest.sale_count))} sales · ${new Date(metrics.latest.sale_month).toLocaleDateString("en-AU",{month:"long",year:"numeric"})}`:""}</small></article></div>
         <div className="chart-grid"><Chart title="Median sale price" rows={rows} value={r=>r.median_price_aud==null?null:Number(r.median_price_aud)} format={v=>money.format(v)} variant={snapshotTheme==="excel"?"columns":snapshotTheme==="presentation"?"area":"line"} showPoints={snapshotTheme==="corporate"} loading={loading}/><Chart title="Monthly sale volume" rows={rows} value={r=>Number(r.sale_count)} format={v=>number.format(v)} variant="columns" loading={loading}/></div>
         {insights&&<section className="deeper-read"><header><p className="eyebrow">WHAT SHAPES THE RESULT?</p><h3>Look beneath the median.</h3></header><div className="insight-grid"><article><span>Land and sale value</span><strong>{Number(insights.summary.land_sample)>=10?`${relationship} ${correlation>=0?"positive":"negative"} relationship`:"Not enough evidence"}</strong><small>{Number(insights.summary.land_sample)>=10?`Correlation ${correlation.toFixed(2)} across ${number.format(Number(insights.summary.land_sample))} comparable house sales`:"Fewer than 10 suitable land records"}</small></article><article><span>Typical recorded land</span><strong>{insights.summary.median_land_size_sqm?`${number.format(Number(insights.summary.median_land_size_sqm))} m²`:"Not available"}</strong><small>Median of plausible 50–10,000 m² house records</small></article></div><SegmentBars title="House median by bedrooms" rows={insights.bedrooms} label={r=>`${r.segment_label} bed`}/></section>}
         {!loading&&rows.length>0&&<footer className="snapshot-credit"><strong>Perth House Data</strong><span>Detached houses · Perth 6000–6200 · Indicative history, not a valuation</span><span>perthhousedata.com</span></footer>}

@@ -9,6 +9,7 @@ const querySchema=z.object({
   postcode:z.string().regex(/^6\d{3}$/).optional(),
   from:z.iso.date().optional(),
   to:z.iso.date().optional(),
+  bedrooms:z.coerce.number().int().min(1).max(6).optional(),
   limit:z.coerce.number().int().min(1).max(5000).default(1200),
 });
 
@@ -18,17 +19,24 @@ export async function GET(request: Request) {
   const input=parsed.data;
   const sql=motherduck();
   try {
-    const suburbKeyFilter=input.suburb_key?sql`AND suburb_key=${input.suburb_key}`:sql``;
-    const suburbFilter=input.suburb?sql`AND lower(suburb)=lower(${input.suburb})`:sql``;
-    const postcodeFilter=input.postcode?sql`AND postcode=${input.postcode}`:sql``;
+    const suburbKeyFilter=input.suburb_key?sql`AND f.suburb_key=${input.suburb_key}`:sql``;
+    const suburbFilter=input.suburb?sql`AND lower(d.suburb)=lower(${input.suburb})`:sql``;
+    const postcodeFilter=input.postcode?sql`AND d.canonical_postcode=${input.postcode}`:sql``;
+    const bedroomFilter=input.bedrooms?sql`AND f.bedrooms=${input.bedrooms}`:sql``;
     // MotherDuck's PostgreSQL endpoint currently rejects bound strings cast to
     // DATE. Zod has already constrained these values to strict ISO dates.
-    const fromFilter=input.from?sql.unsafe(`AND sale_month>=DATE '${input.from}'`):sql``;
-    const toFilter=input.to?sql.unsafe(`AND sale_month<=DATE '${input.to}'`):sql``;
-    const rows=await sql`SELECT suburb,postcode,sale_month,sale_count,median_price_aud,average_price_aud,minimum_price_aud,maximum_price_aud
-      FROM suburb_monthly_sales
-      WHERE true ${suburbKeyFilter} ${suburbFilter} ${postcodeFilter} ${fromFilter} ${toFilter}
-      ORDER BY sale_month DESC,suburb,postcode LIMIT ${input.limit}`;
+    const fromFilter=input.from?sql.unsafe(`AND f.sold_date>=DATE '${input.from}'`):sql``;
+    const toFilter=input.to?sql.unsafe(`AND f.sold_date<=DATE '${input.to}'`):sql``;
+    const rows=await sql`SELECT d.suburb,d.canonical_postcode postcode,date_trunc('month',f.sold_date)::date sale_month,
+        count(*)::bigint sale_count,
+        percentile_cont(.5) WITHIN GROUP(ORDER BY f.price_aud) FILTER(WHERE f.price_aud IS NOT NULL)::bigint median_price_aud,
+        avg(f.price_aud) FILTER(WHERE f.price_aud IS NOT NULL)::bigint average_price_aud,
+        min(f.price_aud) FILTER(WHERE f.price_aud IS NOT NULL)::bigint minimum_price_aud,
+        max(f.price_aud) FILTER(WHERE f.price_aud IS NOT NULL)::bigint maximum_price_aud
+      FROM suburb_sale_facts f JOIN suburb_dimension d ON d.suburb_key=f.suburb_key
+      WHERE true ${suburbKeyFilter} ${suburbFilter} ${postcodeFilter} ${bedroomFilter} ${fromFilter} ${toFilter}
+      GROUP BY d.suburb,d.canonical_postcode,date_trunc('month',f.sold_date)::date
+      ORDER BY sale_month DESC,d.suburb,d.canonical_postcode LIMIT ${input.limit}`;
     return Response.json({data:rows,meta:{rows:rows.length,source:"motherduck",filters:input}},{headers:{"Cache-Control":"public, s-maxage=3600, stale-while-revalidate=86400"}});
   } finally { await sql.end(); }
 }
