@@ -23,6 +23,8 @@ export async function GET(request:Request){
       ?sql.unsafe(`(DATE '${from}'-INTERVAL '${months} months')::date`)
       :sql.unsafe(`(DATE '${from}'-(((DATE '${to}'-DATE '${from}')+1)::integer))::date`);
     const [summary]=await sql`SELECT count(*)::bigint sale_count,count(price_aud)::bigint priced_sales,
+      percentile_cont(.5) WITHIN GROUP(ORDER BY price_aud) FILTER(WHERE price_aud IS NOT NULL)::bigint median_price_aud,
+      avg(price_aud) FILTER(WHERE price_aud IS NOT NULL)::bigint average_price_aud,
       count(*) FILTER(WHERE price_aud BETWEEN 50000 AND 20000000 AND land_size_sqm BETWEEN 50 AND 10000)::bigint land_sample,
       corr(price_aud::double precision,land_size_sqm::double precision) FILTER(WHERE price_aud BETWEEN 50000 AND 20000000 AND land_size_sqm BETWEEN 50 AND 10000) land_price_correlation,
       percentile_cont(.5) WITHIN GROUP(ORDER BY land_size_sqm) FILTER(WHERE land_size_sqm BETWEEN 50 AND 10000)::bigint median_land_size_sqm
