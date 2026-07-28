@@ -1,73 +1,196 @@
 # Perth House Data
 
-Open, auditable analytical detached-house sales data for Perth postcodes 6000–6200. Units, acreage, duplexes, and semi-detached properties are explicitly outside the analytical scope. The application migrates the existing Fabric medallion pipeline to immutable CSV sources, Vercel Workflow orchestration, Neon Postgres canonical records, and MotherDuck OLAP serving.
+[Perth House Data](https://perthhousedata.com) is a free, public explorer for three decades of detached-house sales across Perth postcodes 6000–6200.
 
-Production: [perthhousedata.com](https://perthhousedata.com)
+The project turns an immutable archive of sold-listing observations into a traceable analytical dataset. Visitors can explore suburb history, rolling price medians, sales volume, bedroom segments, and land-to-price relationships, then export the underlying results or create a styled snapshot.
 
-## Data flow
+## Analytical scope
 
-1. A CSV is retained in private Vercel Blob and registered in `ops.ingest_file` by SHA-256. Workflow steps read it through the authenticated Blob SDK.
-2. A durable workflow parses one bounded file and idempotently lands observations in `raw.sale_observation`.
-3. `core.curate_file` selects the best listing observation and resolves it to a canonical property.
-4. `core.sale_event` preserves transactions independently of listing identity.
-5. `mart.suburb_monthly_sales` serves common application reads from Neon.
-6. `scripts/publish-motherduck.ts` uses the native integration token and MotherDuck PostgreSQL endpoint to publish the curated aggregate for columnar analytics.
+- Detached houses only
+- Perth postcodes 6000–6200
+- Units, apartments, acreage, duplexes, and semi-detached properties excluded
+- Unpriced sales retained for volume measures but excluded from price statistics
+- Descriptive historical analysis—not a property valuation service
 
-The current property key is a SHA-256 fingerprint of normalized address, state, and postcode. It is marked as `NORMALIZED_ADDRESS` with a confidence of `0.9000`; authoritative parcel/title identifiers can later be attached without changing `property_id` references. Analytical suburb identity is independent of postcode: `mart.suburb_dimension` assigns a normalized `suburb_key`, retains every observed postcode for lineage, and selects the sales-weighted modal postcode as display metadata. Monthly suburb statistics are recomputed from individual sale events at `suburb_key × sale_month` grain.
+The current baseline contains 347,887 source observations across 296,422 listings and approximately 330 house-sale suburbs. Source and analytical counts are reconciled explicitly; unexplained differences are treated as data-quality issues rather than silently discarded.
 
-## Setup
+## How it works
+
+```text
+Immutable CSV archive
+        ↓
+Private Vercel Blob + Vercel Workflow
+        ↓
+Neon Postgres raw, canonical, and sale-event records
+        ↓
+MotherDuck analytical marts
+        ↓
+Next.js APIs and the public explorer
+```
+
+1. Each source CSV is registered by SHA-256 before ingestion.
+2. Raw listing observations are loaded idempotently and retain their source lineage.
+3. The canonical layer normalises addresses, resolves repeated listings, and preserves sale events separately from listing identity.
+4. Suburbs receive stable analytical keys independent of display postcode.
+5. Monthly medians and related statistics are calculated from individual sales—not averages of pre-aggregated values.
+6. MotherDuck serves the public analytical queries used by the Next.js application.
+
+The current property identity is a SHA-256 fingerprint of normalised address, state, and postcode. It is deliberately replaceable if authoritative parcel or title identifiers become available later.
+
+## Public explorer
+
+The production application provides:
+
+- Suburb and postcode discovery
+- Monthly sale counts and price distributions
+- Rolling annual medians and year-over-year comparisons
+- Sales-velocity measures based on completed sales
+- Bedroom-segment and land-size analysis with visible sample sizes
+- CSV export
+- Downloadable and clipboard-ready visual snapshots
+- Perth Warm, Microsoft Corporate, Excel Analysis, and PowerPoint Sales snapshot styles
+
+Sales velocity means completed detached-house sales per month over the latest rolling 12 months. It is not an inventory-turnover or days-on-market measure.
+
+## Technology
+
+- Next.js 16 and React 19
+- Vercel Functions, Workflow, Blob, Analytics, and Speed Insights
+- Neon Postgres as the canonical system of record
+- MotherDuck as the analytical serving layer
+- TypeScript, Zod, Vitest, and ESLint
+- A Chrome extension in `rea-sold-scraper` for controlled source collection
+
+## Local setup
+
+Requirements:
+
+- Node.js 22
+- pnpm 10.28
+- Neon/Postgres and MotherDuck credentials
 
 ```bash
 pnpm install
 cp .env.example .env.local
 pnpm db:migrate
 pnpm test
+pnpm typecheck
+pnpm lint
+pnpm ingest:local -- --limit=1
+pnpm db:status
+```
+
+After validating a bounded ingestion, load and publish the complete archive:
+
+```bash
+pnpm ingest:local
+pnpm db:reconcile
+pnpm publish:motherduck
+pnpm smoke:motherduck
+```
+
+Standalone database scripts load `.env.local` explicitly. Never commit populated environment files.
+
+### Environment variables
+
+| Variable | Purpose |
+| --- | --- |
+| `DATABASE_URL` | Application database connection |
+| `DATABASE_URL_UNPOOLED` | Direct connection for migrations and ingestion |
+| `DATABASE_READ_URL` | Optional read-only or pooled serving connection |
+| `BLOB_READ_WRITE_TOKEN` | Private Vercel Blob access |
+| `MOTHERDUCK_TOKEN` | MotherDuck publication and query access |
+| `MOTHERDUCK_PG_HOST` | Optional MotherDuck PostgreSQL endpoint override |
+| `INGEST_SECRET` | Bearer secret protecting the HTTP ingestion endpoint |
+
+Use `.env.example` as the configuration template. Production secrets belong in the deployment platform's encrypted environment store.
+
+## Data ingestion
+
+### Local archive
+
+The local bulk driver is the supported path for the historical archive:
+
+```bash
 pnpm ingest:local -- --limit=1
 pnpm db:status
 pnpm ingest:local
+pnpm db:reconcile
 ```
 
-Archive the historical CSV source after pulling a fresh short-lived Blob OIDC token without overwriting the Neon credentials in `.env.local`:
+### Incremental HTTP ingestion
+
+Upload an immutable CSV to private Vercel Blob, then call `POST /api/ingest` with `Authorization: Bearer $INGEST_SECRET`:
+
+```json
+{
+  "fileName": "rea-sold-ALFRED-COVE-WA-6154.csv",
+  "objectUrl": "https://example.blob.vercel-storage.com/raw/example.csv",
+  "expectedSha256": "optional-64-character-checksum"
+}
+```
+
+The endpoint returns HTTP 202 with a Workflow run identifier. CSV bytes remain in Blob; workflow state contains only bounded file metadata. If `INGEST_SECRET` is missing, the endpoint fails closed with HTTP 503.
+
+To archive source files using a fresh short-lived Vercel OIDC token:
 
 ```bash
 vercel env pull .env.blob --environment=production
 pnpm archive:blob
 ```
 
-Standalone database scripts load `.env.local` explicitly. Pull the connected Production variables before the first migration with `vercel env pull .env.local --environment=production`.
-
-## HTTP ingestion
-
-Upload an immutable CSV to Vercel Blob, then call `POST /api/ingest` with `Authorization: Bearer $INGEST_SECRET`:
-
-```json
-{"fileName":"rea-sold-ALFRED-COVE-WA-6154.csv","objectUrl":"https://...blob.vercel-storage.com/raw/...csv","expectedSha256":"optional-64-character-checksum"}
-```
-
-The route returns `202` and a Vercel Workflow run ID. The Workflow state contains only file metadata; CSV bytes remain in Blob.
-If `INGEST_SECRET` is not configured, the route fails closed with HTTP 503.
-
 ## Analytics API
 
-`GET /api/analytics/suburb-sales` queries the MotherDuck monthly mart. Preferred parameters are `suburb_key`, `from`, `to`, and `limit`; `suburb` and `postcode` remain available for compatibility.
+### List suburbs
 
-`GET /api/analytics/suburb-insights` accepts `suburb_key`, `from`, and `to`. It queries the curated MotherDuck sale fact table for rolling 12-month and prior-year medians, explicit sample sizes, land-to-price correlation, plausible median land size, and bedroom-segment medians over the visitor's selected period.
-
-The public explorer includes a deterministic snapshot studio. Visitors can render the same analytical result in Perth Warm, Microsoft Corporate, Excel Analysis, or PowerPoint Sales styles, then copy or download the styled report as a PNG. Clipboard failures fall back to a local PNG download; CSV export remains available separately.
-
-Sales velocity is defined as completed detached-house sales per month over the latest rolling 12 months. Its comparison is the percentage change in completed sale count versus the immediately preceding 12 months; it is not an inventory-turnover or days-on-market measure.
-
-```text
-/api/analytics/suburb-sales?suburb=Yokine&from=2020-01-01
+```http
+GET /api/analytics/suburbs
 ```
 
-## Baseline reconciliation
+### Monthly suburb sales
 
-The last Fabric notebook run reported 347,887 observations, 296,422 listings, 232,596 core analytical records, and 333 suburbs. The current local archive contains 347,902 rows and 347,886 unique observation keys (16 repeated observations), a one-observation drift from that earlier Fabric run. Compare the Neon counts through `/api/stats` after the full load. Differences must be explained by an explicit quality rule rather than silent deletion.
+```http
+GET /api/analytics/suburb-sales?suburb=Yokine&from=2020-01-01
+```
 
-## Production notes
+Supported filters include `suburb_key`, `suburb`, `postcode`, `from`, `to`, `bedrooms`, and `limit`.
 
-- Co-locate Vercel Functions, Neon, and MotherDuck as closely as available.
-- Use the direct Neon URL for migrations/ingestion and a read replica or pooled URL for public APIs.
-- The first 121 MB historical load is intentionally supported by the local bulk driver; incremental files use Vercel Workflow.
-- Keep the raw CSV archive immutable. Do not use Neon raw tables as the only recovery source.
+### Suburb insights
+
+```http
+GET /api/analytics/suburb-insights?suburb_key=yokine&from=2020-01-01&to=2025-12-31
+```
+
+The response includes rolling and prior-period medians, explicit sample sizes, land-to-price correlation, plausible median land size, and bedroom segments.
+
+### System statistics
+
+```http
+GET /api/stats
+```
+
+## Data-quality principles
+
+- Keep the raw CSV archive immutable.
+- Preserve missing prices instead of converting them to zero.
+- Keep source observations, canonical properties, listings, and sale events at distinct grains.
+- Recalculate medians from sale facts.
+- Make exclusions and sample sizes visible.
+- Use idempotent ingestion and content hashes so retries do not duplicate records.
+- Do not rely on Neon raw tables as the only recovery source.
+
+## Production
+
+The public site is deployed at [perthhousedata.com](https://perthhousedata.com).
+
+For production operations:
+
+- Keep Vercel Functions, Neon, and MotherDuck geographically close where possible.
+- Use the direct Neon connection for migrations and ingestion, and a pooled or read-only connection for public traffic.
+- Store all secrets in encrypted deployment configuration.
+- Run `pnpm test`, `pnpm typecheck`, `pnpm lint`, and `pnpm build` before deployment.
+- Run reconciliation and MotherDuck smoke checks after material data refreshes.
+
+## Disclaimer
+
+Perth House Data is an independent project and is not affiliated with realestate.com.au. The dataset may contain source errors, omissions, delayed records, and inferred identities. Results are provided for exploration and should not be treated as financial advice or a formal valuation.
