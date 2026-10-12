@@ -137,7 +137,7 @@ Use `.env.example` as the configuration template. Production secrets belong in t
 
 ### Validated dated captures
 
-Use `scripts/ingest-captures.ts` for a dated Chrome capture. It verifies the saved plans, page projections, CSVs and July inventory, then selects only complete nonempty scopes. Its default is a dry run; `--apply` requires migration `005_current_observation.sql`. Failed searches and verified empty searches are not registered as source files.
+Use `scripts/ingest-captures.ts` for a dated Chrome capture. It verifies the saved plans, page projections, CSVs and July inventory, then selects only complete nonempty scopes. Its default is a dry run; `--apply` requires migrations `005_current_observation.sql` and `006_parser_parallel_safety.sql`. Failed searches and verified empty searches are not registered as source files.
 
 ```powershell
 node node_modules/tsx/dist/cli.mjs scripts/ingest-captures.ts --capture captures/perth-houses-2026-10-12 --baseline captures/2026-07-baseline --additional-capture captures/perth-houses-2026-10-12-supplement

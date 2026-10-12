@@ -395,15 +395,17 @@ FROM core.locality_reference
 GROUP BY suburb_key
 HAVING count(DISTINCT postcode) = 1;
 
+-- Keep these exception-handling parsers out of parallel plans for the observed Neon 17.11
+-- exception-cleanup compatibility failure; their immutable parsing rules remain unchanged.
 CREATE OR REPLACE FUNCTION core.source_listing_id(detail_path text, detail_url text)
-RETURNS bigint LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE AS $$
+RETURNS bigint LANGUAGE plpgsql IMMUTABLE PARALLEL UNSAFE AS $$
 BEGIN
   RETURN (regexp_match(coalesce(nullif(detail_path, ''), detail_url), '(\d+)(?:[/?#].*)?$'))[1]::bigint;
 EXCEPTION WHEN invalid_text_representation OR numeric_value_out_of_range THEN RETURN NULL;
 END $$;
 
 CREATE OR REPLACE FUNCTION core.source_timestamp(value text)
-RETURNS timestamptz LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE AS $$
+RETURNS timestamptz LANGUAGE plpgsql IMMUTABLE PARALLEL UNSAFE AS $$
 BEGIN
   IF value !~ '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$' THEN RETURN NULL; END IF;
   RETURN value::timestamptz;
@@ -411,7 +413,7 @@ EXCEPTION WHEN invalid_datetime_format OR datetime_field_overflow THEN RETURN NU
 END $$;
 
 CREATE OR REPLACE FUNCTION core.source_date(value text)
-RETURNS date LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE AS $$
+RETURNS date LANGUAGE plpgsql IMMUTABLE PARALLEL UNSAFE AS $$
 BEGIN
   IF value !~ '^\d{4}-\d{2}-\d{2}$' THEN RETURN NULL; END IF;
   RETURN value::date;
@@ -419,7 +421,7 @@ EXCEPTION WHEN invalid_datetime_format OR datetime_field_overflow THEN RETURN NU
 END $$;
 
 CREATE OR REPLACE FUNCTION core.source_integer(value text, maximum bigint DEFAULT 9223372036854775807)
-RETURNS bigint LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE AS $$
+RETURNS bigint LANGUAGE plpgsql IMMUTABLE PARALLEL UNSAFE AS $$
 DECLARE amount numeric;
 BEGIN
   IF value !~ '^\d+(\.0+)?$' THEN RETURN NULL; END IF;
@@ -430,7 +432,7 @@ EXCEPTION WHEN invalid_text_representation OR numeric_value_out_of_range THEN RE
 END $$;
 
 CREATE OR REPLACE FUNCTION core.disclosed_price(value text)
-RETURNS bigint LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE AS $$
+RETURNS bigint LANGUAGE plpgsql IMMUTABLE PARALLEL UNSAFE AS $$
 DECLARE amount numeric;
 BEGIN
   IF btrim(value) !~ '^\$(\d+|\d{1,3}(,\d{3})+)(\.\d{2})?$' THEN RETURN NULL; END IF;

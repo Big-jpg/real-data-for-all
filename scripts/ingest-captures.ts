@@ -42,27 +42,28 @@ async function main() {
   process.env.DATABASE_URL = connection;
   const sql = database(connection);
   try {
-    const [migration] = await sql`SELECT 1 FROM ops.schema_migration WHERE version='005_current_observation.sql'`;
-    if (!migration) throw new Error("Apply the current-observation migration before ingesting repeated captures");
-  } finally { await sql.end(); }
-  let insertedRows = 0, skippedCuratedFiles = 0;
-  for (const [index, file] of plan.files.entries()) {
-    const manifest = await readFile(path.join(file.directory, "manifest.json"));
-    if (sourceFileHash(manifest) !== file.manifestSha256) throw new Error(`Capture manifest changed after verification: ${file.runId}`);
-    const content = await readFile(path.join(file.directory, file.file));
-    if (content.byteLength !== file.bytes || sourceFileHash(content) !== file.sha256) throw new Error(`Verified source changed: ${file.file}`);
-    const rows = parseSourceCsv(content);
-    if (rows.length !== file.rows) throw new Error(`Source row count changed: ${file.file}`);
-    const registered = await registerFile(path.basename(file.file), null, file.sha256, content.byteLength);
-    if (registered.status === "curated") { skippedCuratedFiles++; continue; }
-    insertedRows += await loadObservations(registered.fileId, rows);
-    await curateFile(registered.fileId);
-    console.log(`[${index + 1}/${plan.files.length}] curated ${file.slice}: ${rows.length} rows`);
+    const [migrations] = await sql`SELECT count(*)::int count FROM ops.schema_migration WHERE version IN ('005_current_observation.sql','006_parser_parallel_safety.sql')`;
+    if (migrations.count !== 2) throw new Error("Apply the current-observation and parser-safety migrations before ingesting repeated captures");
+    let insertedRows = 0, skippedCuratedFiles = 0;
+    for (const [index, file] of plan.files.entries()) {
+      const manifest = await readFile(path.join(file.directory, "manifest.json"));
+      if (sourceFileHash(manifest) !== file.manifestSha256) throw new Error(`Capture manifest changed after verification: ${file.runId}`);
+      const content = await readFile(path.join(file.directory, file.file));
+      if (content.byteLength !== file.bytes || sourceFileHash(content) !== file.sha256) throw new Error(`Verified source changed: ${file.file}`);
+      const rows = parseSourceCsv(content);
+      if (rows.length !== file.rows) throw new Error(`Source row count changed: ${file.file}`);
+      const registered = await registerFile(path.basename(file.file), null, file.sha256, content.byteLength, sql);
+      if (registered.status === "curated") { skippedCuratedFiles++; continue; }
+      insertedRows += await loadObservations(registered.fileId, rows, sql);
+      await curateFile(registered.fileId, sql);
+      console.log(`[${index + 1}/${plan.files.length}] curated ${file.slice}: ${rows.length} rows`);
+    }
+    await sql`CALL core.rebuild_current_sales()`;
+    await refreshMarts(sql);
+    console.log(JSON.stringify({ completed: true, files: plan.files.length, insertedRows, skippedCuratedFiles }));
+  } finally {
+    await sql.end();
   }
-  const rebuild = database(connection);
-  try { await rebuild`CALL core.rebuild_current_sales()`; } finally { await rebuild.end(); }
-  await refreshMarts();
-  console.log(JSON.stringify({ completed: true, files: plan.files.length, insertedRows, skippedCuratedFiles }));
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {

@@ -18,11 +18,18 @@ try {
   if (!before || !after || unexpected) throw new Error("Regression fixture migration boundary is invalid");
   await pg.exec(before);
   await pg.exec(await readFile(path.resolve("db/005_current_observation.sql"), "utf8"));
+  const parallelSafety = await readFile(path.resolve("db/006_parser_parallel_safety.sql"), "utf8");
+  const freshSafety = await pg.query("SELECT count(*)::integer AS unsafe_parsers FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='core' AND p.proname IN ('source_listing_id','source_timestamp','source_date','source_integer','disclosed_price') AND p.proparallel='u'");
+  if (freshSafety.rows[0].unsafe_parsers !== 5) throw new Error("Fresh parser definitions are not parallel unsafe");
+  // Simulate the original 005 metadata, then test the corrective upgrade without invoking its functions.
+  await pg.exec(parallelSafety.replaceAll("PARALLEL UNSAFE", "PARALLEL SAFE"));
+  await pg.exec(parallelSafety);
   await pg.exec(after);
   const { rows } = await pg.query("SELECT count(*)::integer AS raw_rows FROM raw.sale_observation");
   if (rows[0].raw_rows !== 0) throw new Error("SQL regression did not roll back its fixtures");
-  console.log(JSON.stringify({ status: "passed", engine: "PGlite in-memory PostgreSQL with pgcrypto", migrations: 5,
+  console.log(JSON.stringify({ status: "passed", engine: "PGlite in-memory PostgreSQL with pgcrypto", migrations: 6,
     assertions: (fixture.match(/SELECT pg_temp\.assert_true\(/g) ?? []).length,
+    freshParallelMetadataVerified: true, upgradeParallelMetadataVerified: true,
     productionConnection: false, fixturesRolledBack: true }));
 } finally {
   await pg.close();

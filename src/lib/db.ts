@@ -5,19 +5,20 @@ export function database(url = process.env.DATABASE_URL) {
   if (!url) throw new Error("DATABASE_URL is required");
   return postgres(url, { ssl: "require", max: 4, prepare: false });
 }
+export type DatabaseClient = ReturnType<typeof database>;
 
-export async function registerFile(fileName: string, objectUrl: string | null, sha256: string, byteSize: number) {
-  const sql = database();
+export async function registerFile(fileName: string, objectUrl: string | null, sha256: string, byteSize: number, client?: DatabaseClient) {
+  const sql = client ?? database();
   try {
     const [file] = await sql`INSERT INTO ops.ingest_file(file_name,object_url,sha256,byte_size)
       VALUES(${fileName},${objectUrl},${sha256},${byteSize}) ON CONFLICT(sha256) DO UPDATE SET object_url=coalesce(excluded.object_url,ops.ingest_file.object_url)
       RETURNING file_id,status`;
     return { fileId: String(file.file_id), status: String(file.status) };
-  } finally { await sql.end(); }
+  } finally { if (!client) await sql.end(); }
 }
 
-export async function loadObservations(fileId: string, rows: RawObservation[]) {
-  const sql = database();
+export async function loadObservations(fileId: string, rows: RawObservation[], client?: DatabaseClient) {
+  const sql = client ?? database();
   const columns = ["observation_key","record_hash","file_id","source_row_number","source_url","page_number","ordinal_on_page","price_text","price_value_source","address_text","detail_path","detail_url","bedrooms_source","bathrooms_source","car_spaces_source","land_size_text","land_size_sqm_source","property_type_source","sold_date_text","sold_date_iso_source","scraped_at_source"] as const;
   try {
     await sql`UPDATE ops.ingest_file SET status='loading',source_rows=${rows.length},error=NULL WHERE file_id=${fileId}::uuid`;
@@ -38,16 +39,16 @@ export async function loadObservations(fileId: string, rows: RawObservation[]) {
   } catch(error) {
     await sql`UPDATE ops.ingest_file SET status='failed',error=${error instanceof Error?error.message:String(error)} WHERE file_id=${fileId}::uuid`;
     throw error;
-  } finally { await sql.end(); }
+  } finally { if (!client) await sql.end(); }
 }
 
-export async function curateFile(fileId: string) {
-  const sql=database(); try { await sql`CALL core.curate_file(${fileId}::uuid)`; } finally { await sql.end(); }
+export async function curateFile(fileId: string, client?: DatabaseClient) {
+  const sql=client ?? database(); try { await sql`CALL core.curate_file(${fileId}::uuid)`; } finally { if (!client) await sql.end(); }
 }
 
-export async function refreshMarts() {
-  const sql=database(); try {
+export async function refreshMarts(client?: DatabaseClient) {
+  const sql=client ?? database(); try {
     await sql`REFRESH MATERIALIZED VIEW mart.suburb_dimension`;
     await sql`REFRESH MATERIALIZED VIEW mart.suburb_monthly_sales`;
-  } finally { await sql.end(); }
+  } finally { if (!client) await sql.end(); }
 }

@@ -42,6 +42,9 @@ CREATE TEMP TABLE raw_before AS SELECT to_jsonb(r) AS snapshot FROM raw.sale_obs
 
 -- APPLY_CURRENT_OBSERVATION_MIGRATION_HERE
 
+SELECT pg_temp.assert_true((SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace
+ WHERE n.nspname='core' AND p.proname IN ('source_listing_id','source_timestamp','source_date','source_integer','disclosed_price')
+ AND p.proparallel='u')=5, 'all exception-handling parsers are explicitly parallel unsafe');
 SELECT pg_temp.assert_true((SELECT count(*) FROM core.sale_event WHERE listing_id=1001)=1, 'migration removes only duplicate current projections');
 CALL core.rebuild_current_sales();
 CREATE TEMP TABLE stable_sale AS SELECT sale_event_id, sale_fingerprint FROM core.sale_event WHERE listing_id=1001;
