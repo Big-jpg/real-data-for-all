@@ -1,10 +1,28 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { AnnualMarketAppreciation } from "./AnnualMarketAppreciation";
 import { BedroomChart, MonthlyCharts, PeriodComparison } from "./MarketCharts";
 import { datesFor, displayMoney, monthLabel, monthlySeries, number, periodLabel, periods, salesCsv, variance, type BedroomFilter, type DateRange, type Insights, type MonthlyDatum, type SaleRow, type SnapshotTheme, type Suburb } from "@/lib/market-view";
 
 type Dataset = { suburbKey: string; comparisonKey: string | null; months: number; bedroom: BedroomFilter; range: DateRange; series: { key: string; rows: SaleRow[]; insights: Insights }[] };
+type PeerRow = {
+  suburb_key: string;
+  suburb: string;
+  canonical_postcode: string;
+  sale_count: number | string;
+  priced_sales: number | string;
+  median_price_aud: number | string | null;
+  average_price_aud: number | string | null;
+  minimum_price_aud: number | string | null;
+  maximum_price_aud: number | string | null;
+  p10_price_aud: number | string | null;
+  p90_price_aud: number | string | null;
+  sale_count_percentile: number | string | null;
+  median_price_percentile: number | string | null;
+};
+type PeerDataset = { suburbKey: string; bedroom: BedroomFilter; range: DateRange; data: PeerRow[] };
+type PeerFailure = { suburbKey: string; bedroom: BedroomFilter; range: DateRange; message: string };
 const bedrooms: BedroomFilter[] = ["all", "1", "2", "3", "4", "5", "6"];
 const snapshotBackground: Record<SnapshotTheme, string> = { warm: "#f8efea", corporate: "#eef4fb", excel: "#eef8f0", presentation: "#fff2e8" };
 const suburbName = (name: string) => name.toLowerCase().replace(/\b\w/g, character => character.toUpperCase());
@@ -26,6 +44,8 @@ export default function SalesExplorer() {
   const [periodIndex, setPeriodIndex] = useState(1);
   const [bedroom, setBedroom] = useState<BedroomFilter>("all");
   const [dataset, setDataset] = useState<Dataset | null>(null);
+  const [peerDataset, setPeerDataset] = useState<PeerDataset | null>(null);
+  const [peerFailure, setPeerFailure] = useState<PeerFailure | null>(null);
   const [requestStatus, setRequestStatus] = useState<"idle" | "loading" | "ready">("idle");
   const [error, setError] = useState("");
   const [retry, setRetry] = useState(0);
@@ -102,7 +122,36 @@ export default function SalesExplorer() {
     return () => { clearTimeout(timer); controller.abort(); };
   }, [suburbKey, comparisonKey, selectedLabel, comparedLabel, months, bedroom, range, retry]);
 
+  useEffect(() => {
+    if (!suburbKey) return;
+    const controller = new AbortController();
+    const query = new URLSearchParams({ suburb_key: suburbKey, ...range });
+    if (bedroom !== "all") query.set("bedrooms", bedroom);
+
+    void fetch(`/api/analytics/postcode-peers?${query}`, { signal: controller.signal })
+      .then(async response => {
+        if (!response.ok) throw new Error("Postcode peer analytics are temporarily unavailable.");
+        const json = await response.json();
+        if (!Array.isArray(json.data)) throw new Error("Invalid postcode peer response");
+        if (controller.signal.aborted) return;
+        setPeerDataset({ suburbKey, bedroom, range, data: json.data as PeerRow[] });
+      })
+      .catch(cause => {
+        if (!controller.signal.aborted) setPeerFailure({
+          suburbKey,
+          bedroom,
+          range,
+          message: cause instanceof Error ? cause.message : "Postcode peer analytics are temporarily unavailable.",
+        });
+      });
+
+    return () => controller.abort();
+  }, [suburbKey, bedroom, range]);
+
   const current = dataset?.suburbKey === suburbKey && dataset.comparisonKey === comparisonKey && dataset.months === months && dataset.bedroom === bedroom && dataset.range.from === range.from && dataset.range.to === range.to ? dataset : null;
+  const currentPeers = peerDataset?.suburbKey === suburbKey && peerDataset.bedroom === bedroom && peerDataset.range.from === range.from && peerDataset.range.to === range.to ? peerDataset.data : null;
+  const currentPeerFailure = peerFailure?.suburbKey === suburbKey && peerFailure.bedroom === bedroom && peerFailure.range.from === range.from && peerFailure.range.to === range.to ? peerFailure.message : "";
+  const peerLoading = Boolean(suburbKey) && !currentPeers && !currentPeerFailure;
   const loading = !error && (!selected || !current || requestStatus === "loading");
   const series = useMemo(() => monthlySeries(current?.series.map(item => ({ ...item, label: item.key === suburbKey ? selectedLabel : comparedLabel })) ?? [], range), [current, suburbKey, selectedLabel, comparedLabel, range]);
   const chartSeries = series.length ? series : [
@@ -182,12 +231,65 @@ export default function SalesExplorer() {
       <MonthlyCharts series={chartSeries} loading={loading} showAverage={showAverage} activeMonth={focusedMonth} onMonthFocus={focusMonth} onMonthSelect={pinMonth} />
       <div className="month-readouts">{chartSeries.map(item => <MonthReadout key={item.key} label={compared ? item.label : undefined} month={item.months.find(row => row.month === focusedMonth) ?? null} loading={loading} pinned={Boolean(pinnedMonth)} onClear={() => setPinnedMonth(null)} />)}</div>
       <div className="secondary-grid"><PeriodComparison series={chartSeries} loading={loading} /><BedroomChart series={chartSeries} activeBedroom={bedroom} loading={loading} onSelect={chooseBedroom} /></div>
+      <PostcodePeerComparison data={currentPeers} selectedKey={suburbKey} postcode={selected?.canonical_postcode ?? null} loading={peerLoading || !currentPeers} error={currentPeerFailure} />
+      <AnnualMarketAppreciation />
 
       <details className="data-table"><summary>Monthly data <span>{monthly.length} months{compared && " · 2 suburbs"}</span></summary><div className="table-scroll"><table><caption className="sr-only">{selectedLabel}{compared && ` and ${comparedLabel}`} monthly recorded sale observations</caption><thead><tr><th scope="col">Month</th>{compared && <th scope="col">Suburb</th>}<th scope="col">Recorded sales</th><th scope="col">Median</th><th scope="col">Average</th><th scope="col">Minimum</th><th scope="col">Maximum</th></tr></thead><tbody>{monthly.flatMap(month => series.map(item => ({ item, row: item.months.find(row => row.month === month.month)! }))).map(({ item, row }) => <tr key={`${item.key}-${row.month}`} data-active={row.month === focusedMonth}><th scope="row"><button type="button" aria-pressed={pinnedMonth === row.month} onClick={() => pinMonth(row.month)}>{row.label}</button></th>{compared && <td>{item.label}</td>}<td>{number.format(row.sales)}{!row.observed && <span className="sr-only">; no recorded observations, coverage may be unavailable</span>}</td><td>{displayMoney(row.median)}</td><td>{displayMoney(row.average)}</td><td>{displayMoney(row.minimum)}</td><td>{displayMoney(row.maximum)}</td></tr>)}</tbody></table></div></details>
       <footer className="dashboard-credit"><strong>Perth House Data</strong><span>{selected ? `${selectedLabel} · ${selected.canonical_postcode}${compared ? ` vs ${comparedLabel} · ${compared.canonical_postcode}` : ""} · ` : ""}{periodLabel(range)} · {bedroom === "all" ? "All bedrooms" : `${bedroom} bedrooms`}</span><span>Recorded House observations · perthhousedata.com</span></footer>
       </>}
     </div>
   </section>;
+}
+
+function PostcodePeerComparison({ data, selectedKey, postcode, loading, error }: { data: PeerRow[] | null; selectedKey: string | null; postcode: string | null; loading: boolean; error: string }) {
+  const selected = data?.find(row => row.suburb_key === selectedKey) ?? null;
+  const countBounds = data?.length ? [
+    Math.min(...data.map(row => Number(row.sale_count))),
+    Math.max(...data.map(row => Number(row.sale_count))),
+  ] as const : null;
+  const priceBounds = data?.flatMap(row => [row.minimum_price_aud, row.maximum_price_aud])
+    .filter((value): value is number | string => value != null)
+    .map(Number) ?? [];
+  const typicalBounds = data?.flatMap(row => [row.p10_price_aud, row.p90_price_aud])
+    .filter((value): value is number | string => value != null)
+    .map(Number) ?? [];
+  const priceRange = (values: number[]) => values.length ? `${displayMoney(Math.min(...values))} – ${displayMoney(Math.max(...values))}` : "—";
+  const percentile = (value: number | string | null) => value == null ? "—" : `P${Math.round(Number(value))}`;
+  const selectedSummary = selected
+    ? `${number.format(Number(selected.sale_count))} sales · ${data && data.length > 1 ? `${percentile(selected.sale_count_percentile)} by sales` : "no peer areas"}`
+    : "Selected suburb peer analysis";
+
+  return <details className="data-table peer-comparison" aria-busy={loading}>
+    <summary><span>Postcode peer comparison · {postcode ?? "—"}</span><span>{loading ? "Loading…" : error ? "Unavailable" : `${data?.length ?? 0} areas · ${selectedSummary}`}</span></summary>
+    {error ? <p className="peer-error" role="status">{error}</p> : loading ? <p className="peer-note">Calculating peer distributions for the selected period and bedroom filter…</p> : data?.length ? <>
+      <p className="peer-note">Postcode-level comparison of recorded house sales for the selected filters, including the selected suburb. Percentiles describe relative position within this group, not a forecast.</p>
+      <div className="peer-range-grid">
+        <div><span>Sales per suburb</span><strong>{countBounds ? `${number.format(countBounds[0])} – ${number.format(countBounds[1])}` : "—"}</strong></div>
+        <div><span>Observed price bounds</span><strong>{priceRange(priceBounds)}</strong></div>
+        <div><span>Combined 10th–90th price span</span><strong>{priceRange(typicalBounds)}</strong></div>
+        <div><span>Selected suburb · median</span><strong>{selected ? displayMoney(selected.median_price_aud) : "—"}</strong></div>
+      </div>
+      <div className="table-scroll"><table>
+        <caption className="sr-only">Suburb sales and price distributions in postcode {postcode}</caption>
+        <thead><tr><th scope="col">Suburb</th><th scope="col">Sales</th><th scope="col">Price coverage</th><th scope="col">Median</th><th scope="col">Average</th><th scope="col">Observed range</th><th scope="col">Sales percentile</th><th scope="col">Median percentile</th></tr></thead>
+        <tbody>{data.map(row => {
+          const sales = Number(row.sale_count);
+          const priced = Number(row.priced_sales);
+          const coverage = sales ? `${Math.round(priced / sales * 100)}%` : "—";
+          return <tr key={row.suburb_key} data-active={row.suburb_key === selectedKey}>
+            <th scope="row">{suburbName(row.suburb)}</th>
+            <td>{number.format(sales)}</td>
+            <td>{coverage}</td>
+            <td>{displayMoney(row.median_price_aud)}</td>
+            <td>{displayMoney(row.average_price_aud)}</td>
+            <td>{priceRange([row.minimum_price_aud, row.maximum_price_aud].filter((value): value is number | string => value != null).map(Number))}</td>
+            <td>{percentile(row.sale_count_percentile)}</td>
+            <td>{percentile(row.median_price_percentile)}</td>
+          </tr>;
+        })}</tbody>
+      </table></div>
+    </> : <p className="peer-note">No peer sales are available for these filters.</p>}
+  </details>;
 }
 
 function MetricDelta({ value, loading }: { value: number | null; loading: boolean }) {

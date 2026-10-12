@@ -188,6 +188,35 @@ details > summary::marker { content: ""; }
 .bedroom-card .chart-host { height: 244px; }
 .bedroom-card > .chart-placeholder, .bedroom-card > .chart-empty { min-height: 230px; }
 
+.annual-index-section { margin-top: 14px; padding: 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.annual-index-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px 18px; }
+.annual-index-header h2 { margin-top: 3px; color: var(--rose-dark); font-size: clamp(21px, 2.5vw, 27px); line-height: 1.2; }
+.annual-index-badge { padding: 6px 10px; border: 1px solid var(--accent); border-radius: 999px; color: var(--rose-dark); font-size: 10px; font-weight: 700; }
+.annual-index-intro, .annual-index-coverage, .annual-index-latest, .annual-index-method p { color: var(--muted); font-size: 11px; line-height: 1.6; }
+.annual-index-intro { max-width: 900px; margin-top: 8px; }
+.annual-index-controls { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; }
+.annual-index-controls label { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; color: var(--muted); font-size: 11px; }
+.annual-index-controls input { accent-color: var(--accent); }
+.annual-index-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 7px; color: var(--muted); font-size: 10px; }
+.annual-index-legend > span { display: inline-flex; align-items: center; gap: 6px; }
+.annual-index-legend > span::before { content: ""; width: 15px; height: 3px; border-radius: 2px; background: var(--series-color); }
+.annual-index-legend > span:first-child::before { height: 7px; outline: 3px solid color-mix(in srgb, var(--accent) 16%, transparent); }
+.annual-index-legend > span:nth-child(2)::before { height: 0; border-top: 2px dashed var(--series-color); border-radius: 0; background: none; }
+.annual-index-chart { height: 320px; margin-top: 2px; }
+.annual-index-coverage { margin-top: 2px; }
+.annual-index-latest { margin-top: 4px; color: var(--ink); font-weight: 600; }
+.annual-index-error { margin-top: 12px; color: var(--negative); font-size: 12px; }
+.annual-index-error button { min-height: 30px; margin-left: 8px; padding: 4px 9px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.annual-index-table, .annual-index-method { margin-top: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.annual-index-table > summary, .annual-index-method > summary { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 5px 12px; padding: 11px 13px; color: var(--ink); font-size: 11px; font-weight: 600; }
+.annual-index-table > summary > span { color: var(--muted); font-size: 10px; font-weight: 400; }
+.annual-index-table > .table-scroll { border-top: 1px solid var(--line); }
+.annual-index-table table { min-width: 850px; }
+.annual-index-table td, .annual-index-table th { font-variant-numeric: tabular-nums; }
+.annual-index-method[open] > summary { border-bottom: 1px solid var(--line); }
+.annual-index-method p { max-width: 1000px; margin: 10px 13px; }
+.annual-index-method p:last-child { overflow-wrap: anywhere; }
+
 .data-table { margin-top: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
 .data-table > summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 43px; padding: 12px 18px; color: var(--muted); font-size: 11px; font-weight: 600; }
 .data-table > summary::after { content: "+"; color: var(--rose-dark); font-size: 16px; font-weight: 400; }
@@ -204,6 +233,13 @@ details > summary::marker { content: ""; }
 .data-table tbody tr[data-active="true"] { background: var(--surface-rose); }
 .data-table th button { min-height: 27px; margin: -3px -5px; padding: 3px 5px; border: 1px solid transparent; background: transparent; color: inherit; font-size: inherit; text-align: left; }
 .data-table th button[aria-pressed="true"] { color: var(--rose-dark); border-color: var(--line); }
+.peer-comparison > summary span:last-child { text-align: right; font-weight: 400; }
+.peer-comparison > .peer-note, .peer-comparison > .peer-error { margin: 12px 18px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.peer-comparison > .peer-error { color: var(--rose-dark); }
+.peer-comparison > .peer-range-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; padding: 0 18px 12px; overflow: visible; }
+.peer-range-grid > div { display: flex; flex-direction: column; gap: 5px; min-width: 0; padding: 11px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); }
+.peer-range-grid span { color: var(--muted); font-size: 10px; }
+.peer-range-grid strong { color: var(--ink); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; }
 .dashboard-credit { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 5px 16px; margin-top: 13px; color: var(--muted); font-size: 10px; }
 .dashboard-credit strong { color: var(--rose-dark); font-weight: 600; }
 .app-footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 18px; margin-top: 26px; padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
@@ -260,6 +296,7 @@ details > summary::marker { content: ""; }
   .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .metric-card { min-height: 124px; }
   .metric-value { font-size: 30px; }
+  .peer-comparison > .peer-range-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-right: 12px; padding-left: 12px; }
   .chart-grid, .secondary-grid { grid-template-columns: 1fr; }
   .comparison-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
   .comparison-metric .chart-host { height: 170px; }
@@ -313,6 +350,10 @@ details > summary::marker { content: ""; }
   .comparison-row { grid-template-columns: 65px minmax(0, 1fr) auto; gap: 8px; }
   .data-table > summary { padding: 12px; }
   .data-table th, .data-table td { padding: 10px 12px; font-size: 10px; }
+  .peer-comparison > summary { align-items: flex-start; }
+  .peer-comparison > summary span:last-child { max-width: 55%; }
+  .peer-comparison > .peer-note, .peer-comparison > .peer-error { margin: 10px 12px; }
+  .peer-comparison > .peer-range-grid { gap: 7px; padding-right: 10px; padding-left: 10px; }
   .app-footer { align-items: flex-start; margin-top: 22px; }
 }
 @media (prefers-reduced-motion: reduce) {

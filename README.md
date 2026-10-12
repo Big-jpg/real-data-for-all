@@ -45,12 +45,16 @@ The production application provides:
 - Monthly sale counts and price distributions
 - Rolling annual medians and year-over-year comparisons
 - Sales-velocity measures based on completed sales
+- Postcode peer distributions that compare each suburb's sales volume, price coverage, median and average prices, observed price bounds, and within-postcode percentiles under the same date and bedroom filters
+- An experimental annual repeat-sales index with property-clustered confidence intervals, median-price comparison, and regression sensitivity series
 - Bedroom-segment and land-size analysis with visible sample sizes
 - CSV export
 - Downloadable and clipboard-ready visual snapshots
 - Perth Warm, Microsoft Corporate, Excel Analysis, and PowerPoint Sales snapshot styles
 
 Sales velocity means completed detached-house sales per month over the latest rolling 12 months. It is not an inventory-turnover or days-on-market measure.
+Postcode peer percentiles are descriptive positions within the recorded suburb cohort for the selected filters; they are not forecasts or causal estimates.
+The Experimental Repeat-Sales Index measures appreciation among matched repeat-sale properties. It is not a complete market valuation, forecast, or causal explanation; its published annual dataset records the model version, source snapshot, execution time, and eligibility criteria.
 
 ## Technology
 
@@ -85,9 +89,12 @@ After validating a bounded ingestion, load and publish the complete archive:
 ```bash
 pnpm ingest:local
 pnpm db:reconcile
+pnpm publish:motherduck -- --validate-only
 pnpm publish:motherduck
 pnpm smoke:motherduck
 ```
+
+MotherDuck publication stages and reconciles the existing serving marts, pseudonymous consecutive repeat-sale pairs, and `annual_repeat_sales_index` in one transaction. The annual release is model version `annual-repeat-sales-v1`, uses untrimmed unweighted OLS as primary, and includes the existing return-band OLS and Huber IRLS sensitivity series plus the annual median-price comparator. The `--validate-only` option verifies staged identities and annual results without promoting them.
 
 Standalone database scripts load `.env.local` explicitly. Never commit populated environment files.
 

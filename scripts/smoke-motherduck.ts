@@ -20,6 +20,20 @@ try {
     (SELECT count(*)-count(DISTINCT suburb_key) FROM suburb_dimension)+
     (SELECT count(*) FROM (SELECT suburb_key,sale_month FROM suburb_monthly_sales GROUP BY 1,2 HAVING count(*)>1) AS duplicated_months) AS duplicate_keys`;
   if (Number(duplicate_keys)) throw new Error("MotherDuck serving tables contain duplicate canonical keys");
+  const [{ invalid_property_keys }] = await sql`SELECT count(*)::bigint invalid_property_keys FROM suburb_sale_facts
+    WHERE property_key IS NULL OR property_key !~ '^[a-f0-9]{64}$'`;
+  if (Number(invalid_property_keys)) throw new Error(`MotherDuck serving facts contain ${invalid_property_keys} invalid pseudonymous property keys`);
+  const [repeatPairs] = await sql`SELECT count(*)::bigint pair_count,count(DISTINCT pair_key)::bigint unique_pair_count,
+    count(*) FILTER(WHERE pair_key !~ '^[a-f0-9]{64}$' OR property_key !~ '^[a-f0-9]{64}$'
+      OR holding_days<0 OR (holding_days<=0 AND raw_annualized_return_pct IS NOT NULL)
+      OR (holding_days>0 AND earlier_price_aud>0 AND later_price_aud>0
+        AND NOT has_annualized_return_overflow AND raw_annualized_return_pct IS NULL))::bigint invalid_rows,
+    count(*) FILTER(WHERE is_same_day_ambiguous)::bigint same_day_ambiguous_pairs,
+    count(*) FILTER(WHERE return_eligible AND is_plausible_annualized_return)::bigint plausible_positive_hold_returns
+    FROM repeat_sale_pairs`;
+  if (!Number(repeatPairs.pair_count) || Number(repeatPairs.pair_count) !== Number(repeatPairs.unique_pair_count) || Number(repeatPairs.invalid_rows)) {
+    throw new Error("MotherDuck repeat-sale pairs failed identity or return-integrity checks");
+  }
   const args = process.argv.slice(2);
   for (let index = 0; index < args.length; index += 2) {
     if (args[index] !== "--expect-suburb" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(args[index + 1] ?? "")) throw new Error("Usage: smoke-motherduck.ts [--expect-suburb canonical-suburb-key]");
@@ -61,6 +75,6 @@ try {
   if(!rolling?.current_median_price_aud||!rolling?.prior_median_price_aud) throw new Error("MotherDuck rolling median smoke query returned an incomplete comparison");
   const [{excluded}]=await sql`SELECT count(*)::int excluded FROM suburb_sale_facts WHERE lower(trim(property_type))<>'house'`;
   if(Number(excluded)!==0) throw new Error(`MotherDuck fact scope contains ${excluded} non-house rows`);
-  console.log(`MotherDuck smoke query passed: ${rows.length} months, ${Number(insight.sale_count)} house facts, ${bedrooms.length} bedroom groups, and rolling annual medians`);
-  console.log(JSON.stringify({ servingIntegrity: "passed", ...summary }, null, 2));
+  console.log(`MotherDuck smoke query passed: ${rows.length} months, ${Number(insight.sale_count)} house facts, ${bedrooms.length} bedroom groups, rolling annual medians, and ${Number(repeatPairs.pair_count)} repeat-sale pairs`);
+  console.log(JSON.stringify({ servingIntegrity: "passed", ...summary, ...repeatPairs }, null, 2));
 } finally { await sql.end(); }
