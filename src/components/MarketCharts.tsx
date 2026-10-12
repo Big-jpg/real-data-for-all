@@ -138,11 +138,12 @@ export function PeriodComparison({ rolling, loading }: { rolling: Rolling | null
   ] : [], [rolling]);
   const medianDefinition = useMemo(() => comparisonDefinition(periods, "median"), [periods]);
   const salesDefinition = useMemo(() => comparisonDefinition(periods, "sales"), [periods]);
+  const hasMedian = periods.some(period => period.median !== null);
   return <section className="chart-card comparison-card" aria-busy={loading}>
     <div className="card-top"><h3>Period comparison</h3><div className="chart-legend"><span className="legend-key current-key">Current</span><span className="legend-key prior-key">Prior</span></div></div>
     {loading ? <ChartLoading /> : !rolling ? <div className="chart-empty">No period observations</div> : <>
       <div className="comparison-grid">
-        <div className="comparison-metric"><h4>Median price</h4><Chart definition={medianDefinition} className="chart-host" height={145} initialWidth={330} ariaLabel="Current and prior period median prices in Australian dollars" ariaDescription="Both price bars start at zero. A missing median has no bar." /></div>
+        <div className="comparison-metric"><h4>Median price</h4>{hasMedian ? <Chart definition={medianDefinition} className="chart-host" height={145} initialWidth={330} ariaLabel="Current and prior period median prices in Australian dollars" ariaDescription="Both price bars start at zero. A missing median has no bar." /> : <div className="chart-empty comparison-empty">No disclosed prices</div>}</div>
         <div className="comparison-metric"><h4>Recorded sales</h4><Chart definition={salesDefinition} className="chart-host" height={145} initialWidth={330} ariaLabel="Current and prior period recorded sales" /></div>
       </div>
       <div className="comparison-periods">{periods.map(period => <div key={period.label}>
