@@ -59,7 +59,7 @@ Sales velocity means completed detached-house sales per month over the latest ro
 - Neon Postgres as the canonical system of record
 - MotherDuck as the analytical serving layer
 - TypeScript, Zod, Vitest, and ESLint
-- A Chrome response collector for current captures; the earlier extension remains in `rea-sold-scraper`
+- A local extraction queue with a visible Playwright Chrome worker; the earlier extension remains in `rea-sold-scraper`
 
 ## Local setup
 
@@ -100,6 +100,34 @@ The current collector reads the structured sold-listing responses used by a norm
 - `scripts/compare-captures.ts` compares validated dated captures with the preserved July baseline.
 
 Generate the static browser-tool bootstrap with `node scripts/build-chrome-collector.mjs` (or `pnpm capture:build`). It writes `captures/_runtime/chrome-collector-bootstrap.js`. The bootstrap runs in the approved CUA JavaScript session with `captureFiles`, `capturePath` and `collectorCrypto` bound to the native Node modules, and a Chrome tab plus its documented `cdp` capability. Paste it as ordinary tool code; it requires no file-module imports or runtime code generation. This is an operator-controlled browser capture, not a standalone headless CLI.
+
+### Local extraction queue
+
+Run the local console with installed Google Chrome and Node.js 22 or later:
+
+```powershell
+pnpm capture:queue
+```
+
+Open [the local extraction console](http://127.0.0.1:4318). The console is a separate local process; it does not need database credentials. Select one to three localities and create a pilot, then start it. The worker opens visible Chrome using a dedicated, ignored profile. Keep the computer awake during collection. A Perth-wide job can start only after a small, nonempty pilot has completed successfully.
+
+The console supports locality search, selected work queues, page and row progress, pause/resume, and explicit retries of failed slices. Pause takes effect after the active page has been committed. Resume verifies the saved page checksums and continues from the first uncommitted page. Retry retains committed pages; if the source's total or pagination has changed, create a fresh dated queue rather than modifying earlier evidence. Only one job can execute at a time, and a process lock prevents two consoles from writing the same queue.
+
+Every job creates a unique dated directory under `captures/queues/`, with its own plan, manifest, projected page responses and CSVs. The July baseline and earlier dated captures remain intact. The scope is WA House sales, exact locality/postcode, no surrounding suburbs, and the source's rolling six-month sold window. The June 1 comparison cutoff remains metadata for the preserved July comparison; it does not alter the source window.
+
+A verification page, HTTP 403 or HTTP 429 stops collection. Chrome stays visible so normal access can be restored manually; the operator must explicitly retry before work continues. The worker does not automatically repeat challenged requests. Browser profile data is kept separately from the safe listing projections and must remain ignored. Collection does not ingest files into Postgres, publish MotherDuck tables, or update the public website.
+
+Stop the console with Ctrl+C. Shutdown waits for a safe checkpoint and closes its Chrome worker. Restart the console and resume an interrupted job from its saved checkpoint. A capped locality requires a fresh capture with a higher page limit; retrying an unchanged limit cannot add pages.
+
+The console normally recovers a lock whose recorded process has exited. If it reports a stale reclaim lock after a hard crash, inspect `captures/queues/queue.lock`, confirm that the recorded process and other queue consoles have stopped, then remove only the stale `queue.lock.reclaim` file before restarting. Do not remove a live worker's lock.
+
+The opt-in browser smoke tests use visible Chrome with synthetic, intercepted responses and separate fixture profiles. They verify checkpoint restart and GraphQL pagination; they do not unlock the real console's pilot gate or establish source access:
+
+```powershell
+$env:EXTRACTION_CHROME_SMOKE = "1"
+pnpm test -- scripts/extraction/chrome-smoke.test.mjs
+Remove-Item Env:EXTRACTION_CHROME_SMOKE
+```
 
 Create the collector with `createChromeCollector({ tab, cdp, core: collectorCore, planPath, outputDirectory })`, then call `runBatch()` in bounded batches. The plan must specify WA, House, exact suburb/postcode and a six-month sold window. Each validated page is committed with a SHA-256 before the manifest advances. Recreating the collector with the same plan and directory verifies the saved pages and resumes from the first uncommitted page. A completed slice has all pages and a unique listing count matching the response total. Failed, incomplete, capped and unresolved scopes remain explicit.
 

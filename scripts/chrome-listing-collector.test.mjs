@@ -4,7 +4,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import * as captureCore from "../src/lib/rea-listing-capture";
-import { createChromeCollector, listingUrl, readBootstrapResponse, requestMatches } from "./chrome-listing-collector.mjs";
+import { createChromeCollector, listingUrl, listingUrlMatches, readBootstrapResponse, requestMatches } from "./chrome-listing-collector.mjs";
 
 const ENDPOINT = "https://lexa.realestate.com.au/graphql";
 const CAPTURED_AT = "2026-10-11T17:00:00.000Z";
@@ -129,6 +129,14 @@ async function manifestAt(outputDirectory) {
 }
 
 describe("Chrome listing response transport", () => {
+  it("accepts query parameter ordering while rejecting a changed page or source scope", () => {
+    const target = listingUrl(hocking);
+    const reordered = new URL(target); reordered.searchParams.sort();
+    expect(listingUrlMatches(reordered.href, target)).toBe(true);
+    expect(listingUrlMatches(listingUrl(hocking, 2), target)).toBe(false);
+    reordered.searchParams.set("includeSurrounding", "true");
+    expect(listingUrlMatches(reordered.href, target)).toBe(false);
+  });
   it("matches the complete observed query scope and rejects stale pages or different filters", () => {
     expect(requestMatches(requestFor(), hocking, 1)).toBe(true);
     const changedName = queryFor(); changedName.localities[0].searchLocation = "  HOCKING,   WA 6065  ";
@@ -181,6 +189,7 @@ describe("Chrome listing response transport", () => {
     await first.stop();
 
     const restarted = await createChromeCollector({ ...browser, core, ...files, delayMs: 0 });
+    restarted.resume();
     expect(await restarted.runBatch()).toMatchObject({ done: true, progress: { complete: 1, committedPages: 2, capturedRows: 26 } });
     expect(projected).toHaveBeenCalledTimes(1);
     expect(browser.navigations).toEqual([listingUrl(hocking, 1), listingUrl(hocking, 2)]);
@@ -281,5 +290,108 @@ describe("Chrome listing response transport", () => {
     expect(checkpoint.slices[0]).not.toHaveProperty("failure");
     expect(await collector.runBatch({ maxMs: 45_000 })).toMatchObject({ done: true, committedThisBatch: 1, progress: { complete: 1, committedPages: 2 } });
     expect(browser.navigations).toEqual([listingUrl(hocking, 1), listingUrl(hocking, 2)]);
+  });
+
+  it("pauses after committing an in-flight page and rejects overlapping batches or retry resets", async () => {
+    const files = await workspace();
+    const browser = browserFixture(new Map([
+      [listingUrl(hocking, 1), { payload: responseFor({ count: 25, total: 26, more: true }) }],
+      [listingUrl(hocking, 2), { payload: responseFor({ page: 2, start: 26, total: 26 }) }],
+    ]));
+    let release, entered;
+    const navigationGate = new Promise((resolve) => { release = resolve; });
+    const navigationStarted = new Promise((resolve) => { entered = resolve; });
+    const navigate = browser.tab.goto.getMockImplementation();
+    browser.tab.goto.mockImplementationOnce(async (target) => { await navigate(target); entered(); await navigationGate; });
+    const collector = await createChromeCollector({ ...browser, core: captureCore, ...files, delayMs: 0 });
+    const run = collector.runBatch();
+    await navigationStarted;
+    await expect(collector.runBatch()).rejects.toThrow("already running");
+    await expect(collector.retryExceptions([hocking.name])).rejects.toThrow("Pause the collector");
+    const paused = collector.pause();
+    release();
+    expect(await run).toMatchObject({ paused: true, done: false, committedThisBatch: 1 });
+    await paused;
+    const checkpoint = await manifestAt(files.outputDirectory);
+    expect(checkpoint).toMatchObject({ status: "paused", progress: { committedPages: 1, capturedRows: 25 } });
+    expect(browser.navigations).toEqual([listingUrl(hocking, 1)]);
+    const pageFile = path.join(files.outputDirectory, checkpoint.slices[0].pages[0].file);
+    const firstPage = await fs.readFile(pageFile, "utf8");
+    collector.resume();
+    expect(await collector.runBatch()).toMatchObject({ done: true, progress: { complete: 1, committedPages: 2 } });
+    expect(await fs.readFile(pageFile, "utf8")).toBe(firstPage);
+    await collector.stop();
+    await expect(collector.runBatch()).rejects.toThrow("closed");
+  });
+
+  it("requires an explicit challenged-slice retry before any further navigation", async () => {
+    const files = await workspace();
+    const routes = new Map([[listingUrl(hocking), { status: 429, payload: null }]]);
+    const browser = browserFixture(routes);
+    const collector = await createChromeCollector({ ...browser, core: captureCore, ...files, delayMs: 0 });
+    await collector.runBatch();
+    expect(await collector.runBatch()).toMatchObject({ stopped: true });
+    expect(() => collector.resume()).toThrow("Retry the challenged slice explicitly");
+    await collector.retryExceptions([]);
+    expect(await collector.runBatch()).toMatchObject({ stopped: true });
+    expect(browser.navigations).toHaveLength(1);
+    await expect(collector.retryExceptions(["unknown-slice"])).rejects.toThrow("unknown slice");
+    routes.set(listingUrl(hocking), { payload: responseFor() });
+    expect(await collector.retryExceptions([hocking.name])).toEqual({ retried: 1 });
+    collector.resume();
+    expect(await collector.runBatch()).toMatchObject({ done: true, progress: { complete: 1 } });
+  });
+
+  it("uses the dated plan's comparison metadata and resumes a saved pause deliberately", async () => {
+    const files = await workspace();
+    const plan = JSON.parse(await fs.readFile(files.planPath, "utf8"));
+    plan.comparisonCutoff = "2026-10-01";
+    plan.baseline = "../2026-07-baseline/manifest.json";
+    await fs.writeFile(files.planPath, JSON.stringify(plan));
+    const browser = browserFixture(new Map([[listingUrl(hocking), { payload: responseFor() }]]));
+    const collector = await createChromeCollector({ ...browser, core: captureCore, ...files, delayMs: 0 });
+    await collector.pause();
+    const restarted = await createChromeCollector({ ...browser, core: captureCore, ...files, delayMs: 0 });
+    expect(await restarted.runBatch()).toMatchObject({ paused: true, committedThisBatch: 0 });
+    expect(browser.navigations).toEqual([]);
+    restarted.resume();
+    await restarted.runBatch();
+    expect(await manifestAt(files.outputDirectory)).toMatchObject({ baseline: plan.baseline, settings: { comparisonCutoff: "2026-10-01" } });
+  });
+
+  it("does not navigate when a pause arrives during the between-page delay", async () => {
+    const files = await workspace();
+    const browser = browserFixture(new Map([
+      [listingUrl(hocking, 1), { payload: responseFor({ count: 25, total: 26, more: true }) }],
+      [listingUrl(hocking, 2), { payload: responseFor({ page: 2, start: 26, total: 26 }) }],
+    ]));
+    const collector = await createChromeCollector({ ...browser, core: captureCore, ...files, delayMs: 5000 });
+    await collector.runBatch({ maxCommittedPages: 1 });
+    let release, entered;
+    const delayStarted = new Promise((resolve) => { entered = resolve; });
+    vi.spyOn(globalThis, "setTimeout").mockImplementationOnce((resolve, delay) => { expect(delay).toBeGreaterThan(0); release = resolve; entered(); return 0; });
+    const run = collector.runBatch();
+    await delayStarted;
+    const paused = collector.pause(); release();
+    expect(await run).toMatchObject({ paused: true, committedThisBatch: 0 });
+    await paused;
+    expect(browser.navigations).toEqual([listingUrl(hocking, 1)]);
+    expect((await manifestAt(files.outputDirectory)).slices[0]).not.toHaveProperty("failure");
+  });
+
+  it("rejects checkpoint path traversal and altered scope before making another request", async () => {
+    const files = await workspace();
+    const browser = browserFixture(new Map([[listingUrl(hocking), { payload: responseFor({ count: 25, total: 26, more: true }) }]]));
+    const collector = await createChromeCollector({ ...browser, core: captureCore, ...files, delayMs: 0 });
+    await collector.runBatch({ maxCommittedPages: 1 });
+    const checkpoint = await manifestAt(files.outputDirectory);
+    checkpoint.slices[0].pages[0].file = "../outside.json";
+    await fs.writeFile(path.join(files.outputDirectory, "manifest.json"), JSON.stringify(checkpoint));
+    const restarted = await createChromeCollector({ ...browser, core: captureCore, ...files, delayMs: 0 });
+    await expect(restarted.runBatch()).rejects.toThrow("Committed page path or sequence is invalid");
+    checkpoint.slices[0].suburb = "Perth";
+    await fs.writeFile(path.join(files.outputDirectory, "manifest.json"), JSON.stringify(checkpoint));
+    await expect(createChromeCollector({ ...browser, core: captureCore, ...files, delayMs: 0 })).rejects.toThrow("slice scope does not match");
+    expect(browser.navigations).toHaveLength(1);
   });
 });

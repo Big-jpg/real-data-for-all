@@ -1,0 +1,2475 @@
+{
+  "fixtureOnly": true,
+  "servingDatabaseQueried": false,
+  "status": "passed",
+  "browser": "154.0.8037.99",
+  "scenarios": [
+    "single suburb",
+    "comparison excludes primary",
+    "two series with grouped geometry",
+    "average lines",
+    "aligned monthly table",
+    "selected month and tooltip",
+    "CSV identities",
+    "PNG export",
+    "desktop and mobile layout",
+    "shared period and bedroom filters",
+    "comparison removal",
+    "delayed response cancellation",
+    "named service error and Retry",
+    "undisclosed prices",
+    "empty comparison",
+    "no disclosed prices"
+  ],
+  "chartGeometry": {
+    "singleVolume": [
+      {
+        "tag": "rect",
+        "fill": "var(--surface)",
+        "stroke": null,
+        "d": null,
+        "x": "0",
+        "y": "0",
+        "width": "623.05",
+        "height": "270",
+        "cx": null,
+        "cy": null,
+        "dash": null,
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 623.0499877929688,
+          "height": 270
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M77.92,82.95H95.33A3,3 0 0 1 98.33,85.95V234A0,0 0 0 1 98.33,234H74.92A0,0 0 0 1 74.92,234V85.95A3,3 0 0 1 77.92,82.95Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 74.91999816894531,
+          "y": 82.94999694824219,
+          "width": 23.410003662109375,
+          "height": 151.0500030517578
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M123.17,67.85H140.59A3,3 0 0 1 143.59,70.85V234A0,0 0 0 1 143.59,234H120.17A0,0 0 0 1 120.17,234V70.85A3,3 0 0 1 123.17,67.85Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 120.16999816894531,
+          "y": 67.8499984741211,
+          "width": 23.419998168945312,
+          "height": 166.14999389648438
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M165.43,234H188.84A0,0 0 0 1 188.84,234V234A0,0 0 0 1 188.84,234H165.43A0,0 0 0 1 165.43,234V234A0,0 0 0 1 165.43,234Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 165.42999267578125,
+          "y": 234,
+          "width": 23.410003662109375,
+          "height": 0
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M213.68,37.64H231.1A3,3 0 0 1 234.1,40.64V234A0,0 0 0 1 234.1,234H210.68A0,0 0 0 1 210.68,234V40.64A3,3 0 0 1 213.68,37.64Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 210.67999267578125,
+          "y": 37.63999938964844,
+          "width": 23.420013427734375,
+          "height": 196.36000061035156
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M258.94,82.95H276.35A3,3 0 0 1 279.35,85.95V234A0,0 0 0 1 279.35,234H255.94A0,0 0 0 1 255.94,234V85.95A3,3 0 0 1 258.94,82.95Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 255.94000244140625,
+          "y": 82.94999694824219,
+          "width": 23.410003662109375,
+          "height": 151.0500030517578
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M304.19,67.85H321.6A3,3 0 0 1 324.6,70.85V234A0,0 0 0 1 324.6,234H301.19A0,0 0 0 1 301.19,234V70.85A3,3 0 0 1 304.19,67.85Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 301.19000244140625,
+          "y": 67.8499984741211,
+          "width": 23.410003662109375,
+          "height": 166.14999389648438
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M349.44,52.74H366.86A3,3 0 0 1 369.86,55.74V234A0,0 0 0 1 369.86,234H346.44A0,0 0 0 1 346.44,234V55.74A3,3 0 0 1 349.44,52.74Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 346.44000244140625,
+          "y": 52.7400016784668,
+          "width": 23.41998291015625,
+          "height": 181.25999450683594
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M394.7,37.64H412.11A3,3 0 0 1 415.11,40.64V234A0,0 0 0 1 415.11,234H391.7A0,0 0 0 1 391.7,234V40.64A3,3 0 0 1 394.7,37.64Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 391.70001220703125,
+          "y": 37.63999938964844,
+          "width": 23.40997314453125,
+          "height": 196.36000061035156
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M439.95,82.95H457.37A3,3 0 0 1 460.37,85.95V234A0,0 0 0 1 460.37,234H436.95A0,0 0 0 1 436.95,234V85.95A3,3 0 0 1 439.95,82.95Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 436.95001220703125,
+          "y": 82.94999694824219,
+          "width": 23.41998291015625,
+          "height": 151.0500030517578
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M485.21,67.85H502.62A3,3 0 0 1 505.62,70.85V234A0,0 0 0 1 505.62,234H482.21A0,0 0 0 1 482.21,234V70.85A3,3 0 0 1 485.21,67.85Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 482.2099914550781,
+          "y": 67.8499984741211,
+          "width": 23.410003662109375,
+          "height": 166.14999389648438
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M530.46,52.74H547.87A3,3 0 0 1 550.87,55.74V234A0,0 0 0 1 550.87,234H527.46A0,0 0 0 1 527.46,234V55.74A3,3 0 0 1 530.46,52.74Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 527.4600219726562,
+          "y": 52.7400016784668,
+          "width": 23.40997314453125,
+          "height": 181.25999450683594
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M575.71,37.64H593.13A3,3 0 0 1 596.13,40.64V234A0,0 0 0 1 596.13,234H572.71A0,0 0 0 1 572.71,234V40.64A3,3 0 0 1 575.71,37.64Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 572.7100219726562,
+          "y": 37.63999938964844,
+          "width": 23.41998291015625,
+          "height": 196.36000061035156
+        }
+      }
+    ],
+    "pairedVolume": [
+      {
+        "tag": "rect",
+        "fill": "var(--surface)",
+        "stroke": null,
+        "d": null,
+        "x": "0",
+        "y": "0",
+        "width": "623.05",
+        "height": "270",
+        "cx": null,
+        "cy": null,
+        "dash": null,
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 623.0499877929688,
+          "height": 270
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M76,148.62H82.52A3,3 0 0 1 85.52,151.62V234A0,0 0 0 1 85.52,234H73A0,0 0 0 1 73,234V151.62A3,3 0 0 1 76,148.62Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 73,
+          "y": 148.6199951171875,
+          "width": 12.519996643066406,
+          "height": 85.3800048828125
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M121.25,140.09H127.78A3,3 0 0 1 130.78,143.09V234A0,0 0 0 1 130.78,234H118.25A0,0 0 0 1 118.25,234V143.09A3,3 0 0 1 121.25,140.09Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 118.25,
+          "y": 140.08999633789062,
+          "width": 12.529998779296875,
+          "height": 93.91000366210938
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M163.51,234H176.03A0,0 0 0 1 176.03,234V234A0,0 0 0 1 176.03,234H163.51A0,0 0 0 1 163.51,234V234A0,0 0 0 1 163.51,234Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 163.50999450683594,
+          "y": 234,
+          "width": 12.520004272460938,
+          "height": 0
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M211.76,123.01H218.28A3,3 0 0 1 221.28,126.01V234A0,0 0 0 1 221.28,234H208.76A0,0 0 0 1 208.76,234V126.01A3,3 0 0 1 211.76,123.01Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 208.75999450683594,
+          "y": 123.01000213623047,
+          "width": 12.520004272460938,
+          "height": 110.98999786376953
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M257.01,148.62H263.54A3,3 0 0 1 266.54,151.62V234A0,0 0 0 1 266.54,234H254.01A0,0 0 0 1 254.01,234V151.62A3,3 0 0 1 257.01,148.62Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 254.00999450683594,
+          "y": 148.6199951171875,
+          "width": 12.530014038085938,
+          "height": 85.3800048828125
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M302.27,140.09H308.79A3,3 0 0 1 311.79,143.09V234A0,0 0 0 1 311.79,234H299.27A0,0 0 0 1 299.27,234V143.09A3,3 0 0 1 302.27,140.09Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 299.2699890136719,
+          "y": 140.08999633789062,
+          "width": 12.52001953125,
+          "height": 93.91000366210938
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M347.52,131.55H354.05A3,3 0 0 1 357.05,134.55V234A0,0 0 0 1 357.05,234H344.52A0,0 0 0 1 344.52,234V134.55A3,3 0 0 1 347.52,131.55Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 344.5199890136719,
+          "y": 131.5500030517578,
+          "width": 12.529998779296875,
+          "height": 102.44999694824219
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M392.78,123.01H399.3A3,3 0 0 1 402.3,126.01V234A0,0 0 0 1 402.3,234H389.78A0,0 0 0 1 389.78,234V126.01A3,3 0 0 1 392.78,123.01Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 389.7799987792969,
+          "y": 123.01000213623047,
+          "width": 12.519989013671875,
+          "height": 110.98999786376953
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M438.03,148.62H444.55A3,3 0 0 1 447.55,151.62V234A0,0 0 0 1 447.55,234H435.03A0,0 0 0 1 435.03,234V151.62A3,3 0 0 1 438.03,148.62Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 435.0299987792969,
+          "y": 148.6199951171875,
+          "width": 12.519989013671875,
+          "height": 85.3800048828125
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M483.28,140.09H489.81A3,3 0 0 1 492.81,143.09V234A0,0 0 0 1 492.81,234H480.28A0,0 0 0 1 480.28,234V143.09A3,3 0 0 1 483.28,140.09Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 480.2799987792969,
+          "y": 140.08999633789062,
+          "width": 12.529998779296875,
+          "height": 93.91000366210938
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M528.54,131.55H535.06A3,3 0 0 1 538.06,134.55V234A0,0 0 0 1 538.06,234H525.54A0,0 0 0 1 525.54,234V134.55A3,3 0 0 1 528.54,131.55Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 525.5399780273438,
+          "y": 131.5500030517578,
+          "width": 12.52001953125,
+          "height": 102.44999694824219
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M573.79,123.01H580.32A3,3 0 0 1 583.32,126.01V234A0,0 0 0 1 583.32,234H570.79A0,0 0 0 1 570.79,234V126.01A3,3 0 0 1 573.79,123.01Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 570.7899780273438,
+          "y": 123.01000213623047,
+          "width": 12.530029296875,
+          "height": 110.98999786376953
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M90.73,63.25H97.26A3,3 0 0 1 100.26,66.25V234A0,0 0 0 1 100.26,234H87.73A0,0 0 0 1 87.73,234V66.25A3,3 0 0 1 90.73,63.25Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 87.7300033569336,
+          "y": 63.25,
+          "width": 12.529998779296875,
+          "height": 170.75
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M135.99,54.71H142.51A3,3 0 0 1 145.51,57.71V234A0,0 0 0 1 145.51,234H132.99A0,0 0 0 1 132.99,234V57.71A3,3 0 0 1 135.99,54.71Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 132.99000549316406,
+          "y": 54.709999084472656,
+          "width": 12.519989013671875,
+          "height": 179.29000854492188
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M181.24,46.17H187.76A3,3 0 0 1 190.76,49.17V234A0,0 0 0 1 190.76,234H178.24A0,0 0 0 1 178.24,234V49.17A3,3 0 0 1 181.24,46.17Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 178.24000549316406,
+          "y": 46.16999816894531,
+          "width": 12.519989013671875,
+          "height": 187.8300018310547
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M223.49,234H236.02A0,0 0 0 1 236.02,234V234A0,0 0 0 1 236.02,234H223.49A0,0 0 0 1 223.49,234V234A0,0 0 0 1 223.49,234Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 223.49000549316406,
+          "y": 234,
+          "width": 12.529998779296875,
+          "height": 0
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M271.75,63.25H278.27A3,3 0 0 1 281.27,66.25V234A0,0 0 0 1 281.27,234H268.75A0,0 0 0 1 268.75,234V66.25A3,3 0 0 1 271.75,63.25Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 268.75,
+          "y": 63.25,
+          "width": 12.519989013671875,
+          "height": 170.75
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M317,54.71H323.53A3,3 0 0 1 326.53,57.71V234A0,0 0 0 1 326.53,234H314A0,0 0 0 1 314,234V57.71A3,3 0 0 1 317,54.71Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 314,
+          "y": 54.709999084472656,
+          "width": 12.529998779296875,
+          "height": 179.29000854492188
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M362.26,46.17H368.78A3,3 0 0 1 371.78,49.17V234A0,0 0 0 1 371.78,234H359.26A0,0 0 0 1 359.26,234V49.17A3,3 0 0 1 362.26,46.17Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 359.260009765625,
+          "y": 46.16999816894531,
+          "width": 12.519989013671875,
+          "height": 187.8300018310547
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M407.51,37.64H414.03A3,3 0 0 1 417.03,40.64V234A0,0 0 0 1 417.03,234H404.51A0,0 0 0 1 404.51,234V40.64A3,3 0 0 1 407.51,37.64Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 404.510009765625,
+          "y": 37.63999938964844,
+          "width": 12.519989013671875,
+          "height": 196.36000061035156
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M452.76,63.25H459.29A3,3 0 0 1 462.29,66.25V234A0,0 0 0 1 462.29,234H449.76A0,0 0 0 1 449.76,234V66.25A3,3 0 0 1 452.76,63.25Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 449.760009765625,
+          "y": 63.25,
+          "width": 12.529998779296875,
+          "height": 170.75
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M498.02,54.71H504.54A3,3 0 0 1 507.54,57.71V234A0,0 0 0 1 507.54,234H495.02A0,0 0 0 1 495.02,234V57.71A3,3 0 0 1 498.02,54.71Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 495.0199890136719,
+          "y": 54.709999084472656,
+          "width": 12.52001953125,
+          "height": 179.29000854492188
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M543.27,46.17H549.79A3,3 0 0 1 552.79,49.17V234A0,0 0 0 1 552.79,234H540.27A0,0 0 0 1 540.27,234V49.17A3,3 0 0 1 543.27,46.17Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 540.27001953125,
+          "y": 46.16999816894531,
+          "width": 12.51995849609375,
+          "height": 187.8300018310547
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M588.53,37.64H595.05A3,3 0 0 1 598.05,40.64V234A0,0 0 0 1 598.05,234H585.53A0,0 0 0 1 585.53,234V40.64A3,3 0 0 1 588.53,37.64Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 585.530029296875,
+          "y": 37.63999938964844,
+          "width": 12.51995849609375,
+          "height": 196.36000061035156
+        }
+      }
+    ],
+    "price": [
+      {
+        "tag": "rect",
+        "fill": "var(--surface)",
+        "stroke": null,
+        "d": null,
+        "x": "0",
+        "y": "0",
+        "width": "623.05",
+        "height": "270",
+        "cx": null,
+        "cy": null,
+        "dash": null,
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 623.0499877929688,
+          "height": 270
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "86.63",
+        "cy": "205.41",
+        "dash": null,
+        "bounds": {
+          "x": 84.12999725341797,
+          "y": 202.91000366210938,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "131.88",
+        "cy": "204.01",
+        "dash": null,
+        "bounds": {
+          "x": 129.3800048828125,
+          "y": 201.50999450683594,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "none",
+        "stroke": "var(--accent)",
+        "d": "M86.63,205.41L131.88,204.01",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": null,
+        "bounds": {
+          "x": 86.62999725341797,
+          "y": 204.00999450683594,
+          "width": 45.25000762939453,
+          "height": 1.4000091552734375
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "222.39",
+        "cy": "201.21",
+        "dash": null,
+        "bounds": {
+          "x": 219.88999938964844,
+          "y": 198.7100067138672,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "267.64",
+        "cy": "199.81",
+        "dash": null,
+        "bounds": {
+          "x": 265.1400146484375,
+          "y": 197.30999755859375,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "312.9",
+        "cy": "198.42",
+        "dash": null,
+        "bounds": {
+          "x": 310.3999938964844,
+          "y": 195.9199981689453,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "358.15",
+        "cy": "197.02",
+        "dash": null,
+        "bounds": {
+          "x": 355.6499938964844,
+          "y": 194.52000427246094,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "403.4",
+        "cy": "195.62",
+        "dash": null,
+        "bounds": {
+          "x": 400.8999938964844,
+          "y": 193.1199951171875,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "448.66",
+        "cy": "194.22",
+        "dash": null,
+        "bounds": {
+          "x": 446.1600036621094,
+          "y": 191.72000122070312,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "493.91",
+        "cy": "192.82",
+        "dash": null,
+        "bounds": {
+          "x": 491.4100036621094,
+          "y": 190.32000732421875,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "539.17",
+        "cy": "191.42",
+        "dash": null,
+        "bounds": {
+          "x": 536.6699829101562,
+          "y": 188.9199981689453,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "584.42",
+        "cy": "190.02",
+        "dash": null,
+        "bounds": {
+          "x": 581.9199829101562,
+          "y": 187.52000427246094,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "none",
+        "stroke": "var(--accent)",
+        "d": "M222.39,201.21L267.64,199.81L312.9,198.42L358.15,197.02L403.4,195.62L448.66,194.22L493.91,192.82L539.17,191.42L584.42,190.02",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": null,
+        "bounds": {
+          "x": 222.38999938964844,
+          "y": 190.02000427246094,
+          "width": 362.02996826171875,
+          "height": 11.19000244140625
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "86.63",
+        "cy": "201.91",
+        "dash": null,
+        "bounds": {
+          "x": 84.12999725341797,
+          "y": 199.41000366210938,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "131.88",
+        "cy": "200.51",
+        "dash": null,
+        "bounds": {
+          "x": 129.3800048828125,
+          "y": 198.00999450683594,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "none",
+        "stroke": "var(--accent)",
+        "d": "M86.63,201.91L131.88,200.51",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "5 4",
+        "bounds": {
+          "x": 86.62999725341797,
+          "y": 200.50999450683594,
+          "width": 45.25000762939453,
+          "height": 1.4000091552734375
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "222.39",
+        "cy": "197.72",
+        "dash": null,
+        "bounds": {
+          "x": 219.88999938964844,
+          "y": 195.22000122070312,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "267.64",
+        "cy": "196.32",
+        "dash": null,
+        "bounds": {
+          "x": 265.1400146484375,
+          "y": 193.82000732421875,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "312.9",
+        "cy": "194.92",
+        "dash": null,
+        "bounds": {
+          "x": 310.3999938964844,
+          "y": 192.4199981689453,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "358.15",
+        "cy": "193.52",
+        "dash": null,
+        "bounds": {
+          "x": 355.6499938964844,
+          "y": 191.02000427246094,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "403.4",
+        "cy": "192.12",
+        "dash": null,
+        "bounds": {
+          "x": 400.8999938964844,
+          "y": 189.6199951171875,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "448.66",
+        "cy": "190.72",
+        "dash": null,
+        "bounds": {
+          "x": 446.1600036621094,
+          "y": 188.22000122070312,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "493.91",
+        "cy": "189.32",
+        "dash": null,
+        "bounds": {
+          "x": 491.4100036621094,
+          "y": 186.82000732421875,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "539.17",
+        "cy": "187.92",
+        "dash": null,
+        "bounds": {
+          "x": 536.6699829101562,
+          "y": 185.4199981689453,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--accent)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "584.42",
+        "cy": "186.52",
+        "dash": null,
+        "bounds": {
+          "x": 581.9199829101562,
+          "y": 184.02000427246094,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "none",
+        "stroke": "var(--accent)",
+        "d": "M222.39,197.72L267.64,196.32L312.9,194.92L358.15,193.52L403.4,192.12L448.66,190.72L493.91,189.32L539.17,187.92L584.42,186.52",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "5 4",
+        "bounds": {
+          "x": 222.38999938964844,
+          "y": 186.52000427246094,
+          "width": 362.02996826171875,
+          "height": 11.199996948242188
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "86.63",
+        "cy": "65.48",
+        "dash": null,
+        "bounds": {
+          "x": 84.12999725341797,
+          "y": 62.980003356933594,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "131.88",
+        "cy": "64.08",
+        "dash": null,
+        "bounds": {
+          "x": 129.3800048828125,
+          "y": 61.58000183105469,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "177.13",
+        "cy": "62.68",
+        "dash": null,
+        "bounds": {
+          "x": 174.6300048828125,
+          "y": 60.18000030517578,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "none",
+        "stroke": "var(--secondary)",
+        "d": "M86.63,65.48L131.88,64.08L177.13,62.68",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": null,
+        "bounds": {
+          "x": 86.62999725341797,
+          "y": 62.68000030517578,
+          "width": 90.50000762939453,
+          "height": 2.8000030517578125
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "312.9",
+        "cy": "58.48",
+        "dash": null,
+        "bounds": {
+          "x": 310.3999938964844,
+          "y": 55.97999954223633,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "358.15",
+        "cy": "57.08",
+        "dash": null,
+        "bounds": {
+          "x": 355.6499938964844,
+          "y": 54.58000183105469,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "403.4",
+        "cy": "55.68",
+        "dash": null,
+        "bounds": {
+          "x": 400.8999938964844,
+          "y": 53.18000030517578,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "448.66",
+        "cy": "54.28",
+        "dash": null,
+        "bounds": {
+          "x": 446.1600036621094,
+          "y": 51.779998779296875,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "493.91",
+        "cy": "52.89",
+        "dash": null,
+        "bounds": {
+          "x": 491.4100036621094,
+          "y": 50.38999938964844,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "539.17",
+        "cy": "51.49",
+        "dash": null,
+        "bounds": {
+          "x": 536.6699829101562,
+          "y": 48.9900016784668,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "584.42",
+        "cy": "50.09",
+        "dash": null,
+        "bounds": {
+          "x": 581.9199829101562,
+          "y": 47.59000015258789,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "none",
+        "stroke": "var(--secondary)",
+        "d": "M312.9,58.48L358.15,57.08L403.4,55.68L448.66,54.28L493.91,52.89L539.17,51.49L584.42,50.09",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": null,
+        "bounds": {
+          "x": 312.8999938964844,
+          "y": 50.09000015258789,
+          "width": 271.5199890136719,
+          "height": 8.389999389648438
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "86.63",
+        "cy": "61.98",
+        "dash": null,
+        "bounds": {
+          "x": 84.12999725341797,
+          "y": 59.47999954223633,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "131.88",
+        "cy": "60.58",
+        "dash": null,
+        "bounds": {
+          "x": 129.3800048828125,
+          "y": 58.08000183105469,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "177.13",
+        "cy": "59.18",
+        "dash": null,
+        "bounds": {
+          "x": 174.6300048828125,
+          "y": 56.68000030517578,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "none",
+        "stroke": "var(--secondary)",
+        "d": "M86.63,61.98L131.88,60.58L177.13,59.18",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "5 4",
+        "bounds": {
+          "x": 86.62999725341797,
+          "y": 59.18000030517578,
+          "width": 90.50000762939453,
+          "height": 2.799999237060547
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "312.9",
+        "cy": "54.98",
+        "dash": null,
+        "bounds": {
+          "x": 310.3999938964844,
+          "y": 52.47999954223633,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "358.15",
+        "cy": "53.58",
+        "dash": null,
+        "bounds": {
+          "x": 355.6499938964844,
+          "y": 51.08000183105469,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "403.4",
+        "cy": "52.19",
+        "dash": null,
+        "bounds": {
+          "x": 400.8999938964844,
+          "y": 49.689998626708984,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "448.66",
+        "cy": "50.79",
+        "dash": null,
+        "bounds": {
+          "x": 446.1600036621094,
+          "y": 48.290000915527344,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "493.91",
+        "cy": "49.39",
+        "dash": null,
+        "bounds": {
+          "x": 491.4100036621094,
+          "y": 46.88999938964844,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "539.17",
+        "cy": "47.99",
+        "dash": null,
+        "bounds": {
+          "x": 536.6699829101562,
+          "y": 45.4900016784668,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "circle",
+        "fill": "var(--secondary)",
+        "stroke": null,
+        "d": null,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": "584.42",
+        "cy": "46.59",
+        "dash": null,
+        "bounds": {
+          "x": 581.9199829101562,
+          "y": 44.09000015258789,
+          "width": 5,
+          "height": 5
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "none",
+        "stroke": "var(--secondary)",
+        "d": "M312.9,54.98L358.15,53.58L403.4,52.19L448.66,50.79L493.91,49.39L539.17,47.99L584.42,46.59",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "5 4",
+        "bounds": {
+          "x": 312.8999938964844,
+          "y": 46.59000015258789,
+          "width": 271.5199890136719,
+          "height": 8.389999389648438
+        }
+      }
+    ],
+    "period": [
+      {
+        "tag": "rect",
+        "fill": "var(--surface)",
+        "stroke": null,
+        "d": null,
+        "x": "0",
+        "y": "0",
+        "width": "669.44",
+        "height": "220",
+        "cx": null,
+        "cy": null,
+        "dash": null,
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 669.4400024414062,
+          "height": 220
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M148,29.32H384.28A3,3 0 0 1 387.28,32.32V48.32A3,3 0 0 1 384.28,51.32H148A0,0 0 0 1 148,51.32V29.32A0,0 0 0 1 148,29.32Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 148,
+          "y": 29.31999969482422,
+          "width": 239.280029296875,
+          "height": 22
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M148,110.23H599.86A3,3 0 0 1 602.86,113.23V129.23A3,3 0 0 1 599.86,132.23H148A0,0 0 0 1 148,132.23V110.23A0,0 0 0 1 148,110.23Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 148,
+          "y": 110.2300033569336,
+          "width": 454.8599853515625,
+          "height": 21.99999237060547
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M148,69.77H373.51A3,3 0 0 1 376.51,72.77V88.77A3,3 0 0 1 373.51,91.77H148A0,0 0 0 1 148,91.77V69.77A0,0 0 0 1 148,69.77Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 148,
+          "y": 69.7699966430664,
+          "width": 228.510009765625,
+          "height": 22.00000762939453
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M148,150.68H589.08A3,3 0 0 1 592.08,153.68V169.68A3,3 0 0 1 589.08,172.68H148A0,0 0 0 1 148,172.68V150.68A0,0 0 0 1 148,150.68Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 148,
+          "y": 150.67999267578125,
+          "width": 444.08001708984375,
+          "height": 22
+        }
+      },
+      {
+        "tag": "rect",
+        "fill": "var(--surface)",
+        "stroke": null,
+        "d": null,
+        "x": "0",
+        "y": "0",
+        "width": "669.44",
+        "height": "220",
+        "cx": null,
+        "cy": null,
+        "dash": null,
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 669.4400024414062,
+          "height": 220
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M148,29.32H388.88A3,3 0 0 1 391.88,32.32V48.32A3,3 0 0 1 388.88,51.32H148A0,0 0 0 1 148,51.32V29.32A0,0 0 0 1 148,29.32Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 148,
+          "y": 29.31999969482422,
+          "width": 243.8800048828125,
+          "height": 22
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M148,110.23H599.86A3,3 0 0 1 602.86,113.23V129.23A3,3 0 0 1 599.86,132.23H148A0,0 0 0 1 148,132.23V110.23A0,0 0 0 1 148,110.23Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 148,
+          "y": 110.2300033569336,
+          "width": 454.8599853515625,
+          "height": 21.99999237060547
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M148,69.77H340.49A3,3 0 0 1 343.49,72.77V88.77A3,3 0 0 1 340.49,91.77H148A0,0 0 0 1 148,91.77V69.77A0,0 0 0 1 148,69.77Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 148,
+          "y": 69.7699966430664,
+          "width": 195.489990234375,
+          "height": 22.00000762939453
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M148,150.68H508.88A3,3 0 0 1 511.88,153.68V169.68A3,3 0 0 1 508.88,172.68H148A0,0 0 0 1 148,172.68V150.68A0,0 0 0 1 148,150.68Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 148,
+          "y": 150.67999267578125,
+          "width": 363.8800048828125,
+          "height": 22
+        }
+      }
+    ],
+    "bedrooms": [
+      {
+        "tag": "rect",
+        "fill": "var(--surface)",
+        "stroke": null,
+        "d": null,
+        "x": "0",
+        "y": "0",
+        "width": "576.66",
+        "height": "230",
+        "cx": null,
+        "cy": null,
+        "dash": null,
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 576.6599731445312,
+          "height": 230
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M137.72,137.27H187.72A3,3 0 0 1 190.72,140.27V200A0,0 0 0 1 190.72,200H134.72A0,0 0 0 1 134.72,200V140.27A3,3 0 0 1 137.72,137.27Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 134.72000122070312,
+          "y": 137.27000427246094,
+          "width": 56,
+          "height": 62.72999572753906
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--accent)",
+        "stroke": "none",
+        "d": "M356.72,116.36H406.72A3,3 0 0 1 409.72,119.36V200A0,0 0 0 1 409.72,200H353.72A0,0 0 0 1 353.72,200V119.36A3,3 0 0 1 356.72,116.36Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 353.7200012207031,
+          "y": 116.36000061035156,
+          "width": 56,
+          "height": 83.63999938964844
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M203.93,74.55H253.93A3,3 0 0 1 256.93,77.55V200A0,0 0 0 1 256.93,200H200.93A0,0 0 0 1 200.93,200V77.55A3,3 0 0 1 203.93,74.55Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 200.92999267578125,
+          "y": 74.55000305175781,
+          "width": 56,
+          "height": 125.44999694824219
+        }
+      },
+      {
+        "tag": "path",
+        "fill": "var(--secondary)",
+        "stroke": "none",
+        "d": "M422.93,32.73H472.93A3,3 0 0 1 475.93,35.73V200A0,0 0 0 1 475.93,200H419.93A0,0 0 0 1 419.93,200V35.73A3,3 0 0 1 422.93,32.73Z",
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "cx": null,
+        "cy": null,
+        "dash": "none",
+        "bounds": {
+          "x": 419.92999267578125,
+          "y": 32.72999954223633,
+          "width": 56,
+          "height": 167.27000427246094
+        }
+      }
+    ]
+  },
+  "requests": [
+    {
+      "endpoint": "/api/analytics/suburbs",
+      "filters": {}
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2025-10-01",
+        "to": "2026-09-30",
+        "months": "12",
+        "limit": "1200"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2025-10-01",
+        "to": "2026-09-30",
+        "months": "12",
+        "limit": "1200"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2025-10-01",
+        "to": "2026-09-30",
+        "months": "12",
+        "limit": "1200"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2025-10-01",
+        "to": "2026-09-30",
+        "months": "12",
+        "limit": "1200"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "alkimos-6038",
+        "from": "2025-10-01",
+        "to": "2026-09-30",
+        "months": "12",
+        "limit": "1200"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "alkimos-6038",
+        "from": "2025-10-01",
+        "to": "2026-09-30",
+        "months": "12",
+        "limit": "1200"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "alkimos-6038",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "alkimos-6038",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "alkimos-6038",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "alkimos-6038",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "alkimos-6038",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "alkimos-6038",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "alkimos-6038",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "alkimos-6038",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburbs",
+      "filters": {}
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "alkimos-6038",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "alkimos-6038",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "unpriced-6000",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "unpriced-6000",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "hocking-6065",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "emptyvale-6001",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "emptyvale-6001",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "unpriced-6000",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "unpriced-6000",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "filters": {
+        "suburb_key": "emptyvale-6001",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "filters": {
+        "suburb_key": "emptyvale-6001",
+        "from": "2026-04-01",
+        "to": "2026-09-30",
+        "months": "6",
+        "limit": "1200",
+        "bedrooms": "4"
+      }
+    }
+  ],
+  "pageErrors": []
+}

@@ -8,6 +8,7 @@ export type Segment = { segment_label: string | number; sale_count: number | str
 export type Rolling = { current_from: string; current_to: string; prior_from: string; prior_to: string; current_sale_count: number | string; current_priced_sales: number | string; current_median_price_aud: Value; prior_sale_count: number | string; prior_priced_sales: number | string; prior_median_price_aud: Value };
 export type Insights = { summary: { sale_count: number | string; priced_sales: number | string; median_price_aud: Value; average_price_aud: Value; land_sample: number | string; land_price_correlation: Value; median_land_size_sqm: Value }; rolling: Rolling | null; bedrooms: Segment[] };
 export type MonthlyDatum = { month: string; label: string; shortLabel: string; sales: number; median: number | null; average: number | null; minimum: number | null; maximum: number | null; observed: boolean };
+export type MarketSeries = { key: string; label: string; months: MonthlyDatum[]; rolling: Rolling | null; bedrooms: Segment[] };
 
 export const money = new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD", maximumFractionDigits: 0 });
 export const number = new Intl.NumberFormat("en-AU");
@@ -39,6 +40,23 @@ export function monthlyData(rows: SaleRow[], range: DateRange): MonthlyDatum[] {
     cursor.setUTCMonth(cursor.getUTCMonth() + 1);
   }
   return result;
+}
+
+export function monthlySeries(series: { key: string; label: string; rows: SaleRow[]; insights: Insights | null }[], range: DateRange): MarketSeries[] {
+  return series.map(({ key, label, rows, insights }) => ({
+    key,
+    label,
+    months: monthlyData(rows, range),
+    rolling: insights?.rolling ?? null,
+    bedrooms: insights?.bedrooms ?? [],
+  }));
+}
+
+export function salesCsv(rows: SaleRow[]): string {
+  const columns: (keyof SaleRow)[] = ["suburb", "postcode", "sale_month", "sale_count", "median_price_aud", "average_price_aud", "minimum_price_aud", "maximum_price_aud"];
+  const cell = (value: unknown) => `"${String(value ?? "").replaceAll('"', '""')}"`;
+  const sorted = rows.slice().sort((a, b) => a.sale_month.localeCompare(b.sale_month) || a.suburb.localeCompare(b.suburb) || a.postcode.localeCompare(b.postcode));
+  return [columns.join(","), ...sorted.map(row => columns.map(column => cell(row[column])).join(","))].join("\n");
 }
 
 export function variance(current: Value, previous: Value) {

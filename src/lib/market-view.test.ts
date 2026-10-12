@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { datesFor, monthlyData, variance, type SaleRow } from "./market-view";
+import { datesFor, monthlyData, monthlySeries, salesCsv, variance, type Insights, type SaleRow } from "./market-view";
 
 function saleRow(overrides: Partial<SaleRow>): SaleRow {
   return {
@@ -11,6 +11,15 @@ function saleRow(overrides: Partial<SaleRow>): SaleRow {
     average_price_aud: null,
     minimum_price_aud: null,
     maximum_price_aud: null,
+    ...overrides,
+  };
+}
+
+function insights(overrides: Partial<Insights>): Insights {
+  return {
+    summary: { sale_count: 4, priced_sales: 0, median_price_aud: null, average_price_aud: null, land_sample: 0, land_price_correlation: null, median_land_size_sqm: null },
+    rolling: null,
+    bedrooms: [],
     ...overrides,
   };
 }
@@ -95,5 +104,73 @@ describe("market view data contracts", () => {
     expect(variance("12", "")).toBeNull();
     expect(variance("0", "12")).toBe(-100);
     expect(variance("15", "12")).toBe(25);
+  });
+
+  it("keeps two suburbs' same-month prices, counts and gaps independent", () => {
+    const data = monthlySeries([
+      { key: "hocking", label: "Hocking (6065)", rows: [saleRow({ median_price_aud: "900000", average_price_aud: "950000" })], insights: null },
+      { key: "subiaco", label: "Subiaco (6008)", rows: [
+        saleRow({ suburb: "Subiaco", postcode: "6008", sale_count: "9", median_price_aud: "1500000", average_price_aud: "1600000" }),
+        saleRow({ suburb: "Subiaco", postcode: "6008", sale_month: "2026-05-01", sale_count: "2", median_price_aud: "1400000" }),
+      ], insights: null },
+    ], { from: "2026-04-01", to: "2026-05-31" });
+
+    expect(data.map(({ key, label }) => ({ key, label }))).toEqual([
+      { key: "hocking", label: "Hocking (6065)" },
+      { key: "subiaco", label: "Subiaco (6008)" },
+    ]);
+    expect(data[0].months[0]).toMatchObject({ sales: 4, median: 900000, average: 950000, observed: true });
+    expect(data[1].months[0]).toMatchObject({ sales: 9, median: 1500000, average: 1600000, observed: true });
+    expect(data[0].months[1]).toMatchObject({ sales: 0, median: null, observed: false });
+    expect(data[1].months[1]).toMatchObject({ sales: 2, median: 1400000, observed: true });
+  });
+
+  it("retains undisclosed prices and keeps each suburb's insight values attached", () => {
+    const rolling = {
+      current_from: "2026-04-01", current_to: "2026-09-30", prior_from: "2025-10-01", prior_to: "2026-03-31",
+      current_sale_count: 4, current_priced_sales: 0, current_median_price_aud: null,
+      prior_sale_count: 6, prior_priced_sales: 6, prior_median_price_aud: "800000",
+    };
+    const bedrooms = [{ segment_label: "3", sale_count: 4, median_price_aud: null }];
+    const data = monthlySeries([
+      { key: "hocking", label: "Hocking (6065)", rows: [saleRow({})], insights: insights({ rolling, bedrooms }) },
+      { key: "subiaco", label: "Subiaco (6008)", rows: [], insights: null },
+    ], { from: "2026-04-01", to: "2026-04-30" });
+
+    expect(data[0].months[0]).toMatchObject({ sales: 4, median: null, average: null, minimum: null, maximum: null, observed: true });
+    expect(data[0].rolling).toEqual(rolling);
+    expect(data[0].bedrooms).toEqual(bedrooms);
+    expect(data[1].months[0]).toMatchObject({ sales: 0, median: null, observed: false });
+    expect(data[1].rolling).toBeNull();
+    expect(data[1].bedrooms).toEqual([]);
+  });
+
+  it("exports suburb identity and missing prices in deterministic month/suburb/postcode order", () => {
+    const rows = [
+      saleRow({ suburb: "Subiaco", postcode: "6008", sale_month: "2026-05-01", sale_count: 0 }),
+      saleRow({ suburb: "Hocking", postcode: "6066", sale_count: 2, median_price_aud: "950000" }),
+      saleRow({ suburb: "Subiaco", postcode: "6008", sale_count: 9, median_price_aud: "1500000" }),
+      saleRow({ suburb: "Hocking", postcode: "6065", sale_count: "4", median_price_aud: "900000", average_price_aud: "925000", minimum_price_aud: "800000", maximum_price_aud: "1050000" }),
+    ];
+    const original = rows.slice();
+    const csv = salesCsv(rows);
+
+    expect(csv).toBe([
+      "suburb,postcode,sale_month,sale_count,median_price_aud,average_price_aud,minimum_price_aud,maximum_price_aud",
+      '"Hocking","6065","2026-04-01","4","900000","925000","800000","1050000"',
+      '"Hocking","6066","2026-04-01","2","950000","","",""',
+      '"Subiaco","6008","2026-04-01","9","1500000","","",""',
+      '"Subiaco","6008","2026-05-01","0","","","",""',
+    ].join("\n"));
+    expect(salesCsv(rows.slice().reverse())).toBe(csv);
+    expect(rows).toEqual(original);
+  });
+
+  it("quotes CSV cells containing commas, quotation marks and line breaks", () => {
+    expect(salesCsv([saleRow({ suburb: 'North, "West"\nPark' })])).toBe([
+      "suburb,postcode,sale_month,sale_count,median_price_aud,average_price_aud,minimum_price_aud,maximum_price_aud",
+      '"North, ""West""\nPark","6065","2026-04-01","4","","","",""',
+    ].join("\n"));
+    expect(salesCsv([])).toBe("suburb,postcode,sale_month,sale_count,median_price_aud,average_price_aud,minimum_price_aud,maximum_price_aud");
   });
 });

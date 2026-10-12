@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BedroomChart, MonthlyCharts, PeriodComparison } from "./MarketCharts";
-import { datesFor, displayMoney, monthLabel, monthlyData, number, periodLabel, periods, variance, type BedroomFilter, type DateRange, type Insights, type MonthlyDatum, type SaleRow, type SnapshotTheme, type Suburb } from "@/lib/market-view";
+import { datesFor, displayMoney, monthLabel, monthlySeries, number, periodLabel, periods, salesCsv, variance, type BedroomFilter, type DateRange, type Insights, type MonthlyDatum, type SaleRow, type SnapshotTheme, type Suburb } from "@/lib/market-view";
 
-type Dataset = { suburbKey: string; months: number; bedroom: BedroomFilter; range: DateRange; rows: SaleRow[]; insights: Insights };
+type Dataset = { suburbKey: string; comparisonKey: string | null; months: number; bedroom: BedroomFilter; range: DateRange; series: { key: string; rows: SaleRow[]; insights: Insights }[] };
 const bedrooms: BedroomFilter[] = ["all", "1", "2", "3", "4", "5", "6"];
 const snapshotBackground: Record<SnapshotTheme, string> = { warm: "#f8efea", corporate: "#eef4fb", excel: "#eef8f0", presentation: "#fff2e8" };
 const suburbName = (name: string) => name.toLowerCase().replace(/\b\w/g, character => character.toUpperCase());
@@ -22,6 +22,7 @@ function saveFile(blob: Blob, filename: string) {
 export default function SalesExplorer() {
   const [suburbs, setSuburbs] = useState<Suburb[]>([]);
   const [suburbKey, setSuburbKey] = useState<string | null>(null);
+  const [comparisonKey, setComparisonKey] = useState<string | null>(null);
   const [periodIndex, setPeriodIndex] = useState(1);
   const [bedroom, setBedroom] = useState<BedroomFilter>("all");
   const [dataset, setDataset] = useState<Dataset | null>(null);
@@ -38,6 +39,9 @@ export default function SalesExplorer() {
   const exportVersion = useRef(0);
   const snapshotRef = useRef<HTMLDivElement>(null);
   const selected = suburbs.find(suburb => suburb.suburb_key === suburbKey) ?? null;
+  const compared = suburbs.find(suburb => suburb.suburb_key === comparisonKey) ?? null;
+  const selectedLabel = selected ? suburbName(selected.suburb) : "Selected suburb";
+  const comparedLabel = compared ? suburbName(compared.suburb) : "Comparison suburb";
   const months = periods[periodIndex];
   const range = useMemo(() => datesFor(months, rangeDate), [months, rangeDate]);
 
@@ -68,46 +72,52 @@ export default function SalesExplorer() {
     const controller = new AbortController();
     const timer = setTimeout(async () => {
       setRequestStatus("loading");
-      const query = new URLSearchParams({ suburb_key: suburbKey, ...range, months: String(months), limit: "1200" });
-      if (bedroom !== "all") query.set("bedrooms", bedroom);
       try {
-        const [sales, insights] = await Promise.all([
-          fetch(`/api/analytics/suburb-sales?${query}`, { signal: controller.signal }),
-          fetch(`/api/analytics/suburb-insights?${query}`, { signal: controller.signal }),
-        ]);
-        if (!sales.ok || !insights.ok) throw new Error("Analytics service unavailable");
-        const [salesJson, insightsJson] = await Promise.all([sales.json(), insights.json()]);
-        if (!Array.isArray(salesJson.data) || !insightsJson.summary || !Array.isArray(insightsJson.bedrooms)) throw new Error("Invalid analytics response");
+        const series = await Promise.all([suburbKey, ...(comparisonKey ? [comparisonKey] : [])].map(async key => {
+          const query = new URLSearchParams({ suburb_key: key, ...range, months: String(months), limit: "1200" });
+          if (bedroom !== "all") query.set("bedrooms", bedroom);
+          const label = key === suburbKey ? selectedLabel : comparedLabel;
+          try {
+            const [sales, insights] = await Promise.all([
+              fetch(`/api/analytics/suburb-sales?${query}`, { signal: controller.signal }),
+              fetch(`/api/analytics/suburb-insights?${query}`, { signal: controller.signal }),
+            ]);
+            if (!sales.ok || !insights.ok) throw new Error("Analytics service unavailable");
+            const [salesJson, insightsJson] = await Promise.all([sales.json(), insights.json()]);
+            if (!Array.isArray(salesJson.data) || !insightsJson.summary || !Array.isArray(insightsJson.bedrooms)) throw new Error("Invalid analytics response");
+            return { key, rows: salesJson.data as SaleRow[], insights: insightsJson as Insights };
+          } catch { throw new Error(`${label} analytics are temporarily unavailable.`); }
+        }));
         if (controller.signal.aborted) return;
-        setDataset({ suburbKey, months, bedroom, range, rows: salesJson.data, insights: insightsJson });
+        setDataset({ suburbKey, comparisonKey, months, bedroom, range, series });
         setRequestStatus("ready");
-      } catch {
+      } catch (cause) {
         if (!controller.signal.aborted) {
           exportVersion.current++;
-          setError("The analytical service did not respond.");
+          setError(cause instanceof Error ? cause.message : "The analytical service did not respond.");
           setRequestStatus("idle");
         }
       }
     }, 120);
     return () => { clearTimeout(timer); controller.abort(); };
-  }, [suburbKey, months, bedroom, range, retry]);
+  }, [suburbKey, comparisonKey, selectedLabel, comparedLabel, months, bedroom, range, retry]);
 
-  const current = dataset?.suburbKey === suburbKey && dataset.months === months && dataset.bedroom === bedroom && dataset.range.from === range.from && dataset.range.to === range.to ? dataset : null;
+  const current = dataset?.suburbKey === suburbKey && dataset.comparisonKey === comparisonKey && dataset.months === months && dataset.bedroom === bedroom && dataset.range.from === range.from && dataset.range.to === range.to ? dataset : null;
   const loading = !error && (!selected || !current || requestStatus === "loading");
-  const monthly = useMemo(() => current ? monthlyData(current.rows, current.range) : [], [current]);
-  const summary = current?.insights.summary;
-  const unavailable = loading || !summary;
-  const rolling = current?.insights.rolling ?? null;
-  const salesCount = Number(summary?.sale_count ?? 0);
-  const pricedCount = Number(summary?.priced_sales ?? 0);
-  const coverage = salesCount ? pricedCount / salesCount * 100 : null;
+  const series = useMemo(() => monthlySeries(current?.series.map(item => ({ ...item, label: item.key === suburbKey ? selectedLabel : comparedLabel })) ?? [], range), [current, suburbKey, selectedLabel, comparedLabel, range]);
+  const chartSeries = series.length ? series : [
+    { key: suburbKey ?? "primary", label: selectedLabel, months: [], rolling: null, bedrooms: [] },
+    ...(comparisonKey ? [{ key: comparisonKey, label: comparedLabel, months: [], rolling: null, bedrooms: [] }] : []),
+  ];
+  const monthly = series[0]?.months ?? [];
   const focusedMonth = pinnedMonth ?? hoveredMonth ?? monthly.at(-1)?.month ?? null;
-  const month = monthly.find(row => row.month === focusedMonth) ?? null;
-  const canExport = Boolean(current?.rows.length) && !loading && !error;
+  const canExport = Boolean(current?.series.some(item => item.rows.length)) && !loading && !error;
 
   function resetContext() { exportVersion.current++; setError(""); setHoveredMonth(null); setPinnedMonth(null); setExportStatus(""); }
   function retryRequest() { resetContext(); setRangeDate(new Date()); setRetry(value => value + 1); }
-  function chooseSuburb(suburb: Suburb) { if (error && suburb.suburb_key === suburbKey) retryRequest(); else resetContext(); setSuburbKey(suburb.suburb_key); }
+  function chooseSuburb(suburb: Suburb) { if (error && suburb.suburb_key === suburbKey) retryRequest(); else resetContext(); setSuburbKey(suburb.suburb_key); if (suburb.suburb_key === comparisonKey) setComparisonKey(null); }
+  function chooseComparison(suburb: Suburb) { if (suburb.suburb_key === suburbKey) return; if (error && suburb.suburb_key === comparisonKey) retryRequest(); else resetContext(); setComparisonKey(suburb.suburb_key); }
+  function clearComparison() { resetContext(); setComparisonKey(null); }
   function choosePeriod(index: number) { if (error && index === periodIndex) retryRequest(); else resetContext(); setPeriodIndex(index); }
   function chooseBedroom(value: BedroomFilter) { if (error && value === bedroom) retryRequest(); else resetContext(); setBedroom(value); }
   const focusMonth = useCallback((value: string | null) => setHoveredMonth(value), []);
@@ -115,11 +125,8 @@ export default function SalesExplorer() {
 
   function downloadCsv() {
     if (!current) return;
-    const columns: (keyof SaleRow)[] = ["suburb", "postcode", "sale_month", "sale_count", "median_price_aud", "average_price_aud", "minimum_price_aud", "maximum_price_aud"];
-    const cell = (value: unknown) => `"${String(value ?? "").replaceAll('"', '""')}"`;
-    const rows = current.rows.slice().sort((a, b) => a.sale_month.localeCompare(b.sale_month));
-    const csv = [columns.join(","), ...rows.map(row => columns.map(column => cell(row[column])).join(","))].join("\n");
-    saveFile(new Blob([csv], { type: "text/csv;charset=utf-8" }), `${current.suburbKey}-${current.range.from}-${current.range.to}-${current.bedroom}-bed-sales.csv`);
+    const csv = salesCsv(current.series.flatMap(item => item.rows));
+    saveFile(new Blob([csv], { type: "text/csv;charset=utf-8" }), `${current.series.map(item => item.key).join("-vs-")}-${current.range.from}-${current.range.to}-${current.bedroom}-bed-sales.csv`);
   }
 
   async function exportSnapshot(copy: boolean) {
@@ -143,7 +150,7 @@ export default function SalesExplorer() {
           return;
         } catch { /* Download remains available when image clipboard permission is unavailable. */ }
       }
-      saveFile(blob, `${suburbKey}-${range.from}-${range.to}-${snapshotTheme}.png`);
+      saveFile(blob, `${[suburbKey, comparisonKey].filter(Boolean).join("-vs-")}-${range.from}-${range.to}-${snapshotTheme}.png`);
       setExportStatus(copy ? "Image downloaded; clipboard unavailable." : "Image downloaded.");
     } catch { setExportStatus(version !== exportVersion.current ? "View changed. Export again." : "Image export failed. CSV remains available."); }
     finally { setExporting(false); }
@@ -151,7 +158,10 @@ export default function SalesExplorer() {
 
   return <section className="explorer" aria-label="House sales dashboard">
     <div className="dashboard-toolbar">
-      <SuburbPicker suburbs={suburbs} selected={selected} onSelect={chooseSuburb} />
+      <div className="suburb-selection">
+        <SuburbPicker suburbs={suburbs} selected={selected} onSelect={chooseSuburb} />
+        <div className="comparison-selection"><SuburbPicker suburbs={suburbs} selected={compared} onSelect={chooseComparison} id="comparison-suburb-search" label="Compare" emptyLabel="Add suburb" excludedKey={suburbKey} />{compared && <button className="remove-comparison" type="button" aria-label="Remove comparison suburb" onClick={clearComparison}>×</button>}</div>
+      </div>
       <div className="toolbar-filters">
         <fieldset className="filter-group"><legend>Window</legend><div className="segmented" aria-label="Completed-month window">{periods.map((value, index) => <button key={value} type="button" aria-pressed={periodIndex === index} onClick={() => choosePeriod(index)}>{value}m</button>)}</div></fieldset>
         <fieldset className="filter-group"><legend>Bedrooms</legend><div className="segmented" aria-label="Bedroom filter">{bedrooms.map(value => <button key={value} type="button" aria-pressed={bedroom === value} onClick={() => chooseBedroom(value)}>{value === "all" ? "All" : value}</button>)}</div></fieldset>
@@ -164,22 +174,17 @@ export default function SalesExplorer() {
 
     {error && <div className="service-error" role="alert"><span>{error}</span><button type="button" onClick={retryRequest}>Retry</button></div>}
     <div className="dashboard-snapshot" data-snapshot-theme={snapshotTheme} ref={snapshotRef} aria-busy={loading}>
-      <header className="dashboard-title"><div><h1>{selected ? suburbName(selected.suburb) : "House sales"}<span>{selected?.canonical_postcode}</span></h1><div className="context-chips"><span>{periodLabel(range)}</span><span>{bedroom === "all" ? "All bedrooms" : `${bedroom} bedrooms`}</span><span>Completed months</span><details className="coverage-info"><summary>Coverage ⓘ</summary><span>Recorded observations. Coverage varies by suburb and period; prices use disclosed amounts.</span></details></div></div><span className="update-status" role="status">{loading ? "Loading…" : error ? "Unavailable" : `${number.format(salesCount)} recorded sales`}</span></header>
+      <header className="dashboard-title"><div><h1>{selected ? selectedLabel : "House sales"}{compared && ` vs ${comparedLabel}`}<span>{selected?.canonical_postcode}{compared && ` / ${compared.canonical_postcode}`}</span></h1><div className="context-chips"><span>{periodLabel(range)}</span><span>{bedroom === "all" ? "All bedrooms" : `${bedroom} bedrooms`}</span><span>Completed months</span><details className="coverage-info"><summary>Coverage ⓘ</summary><span>Recorded observations. Coverage varies by suburb and period; prices use disclosed amounts.</span></details></div></div><span className="update-status" role="status">{loading ? "Loading…" : error ? "Unavailable" : compared ? "Comparing 2 suburbs" : `${number.format(Number(current?.series[0]?.insights.summary.sale_count ?? 0))} recorded sales`}</span></header>
       {!error && <>
-      <div className="metric-grid">
-        <article className="metric-card"><span className="metric-label">Median price</span><strong className="metric-value">{unavailable ? "—" : displayMoney(summary.median_price_aud)}</strong><MetricDelta value={variance(rolling?.current_median_price_aud ?? null, rolling?.prior_median_price_aud ?? null)} loading={unavailable} /></article>
-        <article className="metric-card"><span className="metric-label">Average price</span><strong className="metric-value">{unavailable ? "—" : displayMoney(summary.average_price_aud)}</strong><span className="metric-caption">{unavailable ? "—" : `${number.format(pricedCount)} disclosed prices`}</span></article>
-        <article className="metric-card"><span className="metric-label">Recorded sales</span><strong className="metric-value">{unavailable ? "—" : number.format(salesCount)}</strong><MetricDelta value={variance(rolling?.current_sale_count ?? null, rolling?.prior_sale_count ?? null)} loading={unavailable} /></article>
-        <article className="metric-card"><span className="metric-label">Price coverage</span><strong className="metric-value">{unavailable || coverage == null ? "—" : `${coverage.toFixed(0)}%`}</strong>{!unavailable && coverage != null ? <div className="coverage-track" role="meter" aria-label="Price disclosure coverage" aria-valuemin={0} aria-valuemax={100} aria-valuenow={coverage}><i style={{ width: `${coverage}%` }} /></div> : <div className="coverage-track" aria-hidden="true" />}<span className="metric-caption">{unavailable ? "—" : `${number.format(pricedCount)} / ${number.format(salesCount)} priced`}</span></article>
-      </div>
+      {chartSeries.map((item, index) => <div className="suburb-metrics" key={item.key}>{compared && <h2 className={`series-heading ${index ? "secondary-series" : "primary-series"}`}>{item.label}</h2>}<SummaryMetrics insights={current?.series.find(data => data.key === item.key)?.insights ?? null} loading={loading} label={item.label} /></div>)}
 
       <div className="chart-controls"><label><input type="checkbox" checked={showAverage} onChange={event => setShowAverage(event.target.checked)} /> Average price</label><span>{pinnedMonth ? "Month pinned" : "Select a month"}</span></div>
-      <MonthlyCharts months={monthly} loading={loading} showAverage={showAverage} activeMonth={focusedMonth} onMonthFocus={focusMonth} onMonthSelect={pinMonth} />
-      <MonthReadout month={month} loading={loading} pinned={Boolean(pinnedMonth)} onClear={() => setPinnedMonth(null)} />
-      <div className="secondary-grid"><PeriodComparison rolling={rolling} loading={loading} /><BedroomChart rows={current?.insights.bedrooms ?? []} activeBedroom={bedroom} loading={loading} onSelect={chooseBedroom} /></div>
+      <MonthlyCharts series={chartSeries} loading={loading} showAverage={showAverage} activeMonth={focusedMonth} onMonthFocus={focusMonth} onMonthSelect={pinMonth} />
+      <div className="month-readouts">{chartSeries.map(item => <MonthReadout key={item.key} label={compared ? item.label : undefined} month={item.months.find(row => row.month === focusedMonth) ?? null} loading={loading} pinned={Boolean(pinnedMonth)} onClear={() => setPinnedMonth(null)} />)}</div>
+      <div className="secondary-grid"><PeriodComparison series={chartSeries} loading={loading} /><BedroomChart series={chartSeries} activeBedroom={bedroom} loading={loading} onSelect={chooseBedroom} /></div>
 
-      <details className="data-table"><summary>Monthly data <span>{monthly.length} months</span></summary><div className="table-scroll"><table><caption className="sr-only">{selected ? suburbName(selected.suburb) : "Selected suburb"} monthly recorded sale observations</caption><thead><tr><th scope="col">Month</th><th scope="col">Recorded sales</th><th scope="col">Median</th><th scope="col">Average</th><th scope="col">Minimum</th><th scope="col">Maximum</th></tr></thead><tbody>{monthly.map(row => <tr key={row.month} data-active={row.month === focusedMonth}><th scope="row"><button type="button" aria-pressed={pinnedMonth === row.month} onClick={() => pinMonth(row.month)}>{row.label}</button></th><td>{number.format(row.sales)}{!row.observed && <span className="sr-only">; no recorded observations, coverage may be unavailable</span>}</td><td>{displayMoney(row.median)}</td><td>{displayMoney(row.average)}</td><td>{displayMoney(row.minimum)}</td><td>{displayMoney(row.maximum)}</td></tr>)}</tbody></table></div></details>
-      <footer className="dashboard-credit"><strong>Perth House Data</strong><span>{selected ? `${suburbName(selected.suburb)} · ${selected.canonical_postcode} · ` : ""}{periodLabel(range)} · {bedroom === "all" ? "All bedrooms" : `${bedroom} bedrooms`}</span><span>Recorded House observations · perthhousedata.com</span></footer>
+      <details className="data-table"><summary>Monthly data <span>{monthly.length} months{compared && " · 2 suburbs"}</span></summary><div className="table-scroll"><table><caption className="sr-only">{selectedLabel}{compared && ` and ${comparedLabel}`} monthly recorded sale observations</caption><thead><tr><th scope="col">Month</th>{compared && <th scope="col">Suburb</th>}<th scope="col">Recorded sales</th><th scope="col">Median</th><th scope="col">Average</th><th scope="col">Minimum</th><th scope="col">Maximum</th></tr></thead><tbody>{monthly.flatMap(month => series.map(item => ({ item, row: item.months.find(row => row.month === month.month)! }))).map(({ item, row }) => <tr key={`${item.key}-${row.month}`} data-active={row.month === focusedMonth}><th scope="row"><button type="button" aria-pressed={pinnedMonth === row.month} onClick={() => pinMonth(row.month)}>{row.label}</button></th>{compared && <td>{item.label}</td>}<td>{number.format(row.sales)}{!row.observed && <span className="sr-only">; no recorded observations, coverage may be unavailable</span>}</td><td>{displayMoney(row.median)}</td><td>{displayMoney(row.average)}</td><td>{displayMoney(row.minimum)}</td><td>{displayMoney(row.maximum)}</td></tr>)}</tbody></table></div></details>
+      <footer className="dashboard-credit"><strong>Perth House Data</strong><span>{selected ? `${selectedLabel} · ${selected.canonical_postcode}${compared ? ` vs ${comparedLabel} · ${compared.canonical_postcode}` : ""} · ` : ""}{periodLabel(range)} · {bedroom === "all" ? "All bedrooms" : `${bedroom} bedrooms`}</span><span>Recorded House observations · perthhousedata.com</span></footer>
       </>}
     </div>
   </section>;
@@ -189,18 +194,34 @@ function MetricDelta({ value, loading }: { value: number | null; loading: boolea
   return <span className={`metric-caption metric-delta ${value != null && value < 0 ? "decrease" : ""}`}><strong>{loading ? "—" : signed(value)}</strong> vs previous period</span>;
 }
 
-function MonthReadout({ month, loading, pinned, onClear }: { month: MonthlyDatum | null; loading: boolean; pinned: boolean; onClear: () => void }) {
-  return <div className="month-readout" aria-label="Selected month details"><strong>{loading || !month ? "Month details" : monthLabel(month.month)}</strong><dl><div><dt>Recorded sales</dt><dd>{loading || !month ? "—" : number.format(month.sales)}</dd></div><div><dt>Median</dt><dd>{loading ? "—" : displayMoney(month?.median ?? null)}</dd></div><div><dt>Average</dt><dd>{loading ? "—" : displayMoney(month?.average ?? null)}</dd></div><div><dt>Price range</dt><dd>{loading || month?.minimum == null ? "—" : `${displayMoney(month.minimum)} – ${displayMoney(month.maximum)}`}</dd></div></dl>{pinned ? <button type="button" onClick={onClear}>Clear selection</button> : month && !month.observed ? <span className="month-empty">No recorded observations</span> : null}</div>;
+function SummaryMetrics({ insights, loading, label }: { insights: Insights | null; loading: boolean; label: string }) {
+  const summary = insights?.summary;
+  const rolling = insights?.rolling;
+  const unavailable = loading || !summary;
+  const salesCount = Number(summary?.sale_count ?? 0);
+  const pricedCount = Number(summary?.priced_sales ?? 0);
+  const coverage = salesCount ? pricedCount / salesCount * 100 : null;
+  return <div className="metric-grid" aria-label={`${label} summary`}>
+    <article className="metric-card"><span className="metric-label">Median price</span><strong className="metric-value">{unavailable ? "—" : displayMoney(summary.median_price_aud)}</strong><MetricDelta value={variance(rolling?.current_median_price_aud ?? null, rolling?.prior_median_price_aud ?? null)} loading={unavailable} /></article>
+    <article className="metric-card"><span className="metric-label">Average price</span><strong className="metric-value">{unavailable ? "—" : displayMoney(summary.average_price_aud)}</strong><span className="metric-caption">{unavailable ? "—" : `${number.format(pricedCount)} disclosed prices`}</span></article>
+    <article className="metric-card"><span className="metric-label">Recorded sales</span><strong className="metric-value">{unavailable ? "—" : number.format(salesCount)}</strong><MetricDelta value={variance(rolling?.current_sale_count ?? null, rolling?.prior_sale_count ?? null)} loading={unavailable} /></article>
+    <article className="metric-card"><span className="metric-label">Price coverage</span><strong className="metric-value">{unavailable || coverage == null ? "—" : `${coverage.toFixed(0)}%`}</strong>{!unavailable && coverage != null ? <div className="coverage-track" role="meter" aria-label={`${label} price disclosure coverage`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={coverage}><i style={{ width: `${coverage}%` }} /></div> : <div className="coverage-track" aria-hidden="true" />}<span className="metric-caption">{unavailable ? "—" : `${number.format(pricedCount)} / ${number.format(salesCount)} priced`}</span></article>
+  </div>;
 }
 
-function SuburbPicker({ suburbs, selected, onSelect }: { suburbs: Suburb[]; selected: Suburb | null; onSelect: (suburb: Suburb) => void }) {
+function MonthReadout({ month, label, loading, pinned, onClear }: { month: MonthlyDatum | null; label?: string; loading: boolean; pinned: boolean; onClear: () => void }) {
+  return <div className="month-readout" aria-label={label ? `${label} selected month details` : "Selected month details"}><strong>{label && <span>{label} · </span>}{loading || !month ? "Month details" : monthLabel(month.month)}</strong><dl><div><dt>Recorded sales</dt><dd>{loading || !month ? "—" : number.format(month.sales)}</dd></div><div><dt>Median</dt><dd>{loading ? "—" : displayMoney(month?.median ?? null)}</dd></div><div><dt>Average</dt><dd>{loading ? "—" : displayMoney(month?.average ?? null)}</dd></div><div><dt>Price range</dt><dd>{loading || month?.minimum == null ? "—" : `${displayMoney(month.minimum)} – ${displayMoney(month.maximum)}`}</dd></div></dl>{pinned && <button type="button" onClick={onClear}>Clear selection</button>}{month && !month.observed && <span className="month-empty">No recorded observations</span>}</div>;
+}
+
+function SuburbPicker({ suburbs, selected, onSelect, id = "suburb-search", label = "Suburb", emptyLabel = "Loading suburbs…", excludedKey }: { suburbs: Suburb[]; selected: Suburb | null; onSelect: (suburb: Suburb) => void; id?: string; label?: string; emptyLabel?: string; excludedKey?: string | null }) {
   const [query, setQuery] = useState("");
   const details = useRef<HTMLDetailsElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const matches = useMemo(() => {
     const search = query.trim().toLowerCase();
-    return (search ? suburbs.filter(suburb => `${suburb.suburb} ${suburb.canonical_postcode}`.toLowerCase().includes(search)) : suburbs.slice().sort((a, b) => Number(b.sale_count) - Number(a.sale_count))).slice(0, 10);
-  }, [suburbs, query]);
+    const available = suburbs.filter(suburb => suburb.suburb_key !== excludedKey);
+    return (search ? available.filter(suburb => `${suburb.suburb} ${suburb.canonical_postcode}`.toLowerCase().includes(search)) : available.sort((a, b) => Number(b.sale_count) - Number(a.sale_count))).slice(0, 10);
+  }, [suburbs, query, excludedKey]);
   function choose(suburb: Suburb) { onSelect(suburb); setQuery(""); if (details.current) { details.current.open = false; details.current.querySelector("summary")?.focus(); } }
-  return <details className="suburb-picker" ref={details} onToggle={event => { if (event.currentTarget.open) input.current?.focus(); }}><summary className="picker-trigger"><span>Suburb</span><strong>{selected ? suburbName(selected.suburb) : "Loading suburbs…"}</strong><span aria-hidden="true">⌄</span></summary><div className="picker-panel"><label className="sr-only" htmlFor="suburb-search">Search suburb or postcode</label><input id="suburb-search" ref={input} type="search" value={query} onChange={event => setQuery(event.target.value)} onKeyDown={event => { if (event.key === "Escape" && details.current) { details.current.open = false; details.current.querySelector("summary")?.focus(); } if (event.key === "Enter" && matches[0]) choose(matches[0]); }} placeholder="Suburb or postcode" autoComplete="off" /><div className="picker-results">{matches.map(suburb => <button type="button" key={suburb.suburb_key} aria-pressed={selected?.suburb_key === suburb.suburb_key} onClick={() => choose(suburb)}><strong>{suburbName(suburb.suburb)}</strong><span>{suburb.canonical_postcode}</span></button>)}</div>{!matches.length && <p className="picker-empty">No matching suburb</p>}</div></details>;
+  return <details className="suburb-picker" ref={details} onToggle={event => { if (event.currentTarget.open) input.current?.focus(); }}><summary className="picker-trigger" aria-label={`${label}: ${selected ? suburbName(selected.suburb) : emptyLabel}`}><span>{label}</span><strong>{selected ? suburbName(selected.suburb) : emptyLabel}</strong><span aria-hidden="true">⌄</span></summary><div className="picker-panel"><label className="sr-only" htmlFor={id}>{label === "Compare" ? "Search comparison suburb or postcode" : "Search suburb or postcode"}</label><input id={id} ref={input} type="search" value={query} onChange={event => setQuery(event.target.value)} onKeyDown={event => { if (event.key === "Escape" && details.current) { details.current.open = false; details.current.querySelector("summary")?.focus(); } if (event.key === "Enter" && matches[0]) choose(matches[0]); }} placeholder="Suburb or postcode" autoComplete="off" /><div className="picker-results">{matches.map(suburb => <button type="button" key={suburb.suburb_key} aria-pressed={selected?.suburb_key === suburb.suburb_key} onClick={() => choose(suburb)}><strong>{suburbName(suburb.suburb)}</strong><span>{suburb.canonical_postcode}</span></button>)}</div>{!matches.length && <p className="picker-empty">No matching suburb</p>}</div></details>;
 }

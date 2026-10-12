@@ -1,0 +1,164 @@
+{
+  "status": "passed",
+  "mocked": false,
+  "mutations": false,
+  "browser": "154.0.8037.99",
+  "comparison": {
+    "title": "Hocking vs Subiaco6065 / 6008",
+    "summary": [
+      "Median price\n$1,010,000\n+21.0%\nvs previous period\nAverage price\n$1,034,072\n78 disclosed prices\nRecorded sales\n86\n+1.2%\nvs previous period\nPrice coverage\n91%\n78 / 86 priced",
+      "Median price\n$2,200,000\n+12.4%\nvs previous period\nAverage price\n$2,263,278\n76 disclosed prices\nRecorded sales\n86\n-23.2%\nvs previous period\nPrice coverage\n88%\n76 / 86 priced"
+    ],
+    "chartCount": 5,
+    "rows": 24
+  },
+  "api": [
+    {
+      "endpoint": "/api/analytics/suburbs",
+      "suburbKey": null,
+      "status": 200,
+      "rows": 343
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "suburbKey": "baldivis",
+      "status": 200,
+      "rows": 12
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "suburbKey": "baldivis",
+      "status": 200,
+      "saleCount": 644
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "suburbKey": "hocking",
+      "status": 200,
+      "rows": 12
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "suburbKey": "hocking",
+      "status": 200,
+      "saleCount": 86
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "suburbKey": "hocking",
+      "status": 200,
+      "rows": 12
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "suburbKey": "subiaco",
+      "status": 200,
+      "rows": 12
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "suburbKey": "hocking",
+      "status": 200,
+      "saleCount": 86
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "suburbKey": "subiaco",
+      "status": 200,
+      "saleCount": 86
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "suburbKey": "kwinana-town-centre",
+      "status": 200,
+      "rows": 8
+    },
+    {
+      "endpoint": "/api/analytics/suburb-sales",
+      "suburbKey": "hocking",
+      "status": 200,
+      "rows": 12
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "suburbKey": "kwinana-town-centre",
+      "status": 200,
+      "saleCount": 9
+    },
+    {
+      "endpoint": "/api/analytics/suburb-insights",
+      "suburbKey": "hocking",
+      "status": 200,
+      "saleCount": 86
+    }
+  ],
+  "pageErrors": [],
+  "longestSuburb": "KWINANA TOWN CENTRE",
+  "mobilePeriodLabels": [
+    {
+      "text": "Hocking · Current",
+      "left": 97.015625,
+      "svgLeft": 26,
+      "right": 182.2587890625,
+      "svgRight": 364,
+      "clipped": false
+    },
+    {
+      "text": "Hocking · Prior",
+      "left": 110.5,
+      "svgLeft": 26,
+      "right": 183.17578125,
+      "svgRight": 364,
+      "clipped": false
+    },
+    {
+      "text": "Kwinana Town Centre · Current",
+      "left": 33.5,
+      "svgLeft": 26,
+      "right": 182.26171875,
+      "svgRight": 364,
+      "clipped": false
+    },
+    {
+      "text": "Kwinana Town Centre · Prior",
+      "left": 46.96875,
+      "svgLeft": 26,
+      "right": 183.1630859375,
+      "svgRight": 364,
+      "clipped": false
+    },
+    {
+      "text": "Hocking · Current",
+      "left": 97.015625,
+      "svgLeft": 26,
+      "right": 182.2587890625,
+      "svgRight": 364,
+      "clipped": false
+    },
+    {
+      "text": "Hocking · Prior",
+      "left": 110.5,
+      "svgLeft": 26,
+      "right": 183.17578125,
+      "svgRight": 364,
+      "clipped": false
+    },
+    {
+      "text": "Kwinana Town Centre · Current",
+      "left": 33.5,
+      "svgLeft": 26,
+      "right": 182.26171875,
+      "svgRight": 364,
+      "clipped": false
+    },
+    {
+      "text": "Kwinana Town Centre · Prior",
+      "left": 46.96875,
+      "svgLeft": 26,
+      "right": 183.1630859375,
+      "svgRight": 364,
+      "clipped": false
+    }
+  ],
+  "mobilePeriodLabelsCheckedAfterMarginAdjustment": true
+}

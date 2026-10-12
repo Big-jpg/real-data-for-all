@@ -14,6 +14,14 @@ export function listingUrl(slice, page = 1) {
   return `https://www.realestate.com.au/sold/property-house-in-${slug},+wa+${slice.postcode}/list-${page}?includeSurrounding=false&maxSoldAge=6-month&activeSort=solddate`;
 }
 
+export function listingUrlMatches(actual, expected) {
+  try {
+    const left = new URL(actual), right = new URL(expected);
+    const query = (url) => JSON.stringify([...url.searchParams.entries()].sort(([a, x], [b, y]) => a.localeCompare(b) || x.localeCompare(y)));
+    return left.origin === right.origin && left.pathname === right.pathname && query(left) === query(right);
+  } catch { return false; }
+}
+
 export function requestMatches(request, slice, page) {
   try {
     const body = JSON.parse(request.postData);
@@ -67,7 +75,7 @@ export async function readBootstrapResponse(tab) {
 }
 
 function bootstrapMatches(payload, slice, page, url) {
-  if (url !== listingUrl(slice, page)) return false;
+  if (!listingUrlMatches(url, listingUrl(slice, page))) return false;
   try {
     const query = JSON.parse(payload.data.soldSearch.resolvedQuery.metadata.savedSearchQuery);
     return query.channel === "sold" && query.page === page && query.pageSize === 25 && query.filters?.surroundingSuburbs === false &&
@@ -84,6 +92,8 @@ function safeResolved(payload) {
 export async function createChromeCollector({ tab, cdp, core, planPath, outputDirectory, delayMs = 5000, maxPages = 100 }) {
   const root = path.resolve(outputDirectory);
   const plan = JSON.parse(await fs.readFile(planPath, "utf8"));
+  if (typeof plan.runId !== "string" || !/^[a-z0-9][a-z0-9'-]*$/.test(plan.runId)) throw new Error("Plan needs a safe dated run identifier");
+  if (!Number.isFinite(delayMs) || delayMs < 0 || !Number.isInteger(maxPages) || maxPages < 1) throw new Error("Collector pacing or page limit is invalid");
   if (!plan.slices?.length || new Set(plan.slices.map((slice) => slice.name)).size !== plan.slices.length) throw new Error("Plan needs uniquely named slices");
   for (const slice of plan.slices) {
     if (slice.state !== "WA" || slice.propertyType !== "house" || slice.includeSurrounding !== false || slice.maxSoldAge !== "6-month" || !/^\d{4}$/.test(slice.postcode) || !/^[a-z0-9'-]+$/.test(slice.name)) throw new Error(`Unsupported plan scope: ${slice.name}`);
@@ -94,16 +104,26 @@ export async function createChromeCollector({ tab, cdp, core, planPath, outputDi
   try { manifest = JSON.parse(await fs.readFile(manifestPath, "utf8")); } catch (error) { if (error.code !== "ENOENT") throw error; }
   const planHash = hash(JSON.stringify(plan));
   if (manifest && manifest.planSha256 !== planHash) throw new Error("Existing dated capture has a different plan; use another run directory");
+  if (manifest) {
+    if (manifest.schemaVersion !== 1 || manifest.runId !== plan.runId || manifest.slices?.length !== plan.slices.length) throw new Error("Existing capture manifest does not match its plan");
+    const scopeKeys = ["name", "suburb", "state", "postcode", "propertyType", "includeSurrounding", "maxSoldAge", "soldDateFrom"];
+    for (let index = 0; index < plan.slices.length; index++) {
+      if (scopeKeys.some((key) => manifest.slices[index][key] !== plan.slices[index][key]) || !Array.isArray(manifest.slices[index].pages)) throw new Error("Existing capture slice scope does not match its plan");
+    }
+  }
   if (!manifest) {
     manifest = { schemaVersion: 1, runId: plan.runId, startedAt: new Date().toISOString(), updatedAt: new Date().toISOString(), status: "running", planSha256: planHash,
       source: { endpoint: ENDPOINT, transport: "Normal Chrome navigation; structured initial response and matching GraphQL responses", cookiesOrChallengeHeadersSaved: false, fullRawResponsesSaved: false },
-      settings: { concurrency: 1, delayMs, maxPages, comparisonCutoff: "2026-06-01" },
-      baseline: "../2026-07-baseline/manifest.json", slices: plan.slices.map((slice) => ({ ...slice, status: "pending", pages: [], summary: null })) };
+      settings: { concurrency: 1, delayMs, maxPages, comparisonCutoff: plan.comparisonCutoff ?? plan.slices[0].soldDateFrom ?? "2026-06-01" },
+      baseline: plan.baseline ?? "../2026-07-baseline/manifest.json", slices: plan.slices.map((slice) => ({ ...slice, status: "pending", pages: [], summary: null })) };
     await writeJson(manifestPath, manifest);
     await writeJson(path.join(root, "plan.json"), plan);
   }
   let current = null;
   let lastNavigationAt = 0;
+  let pauseRequested = manifest.status === "paused";
+  let batchPromise = null;
+  let closed = false;
   await cdp.send("Network.enable");
 
   async function persist() {
@@ -117,7 +137,9 @@ export async function createChromeCollector({ tab, cdp, core, planPath, outputDi
 
   async function loadPages(slice) {
     const pages = [];
-    for (const committed of slice.pages) {
+    for (const [index, committed] of slice.pages.entries()) {
+      const expectedFile = `pages/${slice.name}/page-${String(index + 1).padStart(3, "0")}.json`;
+      if (committed.pageNumber !== index + 1 || committed.file !== expectedFile) throw new Error("Committed page path or sequence is invalid");
       const content = await fs.readFile(path.join(root, committed.file), "utf8");
       if (hash(content) !== committed.sha256) throw new Error(`Committed page checksum failed: ${committed.file}`);
       const saved = JSON.parse(content);
@@ -146,6 +168,7 @@ export async function createChromeCollector({ tab, cdp, core, planPath, outputDi
   async function capturePage(slice, page, cold) {
     const wait = Math.max(0, delayMs - (Date.now() - lastNavigationAt));
     if (wait) await new Promise((resolve) => setTimeout(resolve, wait));
+    if (pauseRequested) return null;
     const cursor = (await cdp.readEvents({ methods: METHODS })).cursor;
     const target = listingUrl(slice, page);
     lastNavigationAt = Date.now();
@@ -155,7 +178,7 @@ export async function createChromeCollector({ tab, cdp, core, planPath, outputDi
       await tab.playwright.getByRole("link", { name: "Go to next page", exact: true }).click({ timeoutMs: 15000 });
     }
     await tab.getAXState({ emit: false });
-    const url = await tab.url();
+    let url = await tab.url();
     let observed = await eventsAfter(cursor);
     const events = observed.events;
     const matchingRequest = () => events.find((event) => event.method === "Network.requestWillBeSent" && event.params?.request?.url === ENDPOINT && requestMatches(event.params.request, slice, page));
@@ -187,6 +210,9 @@ export async function createChromeCollector({ tab, cdp, core, planPath, outputDi
       const requestBody = JSON.parse(request.params.request.postData);
       evidence = { transport: "chrome-graphql-response", httpStatus: response.status, capturedAt: new Date(request.params.wallTime * 1000).toISOString(),
         request: { endpoint: ENDPOINT, operationName: requestBody.operationName, query: JSON.parse(requestBody.variables.query), persistedQuery: requestBody.extensions?.persistedQuery ?? null } };
+      if (tab.waitForUrl) await tab.waitForUrl(target);
+      url = await tab.url();
+      if (!listingUrlMatches(url, target)) throw new Error("Chrome URL did not reach the matching listing page");
     } else {
       const documentEvent = matchingDocument();
       const documentResponse = documentEvent?.params.response;
@@ -222,11 +248,12 @@ export async function createChromeCollector({ tab, cdp, core, planPath, outputDi
     await persist();
   }
 
-  async function runBatch({ maxMs = 45000, maxCommittedPages = 10 } = {}) {
+  async function runBatchInternal({ maxMs = 45000, maxCommittedPages = 10 } = {}) {
+    if (manifest.status === "source-challenge") return { stopped: true, reason: "SOURCE_CHALLENGE: explicit retry is required", progress: manifest.progress };
     const deadline = Date.now() + maxMs;
     let committed = 0;
     const finished = [];
-    while (Date.now() < deadline && committed < maxCommittedPages) {
+    while (!pauseRequested && Date.now() < deadline && committed < maxCommittedPages) {
       if (!current) {
         const slice = manifest.slices.find((item) => item.status === "pending" || item.status === "running");
         if (!slice) break;
@@ -246,6 +273,7 @@ export async function createChromeCollector({ tab, cdp, core, planPath, outputDi
         const pendingDelay = Math.max(0, delayMs - (Date.now() - lastNavigationAt));
         if (deadline - Date.now() < PAGE_CAPTURE_BUDGET_MS + pendingDelay) break;
         const response = await capturePage(slice, page, current.cold);
+        if (!response) break;
         current.cold = false;
         const file = `pages/${slice.name}/page-${String(page).padStart(3, "0")}.json`;
         // A page is immutable once committed. Persist its data before advancing the manifest.
@@ -263,19 +291,54 @@ export async function createChromeCollector({ tab, cdp, core, planPath, outputDi
       }
     }
     const remaining = manifest.slices.filter((slice) => slice.status === "pending" || slice.status === "running").length;
-    manifest.status = remaining ? "running" : manifest.slices.every((slice) => slice.status === "complete") ? "complete" : "finished-with-exceptions";
+    manifest.status = remaining ? pauseRequested ? "paused" : "running" : manifest.slices.every((slice) => slice.status === "complete") ? "complete" : "finished-with-exceptions";
     if (!remaining) manifest.finishedAt = new Date().toISOString();
     await persist();
-    return { done: remaining === 0, committedThisBatch: committed, finished, progress: manifest.progress, active: current?.slice.name ?? null };
+    return { done: remaining === 0, paused: pauseRequested && remaining > 0, committedThisBatch: committed, finished, progress: manifest.progress, active: current?.slice.name ?? null };
+  }
+  async function runBatch(options) {
+    if (closed) throw new Error("Collector is closed");
+    if (batchPromise) throw new Error("A collector batch is already running");
+    const task = runBatchInternal(options);
+    batchPromise = task;
+    try { return await task; } finally { if (batchPromise === task) batchPromise = null; }
+  }
+  async function pause() {
+    if (closed) return;
+    pauseRequested = true;
+    if (batchPromise) await batchPromise;
+    const remaining = manifest.slices.some((slice) => slice.status === "pending" || slice.status === "running");
+    if (remaining && manifest.status !== "source-challenge") manifest.status = "paused";
+    await persist();
+  }
+  function resume() {
+    if (closed) throw new Error("Collector is closed");
+    if (batchPromise) throw new Error("A collector batch is already running");
+    if (manifest.status === "source-challenge") throw new Error("Retry the challenged slice explicitly before resuming");
+    pauseRequested = false;
   }
   async function retryExceptions(names) {
-    if (current) throw new Error("Finish the active slice before resetting exceptions");
+    if (closed) throw new Error("Collector is closed");
+    if (batchPromise) throw new Error("Pause the collector before resetting exceptions");
+    const selected = names ?? manifest.slices.filter((slice) => ["failed", "partial", "capped"].includes(slice.status)).map((slice) => slice.name);
+    if (!Array.isArray(selected) || selected.some((name) => typeof name !== "string" || !manifest.slices.some((slice) => slice.name === name))) throw new Error("Retry contains an unknown slice");
+    let retried = 0;
     for (const slice of manifest.slices) {
-      if (names.includes(slice.name) && ["failed", "partial", "capped"].includes(slice.status)) {
+      if (selected.includes(slice.name) && ["failed", "partial", "capped"].includes(slice.status)) {
         slice.status = "pending"; delete slice.failure; delete slice.finishedAt;
+        retried++;
       }
     }
-    manifest.status = "running"; await persist();
+    if (retried) { manifest.status = pauseRequested ? "paused" : "running"; delete manifest.finishedAt; }
+    await persist();
+    return { retried };
   }
-  return { runBatch, retryExceptions, manifestPath, status: () => ({ status: manifest.status, progress: manifest.progress, active: current?.slice.name ?? null }), stop: async () => { await persist(); await cdp.send("Network.disable"); } };
+  await persist();
+  return { runBatch, retryExceptions, pause, resume, manifestPath,
+    status: () => ({ status: manifest.status, progress: manifest.progress, active: current?.slice.name ?? null }),
+    stop: async () => {
+      if (closed) return;
+      await pause(); closed = true;
+      await cdp.send("Network.disable");
+    } };
 }
