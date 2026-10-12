@@ -5,5 +5,5 @@ import nextTs from "eslint-config-next/typescript";
 export default defineConfig([
   ...nextVitals,
   ...nextTs,
-  globalIgnores([".next/**", "src/app/.well-known/**", "rea-data-modelling/**", "rea-sold-scraper/**"]),
+  globalIgnores([".next/**", "captures/**", "src/app/.well-known/**", "rea-data-modelling/**", "rea-sold-scraper/**"]),
 ]);

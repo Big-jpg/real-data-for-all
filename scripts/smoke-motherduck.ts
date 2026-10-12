@@ -1,7 +1,31 @@
 import { motherduck } from "../src/lib/motherduck";
+import { requiredMotherDuckToken } from "./publish-motherduck";
 
+process.env.MOTHERDUCK_TOKEN = requiredMotherDuckToken();
 const sql=motherduck();
 try {
+  const [summary] = await sql`SELECT (SELECT count(*) FROM suburb_dimension)::bigint suburbs,
+    (SELECT count(*) FROM suburb_monthly_sales)::bigint monthly_rows,count(*)::bigint house_facts,
+    min(sold_date)::text sold_date_from,max(sold_date)::text sold_date_to FROM suburb_sale_facts`;
+  if (!Number(summary.suburbs) || !Number(summary.monthly_rows) || !Number(summary.house_facts)) throw new Error("MotherDuck serving tables are empty");
+  const [{ dimension_mismatches }] = await sql`WITH facts AS (SELECT suburb_key,count(*)::bigint sale_count FROM suburb_sale_facts GROUP BY suburb_key)
+    SELECT count(*)::bigint dimension_mismatches FROM suburb_dimension d FULL OUTER JOIN facts f USING(suburb_key)
+    WHERE d.sale_count IS DISTINCT FROM f.sale_count`;
+  const [{ monthly_mismatches }] = await sql`WITH facts AS (
+      SELECT suburb_key,date_trunc('month',sold_date)::date sale_month,count(*)::bigint sale_count FROM suburb_sale_facts GROUP BY 1,2)
+    SELECT count(*)::bigint monthly_mismatches FROM suburb_monthly_sales m FULL OUTER JOIN facts f USING(suburb_key,sale_month)
+    WHERE m.sale_count IS DISTINCT FROM f.sale_count`;
+  if (Number(dimension_mismatches) || Number(monthly_mismatches)) throw new Error("MotherDuck dimensions, monthly counts and facts do not reconcile");
+  const [{ duplicate_keys }] = await sql`SELECT
+    (SELECT count(*)-count(DISTINCT suburb_key) FROM suburb_dimension)+
+    (SELECT count(*) FROM (SELECT suburb_key,sale_month FROM suburb_monthly_sales GROUP BY 1,2 HAVING count(*)>1) AS duplicated_months) AS duplicate_keys`;
+  if (Number(duplicate_keys)) throw new Error("MotherDuck serving tables contain duplicate canonical keys");
+  const args = process.argv.slice(2);
+  for (let index = 0; index < args.length; index += 2) {
+    if (args[index] !== "--expect-suburb" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(args[index + 1] ?? "")) throw new Error("Usage: smoke-motherduck.ts [--expect-suburb canonical-suburb-key]");
+    const [observed] = await sql`SELECT count(*)::bigint count FROM suburb_dimension WHERE suburb_key=${args[index + 1]}`;
+    if (Number(observed.count) !== 1) throw new Error(`Expected suburb absent from MotherDuck: ${args[index + 1]}`);
+  }
   const suburbKey="yokine",from="2020-01-01",to="2026-12-31";
   const rows=await sql`SELECT suburb_key,suburb,postcode,sale_month FROM suburb_monthly_sales
     WHERE true ${sql`AND suburb_key=${suburbKey}`}
@@ -38,4 +62,5 @@ try {
   const [{excluded}]=await sql`SELECT count(*)::int excluded FROM suburb_sale_facts WHERE lower(trim(property_type))<>'house'`;
   if(Number(excluded)!==0) throw new Error(`MotherDuck fact scope contains ${excluded} non-house rows`);
   console.log(`MotherDuck smoke query passed: ${rows.length} months, ${Number(insight.sale_count)} house facts, ${bedrooms.length} bedroom groups, and rolling annual medians`);
+  console.log(JSON.stringify({ servingIntegrity: "passed", ...summary }, null, 2));
 } finally { await sql.end(); }

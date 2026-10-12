@@ -14,8 +14,10 @@
     "db:inspect": "tsx --env-file=.env.local scripts/inspect-quality.ts",
     "db:reconcile": "tsx --env-file=.env.local scripts/reconcile.ts",
     "ingest:local": "tsx --env-file=.env.local scripts/ingest-local.ts",
+    "ingest:captures": "tsx --env-file=.env.local scripts/ingest-captures.ts",
     "archive:blob": "tsx --env-file=.env.local scripts/archive-blob.ts",
     "profile": "tsx scripts/profile-data.ts",
+    "capture:build": "node scripts/build-chrome-collector.mjs",
     "publish:motherduck": "tsx --env-file=.env.local scripts/publish-motherduck.ts",
     "smoke:motherduck": "tsx --env-file=.env.local scripts/smoke-motherduck.ts"
   },

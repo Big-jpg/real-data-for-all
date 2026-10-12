@@ -6,17 +6,12 @@ export default function Home() {
     <main>
       <header className="hero">
         <Link className="brand" href="/" aria-label="Perth House Data home"><strong>Perth House Data</strong><span>Open sales history</span></Link>
-        <p className="eyebrow">30 YEARS · 330 SUBURBS · HOUSES ONLY</p>
+        <p className="eyebrow">RECORDED SALES · HOUSES ONLY</p>
         <h1>What did Perth houses<br />really sell for?</h1>
         <p className="lede">Explore three decades of detached-house sales across Perth postcodes 6000–6200—cleaned, deduplicated, and made easy to understand.</p>
         <div className="hero-actions"><a href="#explore">Explore your suburb <span aria-hidden="true">↓</span></a><a href="#methodology">Read the methodology</a></div>
       </header>
       <p className="scope">Houses only <i /> Units excluded <i /> Acreage excluded <i /> Duplex and semi-detached excluded</p>
-      <section className="grid">
-        <article><strong>347,887</strong><span>source observations</span></article>
-        <article><strong>296,422</strong><span>source listings</span></article>
-        <article><strong>330</strong><span>house-sale suburbs</span></article>
-      </section>
       <p className="status">Neon system of record <i /> MotherDuck OLAP <i /> Vercel Workflow</p>
       <SalesExplorer />
       <footer className="site-footer">
@@ -34,8 +29,8 @@ export default function Home() {
           <a href="#future-plans">Future plans</a>
         </nav>
         <div className="footer-grid">
-          <section id="data-collection"><span>01</span><h3>Data collection</h3><p>358 historical CSV files preserve scraped realestate.com.au sold observations. Each file is registered by checksum and archived before its records move through the pipeline.</p></section>
-          <section id="analysis"><span>02</span><h3>Analysis</h3><p>281,196 detached-house sale facts power monthly medians, volumes, bedroom comparisons, and land-to-price relationships across 330 Perth suburbs.</p></section>
+          <section id="data-collection"><span>01</span><h3>Data collection</h3><p>Dated CSV snapshots preserve realestate.com.au sold observations. Source checksums and observation timestamps retain the lineage of historical records and subsequent captures.</p></section>
+          <section id="analysis"><span>02</span><h3>Analysis</h3><p>Detached-house sale facts power monthly medians, volumes, bedroom comparisons, and land-to-price relationships across the recorded suburbs.</p></section>
           <section id="methodology"><span>03</span><h3>Methodology</h3><p>Addresses are normalised into canonical properties, duplicate listings are resolved, and suburbs receive stable keys. Medians are always recalculated from individual sales—not averaged from aggregates.</p></section>
           <section id="implementation"><span>04</span><h3>Implementation</h3><p>Vercel Workflows orchestrate ingestion, private Blob storage preserves source files, Neon holds canonical records, and MotherDuck serves the analytical layer.</p></section>
           <section id="reasoning"><span>05</span><h3>Reasoning</h3><p>Property history should be inspectable without proprietary desktop tooling. Raw, canonical, and analytical layers remain separate so every result can be traced and challenged.</p></section>

@@ -12,7 +12,9 @@ coverage/
 *.log
 *.tsbuildinfo
 rea_sales_data_model/
+/captures/
 /.swc
 
 .vercel
 .env*.local
+.env*
