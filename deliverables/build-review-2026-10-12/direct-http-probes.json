@@ -1,0 +1,30 @@
+[
+  {
+    "name": "perth-sold-search",
+    "responseDate": "Sun, 11 Oct 2026 16:46:03 GMT",
+    "javascriptChallenge": true,
+    "sha256": "06bf2dc82e369f885a015953b692d149add968ecafa0718d7e741826486220b6",
+    "url": "https://www.realestate.com.au/sold/property-house-in-perth,+wa+%226000%22/list-1?includeSurrounding=false&activeSort=solddate",
+    "httpStatus": 429,
+    "listingRecordsCaptured": 0,
+    "bytes": 756
+  },
+  {
+    "name": "yokine-recent-sold-search",
+    "responseDate": "Sun, 11 Oct 2026 16:48:00 GMT",
+    "javascriptChallenge": true,
+    "sha256": "23e8beeaa767a09708c9afc5e571a9d1ed3f9d2a1bffb73123a2b6d2a7d59077",
+    "url": "https://www.realestate.com.au/sold/property-house-in-yokine,+wa+6060/list-1?includeSurrounding=false&activeSort=solddate&maxSoldAge=6-month",
+    "httpStatus": 429,
+    "listingRecordsCaptured": 0,
+    "bytes": 749
+  },
+  {
+    "httpStatus": 401,
+    "reason": "The request requires a valid authentication token",
+    "bytes": 177,
+    "url": "https://api.realestate.com.au/listing/v1/export?listing_id=151135516",
+    "name": "documented-listing-export",
+    "listingRecordsCaptured": 0
+  }
+]

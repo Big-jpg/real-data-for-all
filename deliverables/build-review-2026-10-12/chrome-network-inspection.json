@@ -1,0 +1,56 @@
+{
+  "inspectedAtPerth": "2026-10-12T00:54:32+08:00",
+  "browser": "Existing Chrome profile via the connected browser tool",
+  "searchUrl": "https://www.realestate.com.au/sold/property-house-in-yokine,+wa+6060/list-1?includeSurrounding=false&activeSort=solddate&maxSoldAge=6-month",
+  "method": "Read-only Chrome DevTools Protocol Network events, document response body inspection and visible page verification",
+  "result": "No usable listing endpoint was observed. The initial document returned a challenge before the listing application loaded.",
+  "requests": [
+    {
+      "role": "Sold-search document",
+      "method": "GET",
+      "url": "https://www.realestate.com.au/sold/property-house-in-yokine,+wa+6060/list-1?includeSurrounding=false&activeSort=solddate&maxSoldAge=6-month",
+      "status": 429,
+      "mimeType": "text/html",
+      "responseCharacters": 758,
+      "challengeMarker": "KPSDK",
+      "residentialCardMarkerPresent": false
+    },
+    {
+      "role": "Challenge loader",
+      "method": "GET",
+      "url": "https://www.realestate.com.au/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/ips.js?KP_UIDz=REDACTED&x-kpsdk-im=REDACTED",
+      "status": 200,
+      "mimeType": "application/javascript"
+    },
+    {
+      "role": "XHR associated with the challenge loader path",
+      "method": "POST",
+      "url": "https://www.realestate.com.au/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/tl",
+      "status": 200,
+      "mimeType": "text/plain",
+      "classification": "Inferred challenge communication from its shared path with ips.js. It is not evidence of a listing endpoint.",
+      "bodyInspection": "Chrome no longer had the response body available when requested. No response fields are claimed."
+    }
+  ],
+  "visiblePage": "Blank; no listing cards or search controls",
+  "captureCompleteness": {
+    "eventsTruncated": false,
+    "moreBufferedEvents": false,
+    "laterObservation": "A further 10-second event wait produced no additional requests or automatic document navigation."
+  },
+  "existingCollector": {
+    "transport": "GET sold-search HTML inside a browser session, credentials included, followed by DOMParser card extraction",
+    "existingListingApiIntegration": false,
+    "evidence": "C:/Users/rossf/Desktop/ToBeSorted/rea-for-all/rea-sold-scraper/content.js:244"
+  },
+  "unverified": [
+    "The listing endpoint used after a successful page load",
+    "Whether the successful page serves listing data in HTML or separate JSON",
+    "Request and response listing schema",
+    "Pagination, terminal-page evidence and exact-filter semantics",
+    "Whether direct HTTP access is possible or a normal browser session is required"
+  ],
+  "nextStep": "Manually open or reload the search in Chrome. If listing cards load, attach network observation before changing a filter or advancing to page 2, and inspect only the requests from that successful action.",
+  "privacy": "No cookies, authorization headers, raw session/challenge tokens, or raw HAR were saved in this artifact.",
+  "changes": "No collector implementation, ingestion, publication or access-control changes. Search tab retained for the requested manual verification."
+}

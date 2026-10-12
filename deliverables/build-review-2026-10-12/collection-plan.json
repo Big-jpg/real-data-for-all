@@ -1,0 +1,3591 @@
+{
+  "runId": "perth-houses-2026-10-12",
+  "outputDirectory": "rea-collections/perth-houses-2026-10-12",
+  "settings": {
+    "delayBetweenPages": 5000,
+    "concurrency": 1
+  },
+  "settingsRequireManualApplication": true,
+  "slices": [
+    {
+      "name": "city-delivery-centre-6000-houses-since-2026-06-01",
+      "suburb": "CITY DELIVERY CENTRE",
+      "state": "WA",
+      "postcode": "6000",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "perth-6000-houses-since-2026-06-01",
+      "suburb": "PERTH",
+      "state": "WA",
+      "postcode": "6000",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "perth-6001-houses-since-2026-06-01",
+      "suburb": "PERTH",
+      "state": "WA",
+      "postcode": "6001",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "highgate-6003-houses-since-2026-06-01",
+      "suburb": "HIGHGATE",
+      "state": "WA",
+      "postcode": "6003",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "northbridge-6003-houses-since-2026-06-01",
+      "suburb": "NORTHBRIDGE",
+      "state": "WA",
+      "postcode": "6003",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "east-perth-6004-houses-since-2026-06-01",
+      "suburb": "EAST PERTH",
+      "state": "WA",
+      "postcode": "6004",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "west-perth-6005-houses-since-2026-06-01",
+      "suburb": "WEST PERTH",
+      "state": "WA",
+      "postcode": "6005",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "north-perth-6006-houses-since-2026-06-01",
+      "suburb": "NORTH PERTH",
+      "state": "WA",
+      "postcode": "6006",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "leederville-6007-houses-since-2026-06-01",
+      "suburb": "LEEDERVILLE",
+      "state": "WA",
+      "postcode": "6007",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "west-leederville-6007-houses-since-2026-06-01",
+      "suburb": "WEST LEEDERVILLE",
+      "state": "WA",
+      "postcode": "6007",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "daglish-6008-houses-since-2026-06-01",
+      "suburb": "DAGLISH",
+      "state": "WA",
+      "postcode": "6008",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "shenton-park-6008-houses-since-2026-06-01",
+      "suburb": "SHENTON PARK",
+      "state": "WA",
+      "postcode": "6008",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "subiaco-6008-houses-since-2026-06-01",
+      "suburb": "SUBIACO",
+      "state": "WA",
+      "postcode": "6008",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "subiaco-east-6008-houses-since-2026-06-01",
+      "suburb": "SUBIACO EAST",
+      "state": "WA",
+      "postcode": "6008",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "broadway-nedlands-6009-houses-since-2026-06-01",
+      "suburb": "BROADWAY NEDLANDS",
+      "state": "WA",
+      "postcode": "6009",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "crawley-6009-houses-since-2026-06-01",
+      "suburb": "CRAWLEY",
+      "state": "WA",
+      "postcode": "6009",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "dalkeith-6009-houses-since-2026-06-01",
+      "suburb": "DALKEITH",
+      "state": "WA",
+      "postcode": "6009",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "nedlands-6009-houses-since-2026-06-01",
+      "suburb": "NEDLANDS",
+      "state": "WA",
+      "postcode": "6009",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "nedlands-dc-6009-houses-since-2026-06-01",
+      "suburb": "NEDLANDS DC",
+      "state": "WA",
+      "postcode": "6009",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "claremont-6010-houses-since-2026-06-01",
+      "suburb": "CLAREMONT",
+      "state": "WA",
+      "postcode": "6010",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "claremont-north-6010-houses-since-2026-06-01",
+      "suburb": "CLAREMONT NORTH",
+      "state": "WA",
+      "postcode": "6010",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mount-claremont-6010-houses-since-2026-06-01",
+      "suburb": "MOUNT CLAREMONT",
+      "state": "WA",
+      "postcode": "6010",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "swanbourne-6010-houses-since-2026-06-01",
+      "suburb": "SWANBOURNE",
+      "state": "WA",
+      "postcode": "6010",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "cottesloe-6011-houses-since-2026-06-01",
+      "suburb": "COTTESLOE",
+      "state": "WA",
+      "postcode": "6011",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "peppermint-grove-6011-houses-since-2026-06-01",
+      "suburb": "PEPPERMINT GROVE",
+      "state": "WA",
+      "postcode": "6011",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mosman-park-6012-houses-since-2026-06-01",
+      "suburb": "MOSMAN PARK",
+      "state": "WA",
+      "postcode": "6012",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "floreat-6014-houses-since-2026-06-01",
+      "suburb": "FLOREAT",
+      "state": "WA",
+      "postcode": "6014",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "floreat-forum-6014-houses-since-2026-06-01",
+      "suburb": "FLOREAT FORUM",
+      "state": "WA",
+      "postcode": "6014",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "jolimont-6014-houses-since-2026-06-01",
+      "suburb": "JOLIMONT",
+      "state": "WA",
+      "postcode": "6014",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "wembley-6014-houses-since-2026-06-01",
+      "suburb": "WEMBLEY",
+      "state": "WA",
+      "postcode": "6014",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "city-beach-6015-houses-since-2026-06-01",
+      "suburb": "CITY BEACH",
+      "state": "WA",
+      "postcode": "6015",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "glendalough-6016-houses-since-2026-06-01",
+      "suburb": "GLENDALOUGH",
+      "state": "WA",
+      "postcode": "6016",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mount-hawthorn-6016-houses-since-2026-06-01",
+      "suburb": "MOUNT HAWTHORN",
+      "state": "WA",
+      "postcode": "6016",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "osborne-park-6017-houses-since-2026-06-01",
+      "suburb": "OSBORNE PARK",
+      "state": "WA",
+      "postcode": "6017",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "osborne-park-dc-6017-houses-since-2026-06-01",
+      "suburb": "OSBORNE PARK DC",
+      "state": "WA",
+      "postcode": "6017",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "doubleview-6018-houses-since-2026-06-01",
+      "suburb": "DOUBLEVIEW",
+      "state": "WA",
+      "postcode": "6018",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "gwelup-6018-houses-since-2026-06-01",
+      "suburb": "GWELUP",
+      "state": "WA",
+      "postcode": "6018",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "innaloo-6018-houses-since-2026-06-01",
+      "suburb": "INNALOO",
+      "state": "WA",
+      "postcode": "6018",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "karrinyup-6018-houses-since-2026-06-01",
+      "suburb": "KARRINYUP",
+      "state": "WA",
+      "postcode": "6018",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "woodlands-6018-houses-since-2026-06-01",
+      "suburb": "WOODLANDS",
+      "state": "WA",
+      "postcode": "6018",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "wembley-downs-6019-houses-since-2026-06-01",
+      "suburb": "WEMBLEY DOWNS",
+      "state": "WA",
+      "postcode": "6019",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "greenwood-6024-houses-since-2026-06-01",
+      "suburb": "GREENWOOD",
+      "state": "WA",
+      "postcode": "6024",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "warwick-6024-houses-since-2026-06-01",
+      "suburb": "WARWICK",
+      "state": "WA",
+      "postcode": "6024",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "craigie-6025-houses-since-2026-06-01",
+      "suburb": "CRAIGIE",
+      "state": "WA",
+      "postcode": "6025",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "hillarys-6025-houses-since-2026-06-01",
+      "suburb": "HILLARYS",
+      "state": "WA",
+      "postcode": "6025",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "kallaroo-6025-houses-since-2026-06-01",
+      "suburb": "KALLAROO",
+      "state": "WA",
+      "postcode": "6025",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "padbury-6025-houses-since-2026-06-01",
+      "suburb": "PADBURY",
+      "state": "WA",
+      "postcode": "6025",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "kingsley-6026-houses-since-2026-06-01",
+      "suburb": "KINGSLEY",
+      "state": "WA",
+      "postcode": "6026",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "woodvale-6026-houses-since-2026-06-01",
+      "suburb": "WOODVALE",
+      "state": "WA",
+      "postcode": "6026",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "beldon-6027-houses-since-2026-06-01",
+      "suburb": "BELDON",
+      "state": "WA",
+      "postcode": "6027",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "connolly-6027-houses-since-2026-06-01",
+      "suburb": "CONNOLLY",
+      "state": "WA",
+      "postcode": "6027",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "edgewater-6027-houses-since-2026-06-01",
+      "suburb": "EDGEWATER",
+      "state": "WA",
+      "postcode": "6027",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "heathridge-6027-houses-since-2026-06-01",
+      "suburb": "HEATHRIDGE",
+      "state": "WA",
+      "postcode": "6027",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "joondalup-6027-houses-since-2026-06-01",
+      "suburb": "JOONDALUP",
+      "state": "WA",
+      "postcode": "6027",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "joondalup-dc-6027-houses-since-2026-06-01",
+      "suburb": "JOONDALUP DC",
+      "state": "WA",
+      "postcode": "6027",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mullaloo-6027-houses-since-2026-06-01",
+      "suburb": "MULLALOO",
+      "state": "WA",
+      "postcode": "6027",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "ocean-reef-6027-houses-since-2026-06-01",
+      "suburb": "OCEAN REEF",
+      "state": "WA",
+      "postcode": "6027",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "burns-beach-6028-houses-since-2026-06-01",
+      "suburb": "BURNS BEACH",
+      "state": "WA",
+      "postcode": "6028",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "currambine-6028-houses-since-2026-06-01",
+      "suburb": "CURRAMBINE",
+      "state": "WA",
+      "postcode": "6028",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "iluka-6028-houses-since-2026-06-01",
+      "suburb": "ILUKA",
+      "state": "WA",
+      "postcode": "6028",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "kinross-6028-houses-since-2026-06-01",
+      "suburb": "KINROSS",
+      "state": "WA",
+      "postcode": "6028",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "trigg-6029-houses-since-2026-06-01",
+      "suburb": "TRIGG",
+      "state": "WA",
+      "postcode": "6029",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "clarkson-6030-houses-since-2026-06-01",
+      "suburb": "CLARKSON",
+      "state": "WA",
+      "postcode": "6030",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "merriwa-6030-houses-since-2026-06-01",
+      "suburb": "MERRIWA",
+      "state": "WA",
+      "postcode": "6030",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mindarie-6030-houses-since-2026-06-01",
+      "suburb": "MINDARIE",
+      "state": "WA",
+      "postcode": "6030",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "quinns-rocks-6030-houses-since-2026-06-01",
+      "suburb": "QUINNS ROCKS",
+      "state": "WA",
+      "postcode": "6030",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "ridgewood-6030-houses-since-2026-06-01",
+      "suburb": "RIDGEWOOD",
+      "state": "WA",
+      "postcode": "6030",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "banksia-grove-6031-houses-since-2026-06-01",
+      "suburb": "BANKSIA GROVE",
+      "state": "WA",
+      "postcode": "6031",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "neerabup-6031-houses-since-2026-06-01",
+      "suburb": "NEERABUP",
+      "state": "WA",
+      "postcode": "6031",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "nowergup-6032-houses-since-2026-06-01",
+      "suburb": "NOWERGUP",
+      "state": "WA",
+      "postcode": "6032",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "carabooda-6033-houses-since-2026-06-01",
+      "suburb": "CARABOODA",
+      "state": "WA",
+      "postcode": "6033",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "eglinton-6034-houses-since-2026-06-01",
+      "suburb": "EGLINTON",
+      "state": "WA",
+      "postcode": "6034",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "yanchep-6035-houses-since-2026-06-01",
+      "suburb": "YANCHEP",
+      "state": "WA",
+      "postcode": "6035",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "butler-6036-houses-since-2026-06-01",
+      "suburb": "BUTLER",
+      "state": "WA",
+      "postcode": "6036",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "jindalee-6036-houses-since-2026-06-01",
+      "suburb": "JINDALEE",
+      "state": "WA",
+      "postcode": "6036",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "two-rocks-6037-houses-since-2026-06-01",
+      "suburb": "TWO ROCKS",
+      "state": "WA",
+      "postcode": "6037",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "alkimos-6038-houses-since-2026-06-01",
+      "suburb": "ALKIMOS",
+      "state": "WA",
+      "postcode": "6038",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "gabbadah-6041-houses-since-2026-06-01",
+      "suburb": "GABBADAH",
+      "state": "WA",
+      "postcode": "6041",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "guilderton-6041-houses-since-2026-06-01",
+      "suburb": "GUILDERTON",
+      "state": "WA",
+      "postcode": "6041",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "woodridge-6041-houses-since-2026-06-01",
+      "suburb": "WOODRIDGE",
+      "state": "WA",
+      "postcode": "6041",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "seabird-6042-houses-since-2026-06-01",
+      "suburb": "SEABIRD",
+      "state": "WA",
+      "postcode": "6042",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "ledge-point-6043-houses-since-2026-06-01",
+      "suburb": "LEDGE POINT",
+      "state": "WA",
+      "postcode": "6043",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "karakin-6044-houses-since-2026-06-01",
+      "suburb": "KARAKIN",
+      "state": "WA",
+      "postcode": "6044",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "lancelin-6044-houses-since-2026-06-01",
+      "suburb": "LANCELIN",
+      "state": "WA",
+      "postcode": "6044",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "nilgen-6044-houses-since-2026-06-01",
+      "suburb": "NILGEN",
+      "state": "WA",
+      "postcode": "6044",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "coolbinia-6050-houses-since-2026-06-01",
+      "suburb": "COOLBINIA",
+      "state": "WA",
+      "postcode": "6050",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "menora-6050-houses-since-2026-06-01",
+      "suburb": "MENORA",
+      "state": "WA",
+      "postcode": "6050",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mount-lawley-6050-houses-since-2026-06-01",
+      "suburb": "MOUNT LAWLEY",
+      "state": "WA",
+      "postcode": "6050",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "maylands-6051-houses-since-2026-06-01",
+      "suburb": "MAYLANDS",
+      "state": "WA",
+      "postcode": "6051",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bedford-6052-houses-since-2026-06-01",
+      "suburb": "BEDFORD",
+      "state": "WA",
+      "postcode": "6052",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "inglewood-6052-houses-since-2026-06-01",
+      "suburb": "INGLEWOOD",
+      "state": "WA",
+      "postcode": "6052",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bayswater-6053-houses-since-2026-06-01",
+      "suburb": "BAYSWATER",
+      "state": "WA",
+      "postcode": "6053",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "ashfield-6054-houses-since-2026-06-01",
+      "suburb": "ASHFIELD",
+      "state": "WA",
+      "postcode": "6054",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bassendean-6054-houses-since-2026-06-01",
+      "suburb": "BASSENDEAN",
+      "state": "WA",
+      "postcode": "6054",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bassendean-dc-6054-houses-since-2026-06-01",
+      "suburb": "BASSENDEAN DC",
+      "state": "WA",
+      "postcode": "6054",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "eden-hill-6054-houses-since-2026-06-01",
+      "suburb": "EDEN HILL",
+      "state": "WA",
+      "postcode": "6054",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "kiara-6054-houses-since-2026-06-01",
+      "suburb": "KIARA",
+      "state": "WA",
+      "postcode": "6054",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "lockridge-6054-houses-since-2026-06-01",
+      "suburb": "LOCKRIDGE",
+      "state": "WA",
+      "postcode": "6054",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "brabham-6055-houses-since-2026-06-01",
+      "suburb": "BRABHAM",
+      "state": "WA",
+      "postcode": "6055",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bushmead-6055-houses-since-2026-06-01",
+      "suburb": "BUSHMEAD",
+      "state": "WA",
+      "postcode": "6055",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "caversham-6055-houses-since-2026-06-01",
+      "suburb": "CAVERSHAM",
+      "state": "WA",
+      "postcode": "6055",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "dayton-6055-houses-since-2026-06-01",
+      "suburb": "DAYTON",
+      "state": "WA",
+      "postcode": "6055",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "guildford-6055-houses-since-2026-06-01",
+      "suburb": "GUILDFORD",
+      "state": "WA",
+      "postcode": "6055",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "hazelmere-6055-houses-since-2026-06-01",
+      "suburb": "HAZELMERE",
+      "state": "WA",
+      "postcode": "6055",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "henley-brook-6055-houses-since-2026-06-01",
+      "suburb": "HENLEY BROOK",
+      "state": "WA",
+      "postcode": "6055",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "south-guildford-6055-houses-since-2026-06-01",
+      "suburb": "SOUTH GUILDFORD",
+      "state": "WA",
+      "postcode": "6055",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "west-swan-6055-houses-since-2026-06-01",
+      "suburb": "WEST SWAN",
+      "state": "WA",
+      "postcode": "6055",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "baskerville-6056-houses-since-2026-06-01",
+      "suburb": "BASKERVILLE",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bellevue-6056-houses-since-2026-06-01",
+      "suburb": "BELLEVUE",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "boya-6056-houses-since-2026-06-01",
+      "suburb": "BOYA",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "greenmount-6056-houses-since-2026-06-01",
+      "suburb": "GREENMOUNT",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "helena-valley-6056-houses-since-2026-06-01",
+      "suburb": "HELENA VALLEY",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "herne-hill-6056-houses-since-2026-06-01",
+      "suburb": "HERNE HILL",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "jane-brook-6056-houses-since-2026-06-01",
+      "suburb": "JANE BROOK",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "koongamia-6056-houses-since-2026-06-01",
+      "suburb": "KOONGAMIA",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "middle-swan-6056-houses-since-2026-06-01",
+      "suburb": "MIDDLE SWAN",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "midland-6056-houses-since-2026-06-01",
+      "suburb": "MIDLAND",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "midvale-6056-houses-since-2026-06-01",
+      "suburb": "MIDVALE",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "millendon-6056-houses-since-2026-06-01",
+      "suburb": "MILLENDON",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "red-hill-6056-houses-since-2026-06-01",
+      "suburb": "RED HILL",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "stratton-6056-houses-since-2026-06-01",
+      "suburb": "STRATTON",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "swan-view-6056-houses-since-2026-06-01",
+      "suburb": "SWAN VIEW",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "viveash-6056-houses-since-2026-06-01",
+      "suburb": "VIVEASH",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "woodbridge-6056-houses-since-2026-06-01",
+      "suburb": "WOODBRIDGE",
+      "state": "WA",
+      "postcode": "6056",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "high-wycombe-6057-houses-since-2026-06-01",
+      "suburb": "HIGH WYCOMBE",
+      "state": "WA",
+      "postcode": "6057",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "maida-vale-6057-houses-since-2026-06-01",
+      "suburb": "MAIDA VALE",
+      "state": "WA",
+      "postcode": "6057",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "forrestfield-6058-houses-since-2026-06-01",
+      "suburb": "FORRESTFIELD",
+      "state": "WA",
+      "postcode": "6058",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "dianella-6059-houses-since-2026-06-01",
+      "suburb": "DIANELLA",
+      "state": "WA",
+      "postcode": "6059",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "dog-swamp-6060-houses-since-2026-06-01",
+      "suburb": "DOG SWAMP",
+      "state": "WA",
+      "postcode": "6060",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "joondanna-6060-houses-since-2026-06-01",
+      "suburb": "JOONDANNA",
+      "state": "WA",
+      "postcode": "6060",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "tuart-hill-6060-houses-since-2026-06-01",
+      "suburb": "TUART HILL",
+      "state": "WA",
+      "postcode": "6060",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "yokine-6060-houses-since-2026-06-01",
+      "suburb": "YOKINE",
+      "state": "WA",
+      "postcode": "6060",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "yokine-south-6060-houses-since-2026-06-01",
+      "suburb": "YOKINE SOUTH",
+      "state": "WA",
+      "postcode": "6060",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "balga-6061-houses-since-2026-06-01",
+      "suburb": "BALGA",
+      "state": "WA",
+      "postcode": "6061",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mirrabooka-6061-houses-since-2026-06-01",
+      "suburb": "MIRRABOOKA",
+      "state": "WA",
+      "postcode": "6061",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "westminster-6061-houses-since-2026-06-01",
+      "suburb": "WESTMINSTER",
+      "state": "WA",
+      "postcode": "6061",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "embleton-6062-houses-since-2026-06-01",
+      "suburb": "EMBLETON",
+      "state": "WA",
+      "postcode": "6062",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "morley-6062-houses-since-2026-06-01",
+      "suburb": "MORLEY",
+      "state": "WA",
+      "postcode": "6062",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "noranda-6062-houses-since-2026-06-01",
+      "suburb": "NORANDA",
+      "state": "WA",
+      "postcode": "6062",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "beechboro-6063-houses-since-2026-06-01",
+      "suburb": "BEECHBORO",
+      "state": "WA",
+      "postcode": "6063",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bennett-springs-6063-houses-since-2026-06-01",
+      "suburb": "BENNETT SPRINGS",
+      "state": "WA",
+      "postcode": "6063",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "alexander-heights-6064-houses-since-2026-06-01",
+      "suburb": "ALEXANDER HEIGHTS",
+      "state": "WA",
+      "postcode": "6064",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "girrawheen-6064-houses-since-2026-06-01",
+      "suburb": "GIRRAWHEEN",
+      "state": "WA",
+      "postcode": "6064",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "koondoola-6064-houses-since-2026-06-01",
+      "suburb": "KOONDOOLA",
+      "state": "WA",
+      "postcode": "6064",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "marangaroo-6064-houses-since-2026-06-01",
+      "suburb": "MARANGAROO",
+      "state": "WA",
+      "postcode": "6064",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "ashby-6065-houses-since-2026-06-01",
+      "suburb": "ASHBY",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "darch-6065-houses-since-2026-06-01",
+      "suburb": "DARCH",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "gnangara-6065-houses-since-2026-06-01",
+      "suburb": "GNANGARA",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "hocking-6065-houses-since-2026-06-01",
+      "suburb": "HOCKING",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "jandabup-6065-houses-since-2026-06-01",
+      "suburb": "JANDABUP",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "landsdale-6065-houses-since-2026-06-01",
+      "suburb": "LANDSDALE",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "madeley-6065-houses-since-2026-06-01",
+      "suburb": "MADELEY",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mariginiup-6065-houses-since-2026-06-01",
+      "suburb": "MARIGINIUP",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "melaleuca-6065-houses-since-2026-06-01",
+      "suburb": "MELALEUCA",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "pearsall-6065-houses-since-2026-06-01",
+      "suburb": "PEARSALL",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "pinjar-6065-houses-since-2026-06-01",
+      "suburb": "PINJAR",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "sinagra-6065-houses-since-2026-06-01",
+      "suburb": "SINAGRA",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "tapping-6065-houses-since-2026-06-01",
+      "suburb": "TAPPING",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "wanneroo-6065-houses-since-2026-06-01",
+      "suburb": "WANNEROO",
+      "state": "WA",
+      "postcode": "6065",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "ballajura-6066-houses-since-2026-06-01",
+      "suburb": "BALLAJURA",
+      "state": "WA",
+      "postcode": "6066",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "aveley-6069-houses-since-2026-06-01",
+      "suburb": "AVELEY",
+      "state": "WA",
+      "postcode": "6069",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "belhus-6069-houses-since-2026-06-01",
+      "suburb": "BELHUS",
+      "state": "WA",
+      "postcode": "6069",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "brigadoon-6069-houses-since-2026-06-01",
+      "suburb": "BRIGADOON",
+      "state": "WA",
+      "postcode": "6069",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "ellenbrook-6069-houses-since-2026-06-01",
+      "suburb": "ELLENBROOK",
+      "state": "WA",
+      "postcode": "6069",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "ellenbrook-east-6069-houses-since-2026-06-01",
+      "suburb": "ELLENBROOK EAST",
+      "state": "WA",
+      "postcode": "6069",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "the-vines-6069-houses-since-2026-06-01",
+      "suburb": "THE VINES",
+      "state": "WA",
+      "postcode": "6069",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "upper-swan-6069-houses-since-2026-06-01",
+      "suburb": "UPPER SWAN",
+      "state": "WA",
+      "postcode": "6069",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "darlington-6070-houses-since-2026-06-01",
+      "suburb": "DARLINGTON",
+      "state": "WA",
+      "postcode": "6070",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "glen-forrest-6071-houses-since-2026-06-01",
+      "suburb": "GLEN FORREST",
+      "state": "WA",
+      "postcode": "6071",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "hovea-6071-houses-since-2026-06-01",
+      "suburb": "HOVEA",
+      "state": "WA",
+      "postcode": "6071",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mahogany-creek-6072-houses-since-2026-06-01",
+      "suburb": "MAHOGANY CREEK",
+      "state": "WA",
+      "postcode": "6072",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mundaring-6073-houses-since-2026-06-01",
+      "suburb": "MUNDARING",
+      "state": "WA",
+      "postcode": "6073",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mundaring-dc-6073-houses-since-2026-06-01",
+      "suburb": "MUNDARING DC",
+      "state": "WA",
+      "postcode": "6073",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "sawyers-valley-6074-houses-since-2026-06-01",
+      "suburb": "SAWYERS VALLEY",
+      "state": "WA",
+      "postcode": "6074",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bickley-6076-houses-since-2026-06-01",
+      "suburb": "BICKLEY",
+      "state": "WA",
+      "postcode": "6076",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "carmel-6076-houses-since-2026-06-01",
+      "suburb": "CARMEL",
+      "state": "WA",
+      "postcode": "6076",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "gooseberry-hill-6076-houses-since-2026-06-01",
+      "suburb": "GOOSEBERRY HILL",
+      "state": "WA",
+      "postcode": "6076",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "hacketts-gully-6076-houses-since-2026-06-01",
+      "suburb": "HACKETTS GULLY",
+      "state": "WA",
+      "postcode": "6076",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "kalamunda-6076-houses-since-2026-06-01",
+      "suburb": "KALAMUNDA",
+      "state": "WA",
+      "postcode": "6076",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "lesmurdie-6076-houses-since-2026-06-01",
+      "suburb": "LESMURDIE",
+      "state": "WA",
+      "postcode": "6076",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "paulls-valley-6076-houses-since-2026-06-01",
+      "suburb": "PAULLS VALLEY",
+      "state": "WA",
+      "postcode": "6076",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "pickering-brook-6076-houses-since-2026-06-01",
+      "suburb": "PICKERING BROOK",
+      "state": "WA",
+      "postcode": "6076",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "piesse-brook-6076-houses-since-2026-06-01",
+      "suburb": "PIESSE BROOK",
+      "state": "WA",
+      "postcode": "6076",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "walliston-6076-houses-since-2026-06-01",
+      "suburb": "WALLISTON",
+      "state": "WA",
+      "postcode": "6076",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "gnangara-6077-houses-since-2026-06-01",
+      "suburb": "GNANGARA",
+      "state": "WA",
+      "postcode": "6077",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "jandabup-6077-houses-since-2026-06-01",
+      "suburb": "JANDABUP",
+      "state": "WA",
+      "postcode": "6077",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mariginiup-6078-houses-since-2026-06-01",
+      "suburb": "MARIGINIUP",
+      "state": "WA",
+      "postcode": "6078",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "parkerville-6081-houses-since-2026-06-01",
+      "suburb": "PARKERVILLE",
+      "state": "WA",
+      "postcode": "6081",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "stoneville-6081-houses-since-2026-06-01",
+      "suburb": "STONEVILLE",
+      "state": "WA",
+      "postcode": "6081",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bailup-6082-houses-since-2026-06-01",
+      "suburb": "BAILUP",
+      "state": "WA",
+      "postcode": "6082",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mount-helena-6082-houses-since-2026-06-01",
+      "suburb": "MOUNT HELENA",
+      "state": "WA",
+      "postcode": "6082",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "gidgegannup-6083-houses-since-2026-06-01",
+      "suburb": "GIDGEGANNUP",
+      "state": "WA",
+      "postcode": "6083",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "morangup-6083-houses-since-2026-06-01",
+      "suburb": "MORANGUP",
+      "state": "WA",
+      "postcode": "6083",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bullsbrook-6084-houses-since-2026-06-01",
+      "suburb": "BULLSBROOK",
+      "state": "WA",
+      "postcode": "6084",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "chittering-6084-houses-since-2026-06-01",
+      "suburb": "CHITTERING",
+      "state": "WA",
+      "postcode": "6084",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "lower-chittering-6084-houses-since-2026-06-01",
+      "suburb": "LOWER CHITTERING",
+      "state": "WA",
+      "postcode": "6084",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "malaga-6090-houses-since-2026-06-01",
+      "suburb": "MALAGA",
+      "state": "WA",
+      "postcode": "6090",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "burswood-6100-houses-since-2026-06-01",
+      "suburb": "BURSWOOD",
+      "state": "WA",
+      "postcode": "6100",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "lathlain-6100-houses-since-2026-06-01",
+      "suburb": "LATHLAIN",
+      "state": "WA",
+      "postcode": "6100",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "victoria-park-6100-houses-since-2026-06-01",
+      "suburb": "VICTORIA PARK",
+      "state": "WA",
+      "postcode": "6100",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "carlisle-6101-houses-since-2026-06-01",
+      "suburb": "CARLISLE",
+      "state": "WA",
+      "postcode": "6101",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "carlisle-south-6101-houses-since-2026-06-01",
+      "suburb": "CARLISLE SOUTH",
+      "state": "WA",
+      "postcode": "6101",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "east-victoria-park-6101-houses-since-2026-06-01",
+      "suburb": "EAST VICTORIA PARK",
+      "state": "WA",
+      "postcode": "6101",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bentley-6102-houses-since-2026-06-01",
+      "suburb": "BENTLEY",
+      "state": "WA",
+      "postcode": "6102",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bentley-south-6102-houses-since-2026-06-01",
+      "suburb": "BENTLEY SOUTH",
+      "state": "WA",
+      "postcode": "6102",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "st-james-6102-houses-since-2026-06-01",
+      "suburb": "ST JAMES",
+      "state": "WA",
+      "postcode": "6102",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "rivervale-6103-houses-since-2026-06-01",
+      "suburb": "RIVERVALE",
+      "state": "WA",
+      "postcode": "6103",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "ascot-6104-houses-since-2026-06-01",
+      "suburb": "ASCOT",
+      "state": "WA",
+      "postcode": "6104",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "belmont-6104-houses-since-2026-06-01",
+      "suburb": "BELMONT",
+      "state": "WA",
+      "postcode": "6104",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "redcliffe-6104-houses-since-2026-06-01",
+      "suburb": "REDCLIFFE",
+      "state": "WA",
+      "postcode": "6104",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "cloverdale-6105-houses-since-2026-06-01",
+      "suburb": "CLOVERDALE",
+      "state": "WA",
+      "postcode": "6105",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "kewdale-6105-houses-since-2026-06-01",
+      "suburb": "KEWDALE",
+      "state": "WA",
+      "postcode": "6105",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "beckenham-6107-houses-since-2026-06-01",
+      "suburb": "BECKENHAM",
+      "state": "WA",
+      "postcode": "6107",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "cannington-6107-houses-since-2026-06-01",
+      "suburb": "CANNINGTON",
+      "state": "WA",
+      "postcode": "6107",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "east-cannington-6107-houses-since-2026-06-01",
+      "suburb": "EAST CANNINGTON",
+      "state": "WA",
+      "postcode": "6107",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "kenwick-6107-houses-since-2026-06-01",
+      "suburb": "KENWICK",
+      "state": "WA",
+      "postcode": "6107",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "queens-park-6107-houses-since-2026-06-01",
+      "suburb": "QUEENS PARK",
+      "state": "WA",
+      "postcode": "6107",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "wattle-grove-6107-houses-since-2026-06-01",
+      "suburb": "WATTLE GROVE",
+      "state": "WA",
+      "postcode": "6107",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "wilson-6107-houses-since-2026-06-01",
+      "suburb": "WILSON",
+      "state": "WA",
+      "postcode": "6107",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "thornlie-6108-houses-since-2026-06-01",
+      "suburb": "THORNLIE",
+      "state": "WA",
+      "postcode": "6108",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "maddington-6109-houses-since-2026-06-01",
+      "suburb": "MADDINGTON",
+      "state": "WA",
+      "postcode": "6109",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "orange-grove-6109-houses-since-2026-06-01",
+      "suburb": "ORANGE GROVE",
+      "state": "WA",
+      "postcode": "6109",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "gosnells-6110-houses-since-2026-06-01",
+      "suburb": "GOSNELLS",
+      "state": "WA",
+      "postcode": "6110",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "huntingdale-6110-houses-since-2026-06-01",
+      "suburb": "HUNTINGDALE",
+      "state": "WA",
+      "postcode": "6110",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "martin-6110-houses-since-2026-06-01",
+      "suburb": "MARTIN",
+      "state": "WA",
+      "postcode": "6110",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "southern-river-6110-houses-since-2026-06-01",
+      "suburb": "SOUTHERN RIVER",
+      "state": "WA",
+      "postcode": "6110",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "camillo-6111-houses-since-2026-06-01",
+      "suburb": "CAMILLO",
+      "state": "WA",
+      "postcode": "6111",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "canning-mills-6111-houses-since-2026-06-01",
+      "suburb": "CANNING MILLS",
+      "state": "WA",
+      "postcode": "6111",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "champion-lakes-6111-houses-since-2026-06-01",
+      "suburb": "CHAMPION LAKES",
+      "state": "WA",
+      "postcode": "6111",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "karragullen-6111-houses-since-2026-06-01",
+      "suburb": "KARRAGULLEN",
+      "state": "WA",
+      "postcode": "6111",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "kelmscott-6111-houses-since-2026-06-01",
+      "suburb": "KELMSCOTT",
+      "state": "WA",
+      "postcode": "6111",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "roleystone-6111-houses-since-2026-06-01",
+      "suburb": "ROLEYSTONE",
+      "state": "WA",
+      "postcode": "6111",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "westfield-6111-houses-since-2026-06-01",
+      "suburb": "WESTFIELD",
+      "state": "WA",
+      "postcode": "6111",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "armadale-6112-houses-since-2026-06-01",
+      "suburb": "ARMADALE",
+      "state": "WA",
+      "postcode": "6112",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bedfordale-6112-houses-since-2026-06-01",
+      "suburb": "BEDFORDALE",
+      "state": "WA",
+      "postcode": "6112",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "brookdale-6112-houses-since-2026-06-01",
+      "suburb": "BROOKDALE",
+      "state": "WA",
+      "postcode": "6112",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "forrestdale-6112-houses-since-2026-06-01",
+      "suburb": "FORRESTDALE",
+      "state": "WA",
+      "postcode": "6112",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "harrisdale-6112-houses-since-2026-06-01",
+      "suburb": "HARRISDALE",
+      "state": "WA",
+      "postcode": "6112",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "haynes-6112-houses-since-2026-06-01",
+      "suburb": "HAYNES",
+      "state": "WA",
+      "postcode": "6112",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "hilbert-6112-houses-since-2026-06-01",
+      "suburb": "HILBERT",
+      "state": "WA",
+      "postcode": "6112",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mount-nasura-6112-houses-since-2026-06-01",
+      "suburb": "MOUNT NASURA",
+      "state": "WA",
+      "postcode": "6112",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mount-richon-6112-houses-since-2026-06-01",
+      "suburb": "MOUNT RICHON",
+      "state": "WA",
+      "postcode": "6112",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "piara-waters-6112-houses-since-2026-06-01",
+      "suburb": "PIARA WATERS",
+      "state": "WA",
+      "postcode": "6112",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "seville-grove-6112-houses-since-2026-06-01",
+      "suburb": "SEVILLE GROVE",
+      "state": "WA",
+      "postcode": "6112",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "wungong-6112-houses-since-2026-06-01",
+      "suburb": "WUNGONG",
+      "state": "WA",
+      "postcode": "6112",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "oakford-6121-houses-since-2026-06-01",
+      "suburb": "OAKFORD",
+      "state": "WA",
+      "postcode": "6121",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "oldbury-6121-houses-since-2026-06-01",
+      "suburb": "OLDBURY",
+      "state": "WA",
+      "postcode": "6121",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "byford-6122-houses-since-2026-06-01",
+      "suburb": "BYFORD",
+      "state": "WA",
+      "postcode": "6122",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "cardup-6122-houses-since-2026-06-01",
+      "suburb": "CARDUP",
+      "state": "WA",
+      "postcode": "6122",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "darling-downs-6122-houses-since-2026-06-01",
+      "suburb": "DARLING DOWNS",
+      "state": "WA",
+      "postcode": "6122",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "karrakup-6122-houses-since-2026-06-01",
+      "suburb": "KARRAKUP",
+      "state": "WA",
+      "postcode": "6122",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mundijong-6123-houses-since-2026-06-01",
+      "suburb": "MUNDIJONG",
+      "state": "WA",
+      "postcode": "6123",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "whitby-6123-houses-since-2026-06-01",
+      "suburb": "WHITBY",
+      "state": "WA",
+      "postcode": "6123",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "jarrahdale-6124-houses-since-2026-06-01",
+      "suburb": "JARRAHDALE",
+      "state": "WA",
+      "postcode": "6124",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "hopeland-6125-houses-since-2026-06-01",
+      "suburb": "HOPELAND",
+      "state": "WA",
+      "postcode": "6125",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mardella-6125-houses-since-2026-06-01",
+      "suburb": "MARDELLA",
+      "state": "WA",
+      "postcode": "6125",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "serpentine-6125-houses-since-2026-06-01",
+      "suburb": "SERPENTINE",
+      "state": "WA",
+      "postcode": "6125",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "keysbrook-6126-houses-since-2026-06-01",
+      "suburb": "KEYSBROOK",
+      "state": "WA",
+      "postcode": "6126",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "langford-6147-houses-since-2026-06-01",
+      "suburb": "LANGFORD",
+      "state": "WA",
+      "postcode": "6147",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "lynwood-6147-houses-since-2026-06-01",
+      "suburb": "LYNWOOD",
+      "state": "WA",
+      "postcode": "6147",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "parkwood-6147-houses-since-2026-06-01",
+      "suburb": "PARKWOOD",
+      "state": "WA",
+      "postcode": "6147",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "ferndale-6148-houses-since-2026-06-01",
+      "suburb": "FERNDALE",
+      "state": "WA",
+      "postcode": "6148",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "riverton-6148-houses-since-2026-06-01",
+      "suburb": "RIVERTON",
+      "state": "WA",
+      "postcode": "6148",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "rossmoyne-6148-houses-since-2026-06-01",
+      "suburb": "ROSSMOYNE",
+      "state": "WA",
+      "postcode": "6148",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "shelley-6148-houses-since-2026-06-01",
+      "suburb": "SHELLEY",
+      "state": "WA",
+      "postcode": "6148",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bull-creek-6149-houses-since-2026-06-01",
+      "suburb": "BULL CREEK",
+      "state": "WA",
+      "postcode": "6149",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "leeming-6149-houses-since-2026-06-01",
+      "suburb": "LEEMING",
+      "state": "WA",
+      "postcode": "6149",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bateman-6150-houses-since-2026-06-01",
+      "suburb": "BATEMAN",
+      "state": "WA",
+      "postcode": "6150",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "murdoch-6150-houses-since-2026-06-01",
+      "suburb": "MURDOCH",
+      "state": "WA",
+      "postcode": "6150",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "winthrop-6150-houses-since-2026-06-01",
+      "suburb": "WINTHROP",
+      "state": "WA",
+      "postcode": "6150",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "kensington-6151-houses-since-2026-06-01",
+      "suburb": "KENSINGTON",
+      "state": "WA",
+      "postcode": "6151",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "south-perth-6151-houses-since-2026-06-01",
+      "suburb": "SOUTH PERTH",
+      "state": "WA",
+      "postcode": "6151",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "como-6152-houses-since-2026-06-01",
+      "suburb": "COMO",
+      "state": "WA",
+      "postcode": "6152",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "karawara-6152-houses-since-2026-06-01",
+      "suburb": "KARAWARA",
+      "state": "WA",
+      "postcode": "6152",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "manning-6152-houses-since-2026-06-01",
+      "suburb": "MANNING",
+      "state": "WA",
+      "postcode": "6152",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "salter-point-6152-houses-since-2026-06-01",
+      "suburb": "SALTER POINT",
+      "state": "WA",
+      "postcode": "6152",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "waterford-6152-houses-since-2026-06-01",
+      "suburb": "WATERFORD",
+      "state": "WA",
+      "postcode": "6152",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "applecross-6153-houses-since-2026-06-01",
+      "suburb": "APPLECROSS",
+      "state": "WA",
+      "postcode": "6153",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "applecross-north-6153-houses-since-2026-06-01",
+      "suburb": "APPLECROSS NORTH",
+      "state": "WA",
+      "postcode": "6153",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "ardross-6153-houses-since-2026-06-01",
+      "suburb": "ARDROSS",
+      "state": "WA",
+      "postcode": "6153",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "brentwood-6153-houses-since-2026-06-01",
+      "suburb": "BRENTWOOD",
+      "state": "WA",
+      "postcode": "6153",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mount-pleasant-6153-houses-since-2026-06-01",
+      "suburb": "MOUNT PLEASANT",
+      "state": "WA",
+      "postcode": "6153",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "alfred-cove-6154-houses-since-2026-06-01",
+      "suburb": "ALFRED COVE",
+      "state": "WA",
+      "postcode": "6154",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "booragoon-6154-houses-since-2026-06-01",
+      "suburb": "BOORAGOON",
+      "state": "WA",
+      "postcode": "6154",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "myaree-6154-houses-since-2026-06-01",
+      "suburb": "MYAREE",
+      "state": "WA",
+      "postcode": "6154",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "canning-vale-dc-6155-houses-since-2026-06-01",
+      "suburb": "CANNING VALE DC",
+      "state": "WA",
+      "postcode": "6155",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "canning-vale-south-6155-houses-since-2026-06-01",
+      "suburb": "CANNING VALE SOUTH",
+      "state": "WA",
+      "postcode": "6155",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "willetton-6155-houses-since-2026-06-01",
+      "suburb": "WILLETTON",
+      "state": "WA",
+      "postcode": "6155",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "attadale-6156-houses-since-2026-06-01",
+      "suburb": "ATTADALE",
+      "state": "WA",
+      "postcode": "6156",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "melville-6156-houses-since-2026-06-01",
+      "suburb": "MELVILLE",
+      "state": "WA",
+      "postcode": "6156",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "willagee-6156-houses-since-2026-06-01",
+      "suburb": "WILLAGEE",
+      "state": "WA",
+      "postcode": "6156",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "willagee-central-6156-houses-since-2026-06-01",
+      "suburb": "WILLAGEE CENTRAL",
+      "state": "WA",
+      "postcode": "6156",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bicton-6157-houses-since-2026-06-01",
+      "suburb": "BICTON",
+      "state": "WA",
+      "postcode": "6157",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "palmyra-6157-houses-since-2026-06-01",
+      "suburb": "PALMYRA",
+      "state": "WA",
+      "postcode": "6157",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "east-fremantle-6158-houses-since-2026-06-01",
+      "suburb": "EAST FREMANTLE",
+      "state": "WA",
+      "postcode": "6158",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "north-fremantle-6159-houses-since-2026-06-01",
+      "suburb": "NORTH FREMANTLE",
+      "state": "WA",
+      "postcode": "6159",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "fremantle-6160-houses-since-2026-06-01",
+      "suburb": "FREMANTLE",
+      "state": "WA",
+      "postcode": "6160",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "south-fremantle-6162-houses-since-2026-06-01",
+      "suburb": "SOUTH FREMANTLE",
+      "state": "WA",
+      "postcode": "6162",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "white-gum-valley-6162-houses-since-2026-06-01",
+      "suburb": "WHITE GUM VALLEY",
+      "state": "WA",
+      "postcode": "6162",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bibra-lake-6163-houses-since-2026-06-01",
+      "suburb": "BIBRA LAKE",
+      "state": "WA",
+      "postcode": "6163",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bibra-lake-dc-6163-houses-since-2026-06-01",
+      "suburb": "BIBRA LAKE DC",
+      "state": "WA",
+      "postcode": "6163",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "coolbellup-6163-houses-since-2026-06-01",
+      "suburb": "COOLBELLUP",
+      "state": "WA",
+      "postcode": "6163",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "hamilton-hill-6163-houses-since-2026-06-01",
+      "suburb": "HAMILTON HILL",
+      "state": "WA",
+      "postcode": "6163",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "hilton-6163-houses-since-2026-06-01",
+      "suburb": "HILTON",
+      "state": "WA",
+      "postcode": "6163",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "kardinya-6163-houses-since-2026-06-01",
+      "suburb": "KARDINYA",
+      "state": "WA",
+      "postcode": "6163",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "north-coogee-6163-houses-since-2026-06-01",
+      "suburb": "NORTH COOGEE",
+      "state": "WA",
+      "postcode": "6163",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "north-lake-6163-houses-since-2026-06-01",
+      "suburb": "NORTH LAKE",
+      "state": "WA",
+      "postcode": "6163",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "o'connor-6163-houses-since-2026-06-01",
+      "suburb": "O'CONNOR",
+      "state": "WA",
+      "postcode": "6163",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "samson-6163-houses-since-2026-06-01",
+      "suburb": "SAMSON",
+      "state": "WA",
+      "postcode": "6163",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "atwell-6164-houses-since-2026-06-01",
+      "suburb": "ATWELL",
+      "state": "WA",
+      "postcode": "6164",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "aubin-grove-6164-houses-since-2026-06-01",
+      "suburb": "AUBIN GROVE",
+      "state": "WA",
+      "postcode": "6164",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "banjup-6164-houses-since-2026-06-01",
+      "suburb": "BANJUP",
+      "state": "WA",
+      "postcode": "6164",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "beeliar-6164-houses-since-2026-06-01",
+      "suburb": "BEELIAR",
+      "state": "WA",
+      "postcode": "6164",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "cockburn-central-6164-houses-since-2026-06-01",
+      "suburb": "COCKBURN CENTRAL",
+      "state": "WA",
+      "postcode": "6164",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "hammond-park-6164-houses-since-2026-06-01",
+      "suburb": "HAMMOND PARK",
+      "state": "WA",
+      "postcode": "6164",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "jandakot-6164-houses-since-2026-06-01",
+      "suburb": "JANDAKOT",
+      "state": "WA",
+      "postcode": "6164",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "south-lake-6164-houses-since-2026-06-01",
+      "suburb": "SOUTH LAKE",
+      "state": "WA",
+      "postcode": "6164",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "success-6164-houses-since-2026-06-01",
+      "suburb": "SUCCESS",
+      "state": "WA",
+      "postcode": "6164",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "treeby-6164-houses-since-2026-06-01",
+      "suburb": "TREEBY",
+      "state": "WA",
+      "postcode": "6164",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "yangebup-6164-houses-since-2026-06-01",
+      "suburb": "YANGEBUP",
+      "state": "WA",
+      "postcode": "6164",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "hope-valley-6165-houses-since-2026-06-01",
+      "suburb": "HOPE VALLEY",
+      "state": "WA",
+      "postcode": "6165",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "naval-base-6165-houses-since-2026-06-01",
+      "suburb": "NAVAL BASE",
+      "state": "WA",
+      "postcode": "6165",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "coogee-6166-houses-since-2026-06-01",
+      "suburb": "COOGEE",
+      "state": "WA",
+      "postcode": "6166",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "henderson-6166-houses-since-2026-06-01",
+      "suburb": "HENDERSON",
+      "state": "WA",
+      "postcode": "6166",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "lake-coogee-6166-houses-since-2026-06-01",
+      "suburb": "LAKE COOGEE",
+      "state": "WA",
+      "postcode": "6166",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "munster-6166-houses-since-2026-06-01",
+      "suburb": "MUNSTER",
+      "state": "WA",
+      "postcode": "6166",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "wattleup-6166-houses-since-2026-06-01",
+      "suburb": "WATTLEUP",
+      "state": "WA",
+      "postcode": "6166",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "anketell-6167-houses-since-2026-06-01",
+      "suburb": "ANKETELL",
+      "state": "WA",
+      "postcode": "6167",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "bertram-6167-houses-since-2026-06-01",
+      "suburb": "BERTRAM",
+      "state": "WA",
+      "postcode": "6167",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "calista-6167-houses-since-2026-06-01",
+      "suburb": "CALISTA",
+      "state": "WA",
+      "postcode": "6167",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "casuarina-6167-houses-since-2026-06-01",
+      "suburb": "CASUARINA",
+      "state": "WA",
+      "postcode": "6167",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "kwinana-beach-6167-houses-since-2026-06-01",
+      "suburb": "KWINANA BEACH",
+      "state": "WA",
+      "postcode": "6167",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "kwinana-town-centre-6167-houses-since-2026-06-01",
+      "suburb": "KWINANA TOWN CENTRE",
+      "state": "WA",
+      "postcode": "6167",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "mandogalup-6167-houses-since-2026-06-01",
+      "suburb": "MANDOGALUP",
+      "state": "WA",
+      "postcode": "6167",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "medina-6167-houses-since-2026-06-01",
+      "suburb": "MEDINA",
+      "state": "WA",
+      "postcode": "6167",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "orelia-6167-houses-since-2026-06-01",
+      "suburb": "ORELIA",
+      "state": "WA",
+      "postcode": "6167",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "parmelia-6167-houses-since-2026-06-01",
+      "suburb": "PARMELIA",
+      "state": "WA",
+      "postcode": "6167",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "postans-6167-houses-since-2026-06-01",
+      "suburb": "POSTANS",
+      "state": "WA",
+      "postcode": "6167",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "the-spectacles-6167-houses-since-2026-06-01",
+      "suburb": "THE SPECTACLES",
+      "state": "WA",
+      "postcode": "6167",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "wandi-6167-houses-since-2026-06-01",
+      "suburb": "WANDI",
+      "state": "WA",
+      "postcode": "6167",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "cooloongup-6168-houses-since-2026-06-01",
+      "suburb": "COOLOONGUP",
+      "state": "WA",
+      "postcode": "6168",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "hillman-6168-houses-since-2026-06-01",
+      "suburb": "HILLMAN",
+      "state": "WA",
+      "postcode": "6168",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "rockingham-beach-6168-houses-since-2026-06-01",
+      "suburb": "ROCKINGHAM BEACH",
+      "state": "WA",
+      "postcode": "6168",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "safety-bay-6169-houses-since-2026-06-01",
+      "suburb": "SAFETY BAY",
+      "state": "WA",
+      "postcode": "6169",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "shoalwater-6169-houses-since-2026-06-01",
+      "suburb": "SHOALWATER",
+      "state": "WA",
+      "postcode": "6169",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "waikiki-6169-houses-since-2026-06-01",
+      "suburb": "WAIKIKI",
+      "state": "WA",
+      "postcode": "6169",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "warnbro-6169-houses-since-2026-06-01",
+      "suburb": "WARNBRO",
+      "state": "WA",
+      "postcode": "6169",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "leda-6170-houses-since-2026-06-01",
+      "suburb": "LEDA",
+      "state": "WA",
+      "postcode": "6170",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "wellard-6170-houses-since-2026-06-01",
+      "suburb": "WELLARD",
+      "state": "WA",
+      "postcode": "6170",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "baldivis-6171-houses-since-2026-06-01",
+      "suburb": "BALDIVIS",
+      "state": "WA",
+      "postcode": "6171",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "port-kennedy-6172-houses-since-2026-06-01",
+      "suburb": "PORT KENNEDY",
+      "state": "WA",
+      "postcode": "6172",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "secret-harbour-6173-houses-since-2026-06-01",
+      "suburb": "SECRET HARBOUR",
+      "state": "WA",
+      "postcode": "6173",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "golden-bay-6174-houses-since-2026-06-01",
+      "suburb": "GOLDEN BAY",
+      "state": "WA",
+      "postcode": "6174",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "singleton-6175-houses-since-2026-06-01",
+      "suburb": "SINGLETON",
+      "state": "WA",
+      "postcode": "6175",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "karnup-6176-houses-since-2026-06-01",
+      "suburb": "KARNUP",
+      "state": "WA",
+      "postcode": "6176",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "lakelands-6180-houses-since-2026-06-01",
+      "suburb": "LAKELANDS",
+      "state": "WA",
+      "postcode": "6180",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "parklands-6180-houses-since-2026-06-01",
+      "suburb": "PARKLANDS",
+      "state": "WA",
+      "postcode": "6180",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    },
+    {
+      "name": "stake-hill-6181-houses-since-2026-06-01",
+      "suburb": "STAKE HILL",
+      "state": "WA",
+      "postcode": "6181",
+      "propertyType": "house",
+      "includeSurrounding": false,
+      "maxSoldAge": "6-month",
+      "soldDateFrom": "2026-06-01"
+    }
+  ]
+}

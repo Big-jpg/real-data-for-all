@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "captureRunId": "hocking-houses-2026-10-12",
+  "captureScope": {
+    "suburb": "Hocking",
+    "state": "WA",
+    "postcode": "6065",
+    "propertyTypes": [
+      "house"
+    ],
+    "includeSurrounding": false,
+    "maxSoldAge": {
+      "value": 6,
+      "unit": "month"
+    },
+    "sortType": "sold-date-desc",
+    "note": "This bounded six-month capture contains all 34 reported Hocking House listings; the planned June 1 lower bound is reported as a comparison subset and was not applied to this source capture."
+  },
+  "retrieval": {
+    "transport": "Chrome network response",
+    "endpoint": "https://lexa.realestate.com.au/graphql",
+    "operationName": "soldSearchByQuery",
+    "query": {
+      "channel": "sold",
+      "page": 1,
+      "pageSize": 25,
+      "sortType": "sold-date-desc",
+      "filters": {
+        "propertyTypes": [
+          "house"
+        ],
+        "maxSoldAge": {
+          "value": 6,
+          "unit": "month"
+        },
+        "surroundingSuburbs": false,
+        "excludeNoSalePrice": false,
+        "ex-under-contract": false,
+        "ex-deposit-taken": false,
+        "excludeAuctions": false,
+        "excludeNoDisplayPrice": false,
+        "excludePrivateSales": false,
+        "furnished": false,
+        "petsAllowed": false,
+        "hasScheduledAuction": false
+      },
+      "localities": [
+        {
+          "searchLocation": "hocking, wa 6065"
+        }
+      ]
+    },
+    "pages": [
+      {
+        "pageNumber": 1,
+        "rowCount": 25,
+        "capturedAt": "2026-10-11T16:59:49.486Z",
+        "totalResultsCount": 34,
+        "pagination": {
+          "moreResultsAvailable": true,
+          "maxPageNumberAvailable": 2,
+          "page": 1
+        }
+      },
+      {
+        "pageNumber": 2,
+        "rowCount": 9,
+        "capturedAt": "2026-10-11T17:00:16.436Z",
+        "totalResultsCount": 34,
+        "pagination": {
+          "moreResultsAvailable": false,
+          "maxPageNumberAvailable": 2,
+          "page": 2
+        }
+      }
+    ]
+  },
+  "archive": {
+    "projection": {
+      "fileName": "hocking-listing-capture.json",
+      "bytes": 7476,
+      "sha256": "d2cce4eebf0bf04ce4265e8f112e8becc01c5a77ed484e57ece662424bf30c0c",
+      "projectedFields": [
+        "id",
+        "shortAddress",
+        "suburb",
+        "state",
+        "postcode",
+        "priceDisplay",
+        "soldDateDisplay",
+        "propertyType",
+        "bedrooms",
+        "bathrooms",
+        "carSpaces",
+        "landDisplay",
+        "landUnit",
+        "detailPath"
+      ]
+    },
+    "csv": {
+      "fileName": "hocking-rea-sold-HOCKING-WA-_6065_-2026-10-12.csv",
+      "bytes": 13022,
+      "sha256": "b11ec9e47df2837ef8b9d2c6ed8fe6e3e4349727813039d7f0561a0bde5879a1",
+      "columns": [
+        "sourceUrl",
+        "pageNumber",
+        "ordinalOnPage",
+        "price",
+        "priceValue",
+        "address",
+        "detailPath",
+        "detailUrl",
+        "bedrooms",
+        "bathrooms",
+        "carSpaces",
+        "landSize",
+        "landSizeSqm",
+        "propertyType",
+        "soldDate",
+        "soldDateISO",
+        "scrapedAt"
+      ],
+      "sourceUrlMeaning": "Corresponding public sold-search URLs reconstructed from the capture query and page number; actual retrieval used the GraphQL endpoint recorded above."
+    },
+    "fullRawResponseArchived": false,
+    "onlyProjectedListingFieldsSaved": true,
+    "tokensCookiesCredentialsSaved": false
+  },
+  "validation": {
+    "reportedTotal": 34,
+    "capturedRows": 34,
+    "uniqueListingIds": 34,
+    "duplicateListingIds": [],
+    "pageRowCounts": [
+      25,
+      9
+    ],
+    "terminalPageReached": true,
+    "terminalPageNumber": 2,
+    "moreResultsAvailableOnTerminalPage": false,
+    "totalMatchesCapturedRows": true,
+    "allRowsMatchHouseHockingWA6065": true,
+    "soldDatesSortedDescending": true,
+    "allSoldDatesParsed": true,
+    "allIdsMatchDetailPaths": true,
+    "stablePerPageScrapedAt": true,
+    "priceValueRule": "Only a full-string single dollar amount is parsed; Contact agent and other non-exact displays remain blank.",
+    "numericPriceCount": 32,
+    "blankPriceCount": 2,
+    "dateRange": {
+      "from": "2026-04-17",
+      "to": "2026-09-24"
+    },
+    "soldDateFrom20260601Count": 23,
+    "soldAfter20260709Count": 14,
+    "existingSourceHelperValidation": {
+      "status": "passed",
+      "helper": "src/lib/source.ts parseSourceCsv and sourceFileHash",
+      "parsedRows": 34,
+      "uniqueObservationKeys": 34,
+      "newObservationKeysAgainstHistoricalHocking": 34,
+      "uniquePerPageCaptureTimestamps": 2,
+      "all17SourceColumnsPresent": true,
+      "checksumsVerified": true
+    }
+  },
+  "listingIds": [
+    "150527112",
+    "152180832",
+    "151971240",
+    "152017828",
+    "150884028",
+    "151571512",
+    "151515252",
+    "151409880",
+    "151164400",
+    "151617376",
+    "151290612",
+    "151598508",
+    "151092272",
+    "151665868",
+    "151131772",
+    "150910960",
+    "151512124",
+    "150657676",
+    "151073216",
+    "150847792",
+    "151056972",
+    "150906028",
+    "150883564",
+    "151216688",
+    "151055660",
+    "150643812",
+    "150686732",
+    "150934364",
+    "150933760",
+    "150610356",
+    "150862976",
+    "150941620",
+    "150588456",
+    "150491524"
+  ]
+}

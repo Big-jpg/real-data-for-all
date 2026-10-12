@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "transport": "Chrome network response",
+  "endpoint": "https://lexa.realestate.com.au/graphql",
+  "operationName": "soldSearchByQuery",
+  "persistedQuery": {"sha256Hash": "2d2bae1f5961e727de823b31ae58281d81e1fdba4617b794c95e69b2f432f31e", "version": 1},
+  "query": {"channel": "sold", "page": 1, "pageSize": 25, "sortType": "sold-date-desc", "filters": {"propertyTypes": ["house"], "maxSoldAge": {"value": 6, "unit": "month"}, "surroundingSuburbs": false, "excludeNoSalePrice": false, "ex-under-contract": false, "ex-deposit-taken": false, "excludeAuctions": false, "excludeNoDisplayPrice": false, "excludePrivateSales": false, "furnished": false, "petsAllowed": false, "hasScheduledAuction": false}, "localities": [{"searchLocation": "hocking, wa 6065"}]},
+  "columns": ["id", "shortAddress", "suburb", "state", "postcode", "priceDisplay", "soldDateDisplay", "propertyType", "bedrooms", "bathrooms", "carSpaces", "landDisplay", "landUnit", "detailPath"],
+  "pages": [
+    {
+      "sourceUrl": "https://lexa.realestate.com.au/graphql",
+      "pageNumber": 1,
+      "capturedAt": "2026-10-11T16:59:49.486Z",
+      "totalResultsCount": 34,
+      "pagination": {"moreResultsAvailable": true, "maxPageNumberAvailable": 2, "page": 1},
+      "rows": [
+        ["150527112", "25 Tenement Loop", "Hocking", "WA", "6065", "Contact agent", "24 Sep 2026", "House", 4, 2, 2, "591", "m²", "/sold/property-house-wa-hocking-150527112"],
+        ["152180832", "43 Majorca Elbow", "Hocking", "WA", "6065", "$1,100,000", "13 Sep 2026", "House", 4, 2, 2, "426", "m²", "/sold/property-house-wa-hocking-152180832"],
+        ["151971240", "9 Indiana Way", "Hocking", "WA", "6065", "$1,060,000", "08 Sep 2026", "House", 4, 2, 2, "596", "m²", "/sold/property-house-wa-hocking-151971240"],
+        ["152017828", "29 Chartwell Bend", "Hocking", "WA", "6065", "$1,225,000", "25 Aug 2026", "House", 4, 2, 2, "606", "m²", "/sold/property-house-wa-hocking-152017828"],
+        ["150884028", "28 Chatsworth Drive", "Hocking", "WA", "6065", "$1,135,000", "13 Aug 2026", "House", 4, 2, 2, "540", "m²", "/sold/property-house-wa-hocking-150884028"],
+        ["151571512", "42 Tenement Loop", "Hocking", "WA", "6065", "$945,000", "06 Aug 2026", "House", 4, 2, 2, "544", "m²", "/sold/property-house-wa-hocking-151571512"],
+        ["151515252", "66 Ranworth Road", "Hocking", "WA", "6065", "$1,090,000", "05 Aug 2026", "House", 4, 2, 2, "587", "m²", "/sold/property-house-wa-hocking-151515252"],
+        ["151409880", "4 Dresden Street", "Hocking", "WA", "6065", "$1,000,000", "05 Aug 2026", "House", 4, 2, 2, "360", "m²", "/sold/property-house-wa-hocking-151409880"],
+        ["151164400", "7 Moscow Retreat", "Hocking", "WA", "6065", "$790,000", "31 Jul 2026", "House", 3, 2, 2, "202", "m²", "/sold/property-house-wa-hocking-151164400"],
+        ["151617376", "21 Madrid Terrace", "Hocking", "WA", "6065", "$1,165,000", "30 Jul 2026", "House", 5, 2, 4, "567", "m²", "/sold/property-house-wa-hocking-151617376"],
+        ["151290612", "1 Meadow Place", "Hocking", "WA", "6065", "$879,000", "29 Jul 2026", "House", 3, 1, 6, "680", "m²", "/sold/property-house-wa-hocking-151290612"],
+        ["151598508", "11 Georgia Street", "Hocking", "WA", "6065", "$952,990", "28 Jul 2026", "House", 4, 2, 2, "441", "m²", "/sold/property-house-wa-hocking-151598508"],
+        ["151092272", "28 Amery Road", "Hocking", "WA", "6065", "$1,100,000", "23 Jul 2026", "House", 4, 2, 2, "609", "m²", "/sold/property-house-wa-hocking-151092272"],
+        ["151665868", "27 Chartwell Bend", "Hocking", "WA", "6065", "$1,020,000", "14 Jul 2026", "House", 4, 2, 2, "582", "m²", "/sold/property-house-wa-hocking-151665868"],
+        ["151131772", "75B Gungurru Avenue", "Hocking", "WA", "6065", "$850,000", "02 Jul 2026", "House", 4, 2, 2, "337", "m²", "/sold/property-house-wa-hocking-151131772"],
+        ["150910960", "75A Gungurru Avenue", "Hocking", "WA", "6065", "Contact agent", "30 Jun 2026", "House", 3, 2, 2, "285", "m²", "/sold/property-house-wa-hocking-150910960"],
+        ["151512124", "6 Stuttgart Avenue", "Hocking", "WA", "6065", "$1,265,000", "26 Jun 2026", "House", 4, 3, 2, "521", "m²", "/sold/property-house-wa-hocking-151512124"],
+        ["150657676", "33 Chartwell Bend", "Hocking", "WA", "6065", "$1,320,000", "25 Jun 2026", "House", 4, 2, 2, "582", "m²", "/sold/property-house-wa-hocking-150657676"],
+        ["151073216", "39 Cadoux Loop", "Hocking", "WA", "6065", "$1,005,000", "23 Jun 2026", "House", 4, 2, 2, "632", "m²", "/sold/property-house-wa-hocking-151073216"],
+        ["150847792", "30 Heacham Avenue", "Hocking", "WA", "6065", "$1,230,000", "20 Jun 2026", "House", 4, 2, 2, "679", "m²", "/sold/property-house-wa-hocking-150847792"],
+        ["151056972", "40 Osaka Loop", "Hocking", "WA", "6065", "$1,050,000", "15 Jun 2026", "House", 4, 2, 2, "564", "m²", "/sold/property-house-wa-hocking-151056972"],
+        ["150906028", "77 Vignerons Loop", "Hocking", "WA", "6065", "$935,000", "09 Jun 2026", "House", 3, 2, 2, "300", "m²", "/sold/property-house-wa-hocking-150906028"],
+        ["150883564", "32 Manchester Drive", "Hocking", "WA", "6065", "$928,000", "05 Jun 2026", "House", 4, 2, 2, "604", "m²", "/sold/property-house-wa-hocking-150883564"],
+        ["151216688", "4 Vignerons Loop", "Hocking", "WA", "6065", "$970,000", "30 May 2026", "House", 3, 2, 2, "350", "m²", "/sold/property-house-wa-hocking-151216688"],
+        ["151055660", "32 Elliot Road", "Hocking", "WA", "6065", "$900,000", "28 May 2026", "House", 3, 1, 2, "703", "m²", "/sold/property-house-wa-hocking-151055660"]
+      ]
+    },
+    {
+      "sourceUrl": "https://lexa.realestate.com.au/graphql",
+      "pageNumber": 2,
+      "capturedAt": "2026-10-11T17:00:16.436Z",
+      "totalResultsCount": 34,
+      "pagination": {"moreResultsAvailable": false, "maxPageNumberAvailable": 2, "page": 2},
+      "rows": [
+        ["150643812", "14 Toledo Drive", "Hocking", "WA", "6065", "$1,425,000", "13 May 2026", "House", 3, 2, 3, "577", "m²", "/sold/property-house-wa-hocking-150643812"],
+        ["150686732", "1 Amery Road", "Hocking", "WA", "6065", "$1,105,000", "06 May 2026", "House", 4, 2, 2, "686", "m²", "/sold/property-house-wa-hocking-150686732"],
+        ["150934364", "52 Hinckley Parkway", "Hocking", "WA", "6065", "$865,000", "05 May 2026", "House", 3, 2, 2, "226", "m²", "/sold/property-house-wa-hocking-150934364"],
+        ["150933760", "4 Kiev Link", "Hocking", "WA", "6065", "$970,000", "30 Apr 2026", "House", 4, 2, 2, "560", "m²", "/sold/property-house-wa-hocking-150933760"],
+        ["150610356", "12 Toledo Drive", "Hocking", "WA", "6065", "$767,000", "29 Apr 2026", "House", 3, 2, 2, "202", "m²", "/sold/property-house-wa-hocking-150610356"],
+        ["150862976", "6 Paris Gardens", "Hocking", "WA", "6065", "$1,360,000", "23 Apr 2026", "House", 4, 2, 2, "555", "m²", "/sold/property-house-wa-hocking-150862976"],
+        ["150941620", "9 Moscow Retreat", "Hocking", "WA", "6065", "$845,000", "20 Apr 2026", "House", 3, 2, 2, "200", "m²", "/sold/property-house-wa-hocking-150941620"],
+        ["150588456", "46 Hinckley Parkway", "Hocking", "WA", "6065", "$850,000", "19 Apr 2026", "House", 3, 2, 2, "226", "m²", "/sold/property-house-wa-hocking-150588456"],
+        ["150491524", "68 Toledo Drive", "Hocking", "WA", "6065", "$1,150,000", "17 Apr 2026", "House", 4, 2, 2, "406", "m²", "/sold/property-house-wa-hocking-150491524"]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "observedAtPerthDate": "2026-10-12",
+  "objective": "Collect newly reported WA house sales with repeatable coverage and observation history",
+  "endpoint": "https://lexa.realestate.com.au/graphql",
+  "method": "POST",
+  "operationName": "soldSearchByQuery",
+  "requestTemplate": "rea-sold-request.json",
+  "persistedQuery": {"sha256Hash": "2d2bae1f5961e727de823b31ae58281d81e1fdba4617b794c95e69b2f432f31e", "version": 1},
+  "queryEncoding": "variables.query is a JSON-encoded string, not a nested object",
+  "observedParameters": {
+    "channel": "sold",
+    "page": [1, 2],
+    "pageSize": 25,
+    "sortType": "sold-date-desc",
+    "filters.propertyTypes": ["house"],
+    "filters.maxSoldAge": {"value": 6, "unit": "month"},
+    "filters.surroundingSuburbs": false,
+    "filters.excludeNoSalePrice": false,
+    "localities[0].searchLocation": "hocking, wa 6065"
+  },
+  "uiUrlTemplate": "https://www.realestate.com.au/sold/property-house-in-hocking,+wa+6065/list-{page}?includeSurrounding=false&maxSoldAge=6-month&activeSort=solddate",
+  "response": {
+    "root": "data.soldSearch.results",
+    "items": "exact.items[*].listing",
+    "total": "totalResultsCount",
+    "pagination": ["pagination.page", "pagination.maxPageNumberAvailable", "pagination.moreResultsAvailable"],
+    "fields": {
+      "listingId": "id",
+      "priceDisplay": "price.display",
+      "soldDateDisplay": "dateSold.display",
+      "street": "address.display.shortAddress",
+      "suburb": "address.suburb",
+      "state": "address.state",
+      "postcode": "address.postcode",
+      "propertyType": "propertyType.display",
+      "bedrooms": "generalFeatures.bedrooms.value",
+      "bathrooms": "generalFeatures.bathrooms.value",
+      "carSpaces": "generalFeatures.parkingSpaces.value",
+      "landDisplay": "propertySizes.land.displayValue",
+      "landUnit": "propertySizes.land.sizeUnit.displayValue",
+      "detailPath": "_links.canonical.path",
+      "detailUrl": "_links.canonical.href"
+    }
+  },
+  "liveEvidence": {
+    "browser": "Chrome, successful existing normal site session",
+    "httpStatus": [200, 200],
+    "graphqlErrors": false,
+    "pageCounts": [25, 9],
+    "reportedTotal": 34,
+    "uniqueListingIds": 34,
+    "allExpectedScope": true,
+    "terminalPage": {"page": 2, "moreResultsAvailable": false},
+    "savedProjection": "hocking-listing-capture.json",
+    "limits": "Only required listing fields and pagination were retained. Full JSON response bodies were inspected but not archived. No authentication, challenge token, cookie or tracking payload was saved."
+  },
+  "directHttpTest": {
+    "method": "POST",
+    "requestBody": "rea-sold-request.json",
+    "headersSent": {"Content-Type": "application/json"},
+    "browserCredentialsSent": false,
+    "status": 429,
+    "contentType": "text/html; charset=utf-8",
+    "responseBytes": 549,
+    "result": "Challenge HTML; no listing JSON. Standalone curl collection is not proven.",
+    "successfulBrowserHeaderNames": ["Referer", "User-Agent", "accept", "content-type", "sec-ch-ua", "sec-ch-ua-mobile", "sec-ch-ua-platform", "x-kpsdk-cd", "x-kpsdk-ct", "x-kpsdk-h", "x-kpsdk-v"],
+    "headerValuesRetained": false
+  },
+  "collectorRecommendation": {
+    "transport": "Use the existing normal Chrome session and collect the site's successful listing responses. A standalone HTTP transport requires its own successful access test.",
+    "scope": "Keep the dated WA suburb plan and exact-house filters; use the observed query shape with each locality and page, then verify the resolved scope.",
+    "coverage": "Commit a page only after validating and persisting its rows. Require explicit terminal pagination, unique IDs, and reconciliation to reported totals; mark failures or source caps incomplete.",
+    "history": "Preserve dated observations separately from current sales. Listing identity must prevent repeat captures and later disclosures from creating additional sales.",
+    "price": "Retain display text. Populate numeric price only for an explicit single disclosed dollar amount; missing prices remain usable for counts.",
+    "compatibility": "Existing CSV address must be shortAddress plus suburb. The current SQL treats the final comma-separated segment as suburb, so fullAddress must not be copied into that field.",
+    "contractStability": "This is an observed site implementation endpoint, not a documented supported market-data API. The persisted hash and response shape may change. Page caps and other suburbs were not tested here.",
+    "refreshWindow": "The six-month source filter moves with time. Record each capture timestamp and apply the planned 2026-06-01 overlap cutoff locally for this run."
+  }
+}

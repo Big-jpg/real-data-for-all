@@ -1,0 +1,24 @@
+[
+  {
+    "requestedAtUtc": "2026-10-11T16:48:34.0840706Z",
+    "rows": 330,
+    "completedAtUtc": "2026-10-11T16:48:34.4244683Z",
+    "url": "https://perthhousedata.com/api/analytics/suburbs",
+    "status": 200,
+    "sha256": "ca58d784700fc481a434ebf0d279adcb82dfbd606227061a1695f0c0c6d01495",
+    "name": "suburbs",
+    "scope": "Current public serving data; not a fresh REA source capture",
+    "file": "suburbs.json"
+  },
+  {
+    "requestedAtUtc": "2026-10-11T16:48:34.4492324Z",
+    "rows": 1693,
+    "completedAtUtc": "2026-10-11T16:48:36.6507933Z",
+    "url": "https://perthhousedata.com/api/analytics/suburb-sales?from=2026-01-01&limit=5000",
+    "status": 200,
+    "sha256": "f318fd717e1b7bc74601918ed775faa0effa0c6e505e08f21815b1b6dd3d0f5c",
+    "name": "monthly-sales-2026",
+    "scope": "Current public serving data; not a fresh REA source capture",
+    "file": "monthly-sales-2026.json"
+  }
+]

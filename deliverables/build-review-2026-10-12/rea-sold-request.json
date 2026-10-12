@@ -1,0 +1,15 @@
+{
+  "extensions": {
+    "persistedQuery": {
+      "sha256Hash": "2d2bae1f5961e727de823b31ae58281d81e1fdba4617b794c95e69b2f432f31e",
+      "version": 1
+    }
+  },
+  "operationName": "soldSearchByQuery",
+  "variables": {
+    "placeNameFeatureToggle": true,
+    "query": "{\"channel\":\"sold\",\"page\":1,\"pageSize\":25,\"sortType\":\"sold-date-desc\",\"filters\":{\"propertyTypes\":[\"house\"],\"maxSoldAge\":{\"value\":6,\"unit\":\"month\"},\"surroundingSuburbs\":false,\"excludeNoSalePrice\":false,\"ex-under-contract\":false,\"ex-deposit-taken\":false,\"excludeAuctions\":false,\"excludeNoDisplayPrice\":false,\"excludePrivateSales\":false,\"furnished\":false,\"petsAllowed\":false,\"hasScheduledAuction\":false},\"localities\":[{\"searchLocation\":\"hocking, wa 6065\"}]}",
+    "testListings": false,
+    "travelTimeFeatureToggle": true
+  }
+}

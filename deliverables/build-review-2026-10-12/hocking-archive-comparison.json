@@ -1,0 +1,705 @@
+{
+  "schemaVersion": 1,
+  "captureRunId": "hocking-houses-2026-10-12",
+  "comparisonMeaning": "Every captured row is a new observation at the October capture timestamp. A listing ID new to the retained archive establishes newly observed coverage, not that the sale occurred after the previous capture. Use soldDateISO separately for transaction timing.",
+  "historicalSource": {
+    "archiveDirectory": "C:\\Users\\rossf\\Desktop\\ToBeSorted\\rea-for-all\\rea_sales_data_model",
+    "archiveFileCount": 358,
+    "archiveRawRows": 347902,
+    "archiveLatestScrapedAt": "2026-07-09T16:32:55.348Z",
+    "archiveLatestSoldDateISO": "2026-07-09",
+    "relevantHockingFiles": [
+      {
+        "fileName": "rea-sold-HOCKING-WA-_6065_.csv",
+        "sha256": "a7871d9aa80d2dc911d732f7c291780f3ab0e689af4a07aae8905b6bf2c4bac9",
+        "bytes": 546954
+      }
+    ],
+    "hockingRawRows": 1601,
+    "hockingUniqueListingIds": 1601,
+    "hockingScrapedAtRange": {
+      "from": "2026-07-06T17:35:58.691Z",
+      "to": "2026-07-06T17:53:34.681Z"
+    },
+    "hockingSoldDateRange": {
+      "from": "2007-07-03",
+      "to": "2026-06-30"
+    }
+  },
+  "counts": {
+    "capturedObservations": 34,
+    "newToHistoricalHockingListingIds": 18,
+    "overlappingHistoricalHockingListingIds": 16,
+    "newToWholeRetainedArchiveListingIds": 18,
+    "overlappingWholeRetainedArchiveListingIds": 16,
+    "soldDateFrom20260601": 23,
+    "soldDateFrom20260601NewToArchive": 18,
+    "soldDateFrom20260601OverlappingArchive": 5,
+    "soldAfter20260709": 14,
+    "soldAfter20260709NewToArchive": 14,
+    "newToArchiveWithSoldDateOnOrBefore20260709": 4,
+    "newObservationKeysAgainstHistoricalHocking": 34,
+    "uniqueCaptureTimestamps": 2
+  },
+  "newListingIds": [
+    "150527112",
+    "152180832",
+    "151971240",
+    "152017828",
+    "150884028",
+    "151571512",
+    "151515252",
+    "151409880",
+    "151164400",
+    "151617376",
+    "151290612",
+    "151598508",
+    "151092272",
+    "151665868",
+    "151131772",
+    "151512124",
+    "150847792",
+    "151056972"
+  ],
+  "overlappingListingIds": [
+    "150910960",
+    "150657676",
+    "151073216",
+    "150906028",
+    "150883564",
+    "151216688",
+    "151055660",
+    "150643812",
+    "150686732",
+    "150934364",
+    "150933760",
+    "150610356",
+    "150862976",
+    "150941620",
+    "150588456",
+    "150491524"
+  ],
+  "newToArchive": [
+    {
+      "id": "150527112",
+      "soldDateISO": "2026-09-24",
+      "address": "25 Tenement Loop, Hocking",
+      "priceDisplay": "Contact agent",
+      "pageNumber": 1
+    },
+    {
+      "id": "152180832",
+      "soldDateISO": "2026-09-13",
+      "address": "43 Majorca Elbow, Hocking",
+      "priceDisplay": "$1,100,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151971240",
+      "soldDateISO": "2026-09-08",
+      "address": "9 Indiana Way, Hocking",
+      "priceDisplay": "$1,060,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "152017828",
+      "soldDateISO": "2026-08-25",
+      "address": "29 Chartwell Bend, Hocking",
+      "priceDisplay": "$1,225,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "150884028",
+      "soldDateISO": "2026-08-13",
+      "address": "28 Chatsworth Drive, Hocking",
+      "priceDisplay": "$1,135,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151571512",
+      "soldDateISO": "2026-08-06",
+      "address": "42 Tenement Loop, Hocking",
+      "priceDisplay": "$945,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151515252",
+      "soldDateISO": "2026-08-05",
+      "address": "66 Ranworth Road, Hocking",
+      "priceDisplay": "$1,090,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151409880",
+      "soldDateISO": "2026-08-05",
+      "address": "4 Dresden Street, Hocking",
+      "priceDisplay": "$1,000,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151164400",
+      "soldDateISO": "2026-07-31",
+      "address": "7 Moscow Retreat, Hocking",
+      "priceDisplay": "$790,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151617376",
+      "soldDateISO": "2026-07-30",
+      "address": "21 Madrid Terrace, Hocking",
+      "priceDisplay": "$1,165,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151290612",
+      "soldDateISO": "2026-07-29",
+      "address": "1 Meadow Place, Hocking",
+      "priceDisplay": "$879,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151598508",
+      "soldDateISO": "2026-07-28",
+      "address": "11 Georgia Street, Hocking",
+      "priceDisplay": "$952,990",
+      "pageNumber": 1
+    },
+    {
+      "id": "151092272",
+      "soldDateISO": "2026-07-23",
+      "address": "28 Amery Road, Hocking",
+      "priceDisplay": "$1,100,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151665868",
+      "soldDateISO": "2026-07-14",
+      "address": "27 Chartwell Bend, Hocking",
+      "priceDisplay": "$1,020,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151131772",
+      "soldDateISO": "2026-07-02",
+      "address": "75B Gungurru Avenue, Hocking",
+      "priceDisplay": "$850,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151512124",
+      "soldDateISO": "2026-06-26",
+      "address": "6 Stuttgart Avenue, Hocking",
+      "priceDisplay": "$1,265,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "150847792",
+      "soldDateISO": "2026-06-20",
+      "address": "30 Heacham Avenue, Hocking",
+      "priceDisplay": "$1,230,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151056972",
+      "soldDateISO": "2026-06-15",
+      "address": "40 Osaka Loop, Hocking",
+      "priceDisplay": "$1,050,000",
+      "pageNumber": 1
+    }
+  ],
+  "overlappingArchive": [
+    {
+      "id": "150910960",
+      "soldDateISO": "2026-06-30",
+      "address": "75A Gungurru Avenue, Hocking",
+      "priceDisplay": "Contact agent",
+      "pageNumber": 1,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-06-30",
+          "scrapedAt": "2026-07-06T17:46:25.394Z"
+        }
+      ]
+    },
+    {
+      "id": "150657676",
+      "soldDateISO": "2026-06-25",
+      "address": "33 Chartwell Bend, Hocking",
+      "priceDisplay": "$1,320,000",
+      "pageNumber": 1,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-06-25",
+          "scrapedAt": "2026-07-06T17:35:58.691Z"
+        }
+      ]
+    },
+    {
+      "id": "151073216",
+      "soldDateISO": "2026-06-23",
+      "address": "39 Cadoux Loop, Hocking",
+      "priceDisplay": "$1,005,000",
+      "pageNumber": 1,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-06-23",
+          "scrapedAt": "2026-07-06T17:39:49.437Z"
+        }
+      ]
+    },
+    {
+      "id": "150906028",
+      "soldDateISO": "2026-06-09",
+      "address": "77 Vignerons Loop, Hocking",
+      "priceDisplay": "$935,000",
+      "pageNumber": 1,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-06-09",
+          "scrapedAt": "2026-07-06T17:35:58.691Z"
+        }
+      ]
+    },
+    {
+      "id": "150883564",
+      "soldDateISO": "2026-06-05",
+      "address": "32 Manchester Drive, Hocking",
+      "priceDisplay": "$928,000",
+      "pageNumber": 1,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-06-05",
+          "scrapedAt": "2026-07-06T17:46:25.394Z"
+        }
+      ]
+    },
+    {
+      "id": "151216688",
+      "soldDateISO": "2026-05-30",
+      "address": "4 Vignerons Loop, Hocking",
+      "priceDisplay": "$970,000",
+      "pageNumber": 1,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-05-30",
+          "scrapedAt": "2026-07-06T17:35:58.691Z"
+        }
+      ]
+    },
+    {
+      "id": "151055660",
+      "soldDateISO": "2026-05-28",
+      "address": "32 Elliot Road, Hocking",
+      "priceDisplay": "$900,000",
+      "pageNumber": 1,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-05-28",
+          "scrapedAt": "2026-07-06T17:35:58.691Z"
+        }
+      ]
+    },
+    {
+      "id": "150643812",
+      "soldDateISO": "2026-05-13",
+      "address": "14 Toledo Drive, Hocking",
+      "priceDisplay": "$1,425,000",
+      "pageNumber": 2,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-05-13",
+          "scrapedAt": "2026-07-06T17:35:58.691Z"
+        }
+      ]
+    },
+    {
+      "id": "150686732",
+      "soldDateISO": "2026-05-06",
+      "address": "1 Amery Road, Hocking",
+      "priceDisplay": "$1,105,000",
+      "pageNumber": 2,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-05-06",
+          "scrapedAt": "2026-07-06T17:35:58.691Z"
+        }
+      ]
+    },
+    {
+      "id": "150934364",
+      "soldDateISO": "2026-05-05",
+      "address": "52 Hinckley Parkway, Hocking",
+      "priceDisplay": "$865,000",
+      "pageNumber": 2,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-05-05",
+          "scrapedAt": "2026-07-06T17:35:58.691Z"
+        }
+      ]
+    },
+    {
+      "id": "150933760",
+      "soldDateISO": "2026-04-30",
+      "address": "4 Kiev Link, Hocking",
+      "priceDisplay": "$970,000",
+      "pageNumber": 2,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-04-30",
+          "scrapedAt": "2026-07-06T17:35:58.691Z"
+        }
+      ]
+    },
+    {
+      "id": "150610356",
+      "soldDateISO": "2026-04-29",
+      "address": "12 Toledo Drive, Hocking",
+      "priceDisplay": "$767,000",
+      "pageNumber": 2,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-04-29",
+          "scrapedAt": "2026-07-06T17:35:58.691Z"
+        }
+      ]
+    },
+    {
+      "id": "150862976",
+      "soldDateISO": "2026-04-23",
+      "address": "6 Paris Gardens, Hocking",
+      "priceDisplay": "$1,360,000",
+      "pageNumber": 2,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-04-23",
+          "scrapedAt": "2026-07-06T17:35:58.691Z"
+        }
+      ]
+    },
+    {
+      "id": "150941620",
+      "soldDateISO": "2026-04-20",
+      "address": "9 Moscow Retreat, Hocking",
+      "priceDisplay": "$845,000",
+      "pageNumber": 2,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-04-20",
+          "scrapedAt": "2026-07-06T17:35:58.691Z"
+        }
+      ]
+    },
+    {
+      "id": "150588456",
+      "soldDateISO": "2026-04-19",
+      "address": "46 Hinckley Parkway, Hocking",
+      "priceDisplay": "$850,000",
+      "pageNumber": 2,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-04-19",
+          "scrapedAt": "2026-07-06T17:35:58.691Z"
+        }
+      ]
+    },
+    {
+      "id": "150491524",
+      "soldDateISO": "2026-04-17",
+      "address": "68 Toledo Drive, Hocking",
+      "priceDisplay": "$1,150,000",
+      "pageNumber": 2,
+      "historicalMatches": [
+        {
+          "sourceFile": "rea-sold-HOCKING-WA-_6065_.csv",
+          "soldDateISO": "2026-04-17",
+          "scrapedAt": "2026-07-06T17:35:58.691Z"
+        }
+      ]
+    }
+  ],
+  "soldDateFrom20260601": [
+    {
+      "id": "150527112",
+      "soldDateISO": "2026-09-24",
+      "address": "25 Tenement Loop, Hocking",
+      "priceDisplay": "Contact agent",
+      "pageNumber": 1
+    },
+    {
+      "id": "152180832",
+      "soldDateISO": "2026-09-13",
+      "address": "43 Majorca Elbow, Hocking",
+      "priceDisplay": "$1,100,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151971240",
+      "soldDateISO": "2026-09-08",
+      "address": "9 Indiana Way, Hocking",
+      "priceDisplay": "$1,060,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "152017828",
+      "soldDateISO": "2026-08-25",
+      "address": "29 Chartwell Bend, Hocking",
+      "priceDisplay": "$1,225,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "150884028",
+      "soldDateISO": "2026-08-13",
+      "address": "28 Chatsworth Drive, Hocking",
+      "priceDisplay": "$1,135,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151571512",
+      "soldDateISO": "2026-08-06",
+      "address": "42 Tenement Loop, Hocking",
+      "priceDisplay": "$945,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151515252",
+      "soldDateISO": "2026-08-05",
+      "address": "66 Ranworth Road, Hocking",
+      "priceDisplay": "$1,090,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151409880",
+      "soldDateISO": "2026-08-05",
+      "address": "4 Dresden Street, Hocking",
+      "priceDisplay": "$1,000,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151164400",
+      "soldDateISO": "2026-07-31",
+      "address": "7 Moscow Retreat, Hocking",
+      "priceDisplay": "$790,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151617376",
+      "soldDateISO": "2026-07-30",
+      "address": "21 Madrid Terrace, Hocking",
+      "priceDisplay": "$1,165,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151290612",
+      "soldDateISO": "2026-07-29",
+      "address": "1 Meadow Place, Hocking",
+      "priceDisplay": "$879,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151598508",
+      "soldDateISO": "2026-07-28",
+      "address": "11 Georgia Street, Hocking",
+      "priceDisplay": "$952,990",
+      "pageNumber": 1
+    },
+    {
+      "id": "151092272",
+      "soldDateISO": "2026-07-23",
+      "address": "28 Amery Road, Hocking",
+      "priceDisplay": "$1,100,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151665868",
+      "soldDateISO": "2026-07-14",
+      "address": "27 Chartwell Bend, Hocking",
+      "priceDisplay": "$1,020,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151131772",
+      "soldDateISO": "2026-07-02",
+      "address": "75B Gungurru Avenue, Hocking",
+      "priceDisplay": "$850,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "150910960",
+      "soldDateISO": "2026-06-30",
+      "address": "75A Gungurru Avenue, Hocking",
+      "priceDisplay": "Contact agent",
+      "pageNumber": 1
+    },
+    {
+      "id": "151512124",
+      "soldDateISO": "2026-06-26",
+      "address": "6 Stuttgart Avenue, Hocking",
+      "priceDisplay": "$1,265,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "150657676",
+      "soldDateISO": "2026-06-25",
+      "address": "33 Chartwell Bend, Hocking",
+      "priceDisplay": "$1,320,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151073216",
+      "soldDateISO": "2026-06-23",
+      "address": "39 Cadoux Loop, Hocking",
+      "priceDisplay": "$1,005,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "150847792",
+      "soldDateISO": "2026-06-20",
+      "address": "30 Heacham Avenue, Hocking",
+      "priceDisplay": "$1,230,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151056972",
+      "soldDateISO": "2026-06-15",
+      "address": "40 Osaka Loop, Hocking",
+      "priceDisplay": "$1,050,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "150906028",
+      "soldDateISO": "2026-06-09",
+      "address": "77 Vignerons Loop, Hocking",
+      "priceDisplay": "$935,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "150883564",
+      "soldDateISO": "2026-06-05",
+      "address": "32 Manchester Drive, Hocking",
+      "priceDisplay": "$928,000",
+      "pageNumber": 1
+    }
+  ],
+  "soldAfter20260709": [
+    {
+      "id": "150527112",
+      "soldDateISO": "2026-09-24",
+      "address": "25 Tenement Loop, Hocking",
+      "priceDisplay": "Contact agent",
+      "pageNumber": 1
+    },
+    {
+      "id": "152180832",
+      "soldDateISO": "2026-09-13",
+      "address": "43 Majorca Elbow, Hocking",
+      "priceDisplay": "$1,100,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151971240",
+      "soldDateISO": "2026-09-08",
+      "address": "9 Indiana Way, Hocking",
+      "priceDisplay": "$1,060,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "152017828",
+      "soldDateISO": "2026-08-25",
+      "address": "29 Chartwell Bend, Hocking",
+      "priceDisplay": "$1,225,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "150884028",
+      "soldDateISO": "2026-08-13",
+      "address": "28 Chatsworth Drive, Hocking",
+      "priceDisplay": "$1,135,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151571512",
+      "soldDateISO": "2026-08-06",
+      "address": "42 Tenement Loop, Hocking",
+      "priceDisplay": "$945,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151515252",
+      "soldDateISO": "2026-08-05",
+      "address": "66 Ranworth Road, Hocking",
+      "priceDisplay": "$1,090,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151409880",
+      "soldDateISO": "2026-08-05",
+      "address": "4 Dresden Street, Hocking",
+      "priceDisplay": "$1,000,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151164400",
+      "soldDateISO": "2026-07-31",
+      "address": "7 Moscow Retreat, Hocking",
+      "priceDisplay": "$790,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151617376",
+      "soldDateISO": "2026-07-30",
+      "address": "21 Madrid Terrace, Hocking",
+      "priceDisplay": "$1,165,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151290612",
+      "soldDateISO": "2026-07-29",
+      "address": "1 Meadow Place, Hocking",
+      "priceDisplay": "$879,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151598508",
+      "soldDateISO": "2026-07-28",
+      "address": "11 Georgia Street, Hocking",
+      "priceDisplay": "$952,990",
+      "pageNumber": 1
+    },
+    {
+      "id": "151092272",
+      "soldDateISO": "2026-07-23",
+      "address": "28 Amery Road, Hocking",
+      "priceDisplay": "$1,100,000",
+      "pageNumber": 1
+    },
+    {
+      "id": "151665868",
+      "soldDateISO": "2026-07-14",
+      "address": "27 Chartwell Bend, Hocking",
+      "priceDisplay": "$1,020,000",
+      "pageNumber": 1
+    }
+  ],
+  "interpretationLimits": [
+    "This is one suburb and a six-month result window; it does not establish a Perth-wide market trend.",
+    "Capture timestamps identify observations; sold dates identify reported transaction timing.",
+    "Source listing updates, delayed reporting, changed source coverage, and corrections can affect newly observed IDs.",
+    "Price and volume comparisons require the existing analytical house/sale-event rules and deduplication; no database ingestion or analytical publication was performed."
+  ]
+}
