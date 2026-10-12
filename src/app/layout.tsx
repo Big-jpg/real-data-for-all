@@ -5,17 +5,17 @@ import "./styles.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://perthhousedata.com"),
-  title: { default: "Perth House Data — 30 Years of House Sales", template: "%s | Perth House Data" },
-  description: "Explore rolling house-price medians, sales velocity, land relationships and bedroom trends across 330 Perth suburbs. Free, transparent and downloadable.",
+  title: { default: "Perth House Data — Sales Explorer", template: "%s | Perth House Data" },
+  description: "Explore recorded house-sale prices, monthly volumes and bedroom comparisons across Perth postcodes 6000–6200. Interactive charts and downloadable data.",
   alternates: { canonical: "/" },
   openGraph: {
     url: "/",
     siteName: "Perth House Data",
     type: "website",
-    title: "What did Perth houses really sell for?",
-    description: "Rolling medians, sales velocity and downloadable house-sale history across 330 Perth suburbs.",
+    title: "Perth House Data — Sales Explorer",
+    description: "Recorded house-sale prices, monthly volumes and bedroom comparisons across Perth postcodes 6000–6200.",
   },
-  twitter: { card: "summary_large_image", title: "What did Perth houses really sell for?", description: "Explore 30 years of Perth house sales—free, transparent and downloadable." },
+  twitter: { card: "summary_large_image", title: "Perth House Data — Sales Explorer", description: "Interactive charts for recorded Perth house-sale prices and volumes." },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
