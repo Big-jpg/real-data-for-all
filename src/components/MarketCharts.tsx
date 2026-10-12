@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useMemo, type CSSProperties } from "react";
-import { barX, barY, group, lineY, ruleX } from "@tanstack/charts";
+import { areaY, barX, barY, group, lineY, ruleX } from "@tanstack/charts";
 import { Chart, type ChartDefinition } from "@tanstack/charts/react";
 import { scaleBand } from "@tanstack/charts/scales/band";
 import { scaleLinear } from "@tanstack/charts/scales/linear";
@@ -56,10 +56,20 @@ export function MonthlyCharts({ series, loading, showAverage, activeMonth, onMon
   const priceDefinition = useMemo<ChartDefinition<MonthlyDatum, string, number>>(() => {
     const domain = months.map(month => month.month);
     const labels = new Map(months.map(month => [month.month, month.shortLabel]));
+    const priceExtent = priceDomain(data.flatMap(month => showAverage ? [month.median, month.average] : [month.median]));
     const marks = [
+      ...(!comparing && monthlySeries[0] ? [areaY(monthlySeries[0].months, {
+        id: "Median price area",
+        x: "month",
+        y: "median",
+        y1: priceExtent[0],
+        key: "month",
+        fill: monthlySeries[0].color,
+        fillOpacity: 0.12,
+      })] : []),
       ...monthlySeries.flatMap(item => [
-        lineY(item.months, { id: `${item.label} · Median`, x: "month", y: "median", key: "month", stroke: item.color, strokeWidth: 2.6, points: true }),
-        ...(showAverage ? [lineY(item.months, { id: `${item.label} · Average`, x: "month", y: "average", key: "month", stroke: comparing ? item.color : "var(--secondary)", strokeWidth: 2, strokeDasharray: "5 4", points: true })] : []),
+        lineY(item.months, { id: `${item.label} · Median`, x: "month", y: "median", key: "month", stroke: item.color, strokeWidth: 3, lineCap: "round", lineJoin: "round", points: true }),
+        ...(showAverage ? [lineY(item.months, { id: `${item.label} · Average`, x: "month", y: "average", key: "month", stroke: comparing ? item.color : "var(--secondary)", strokeWidth: 2, strokeDasharray: "5 4", lineCap: "round", points: true })] : []),
       ]),
       ruleX(activeMonth ? [activeMonth] : [], { stroke: "var(--muted)", strokeWidth: 1, strokeDasharray: "3 4", strokeOpacity: 0.55 }),
     ];
@@ -67,7 +77,7 @@ export function MonthlyCharts({ series, loading, showAverage, activeMonth, onMon
       marks, theme: palette, margin: monthlyMargin, svgAnimation: false, motion: false, focus: "group-x", keyboard: true,
       scales: {
         x: { scale: scaleBand<string>().domain(domain).paddingInner(0.3).paddingOuter(0.15), axis: { line: false, ticks: { values: domain, line: false, format: value => labels.get(String(value)) ?? "" }, tickLabels: { fontSize: 10, thin: { minGap: 18, priority: "ends" } } } },
-        y: { scale: scaleLinear().domain(priceDomain(data.flatMap(month => showAverage ? [month.median, month.average] : [month.median]))), grid: true, axis: { line: false, ticks: { count: 4, line: false, format: priceFormat }, tickLabels: { fontSize: 11 } } },
+        y: { scale: scaleLinear().domain(priceExtent), grid: true, axis: { line: false, ticks: { count: 4, line: false, format: priceFormat }, tickLabels: { fontSize: 11 } } },
       },
       tooltip: { use: tooltip, motion: false, className: "market-tooltip", content: points => {
         const focused = points[0]?.datum;
@@ -119,7 +129,7 @@ export function MonthlyCharts({ series, loading, showAverage, activeMonth, onMon
   const names = series.map(item => item.label).join(" and ");
   return <div className="chart-grid">
     <section className="chart-card price-card" aria-busy={loading}>
-      <div className="card-top"><h3>Price trend</h3><div className="chart-values">{monthlySeries.map(item => {
+      <div className="card-top"><div className="chart-heading"><span className="chart-kicker">Market trend</span><h3>Price trend</h3></div><div className="chart-values">{monthlySeries.map(item => {
         const selected = selectedMonth ? item.byMonth.get(selectedMonth) : undefined;
         return <div className="chart-value" key={item.key}>{displayMoney(selected?.median ?? null)}<span>{comparing ? `${item.label} · ` : ""}{selected?.label ?? "Median"}</span></div>;
       })}</div></div>
@@ -130,7 +140,7 @@ export function MonthlyCharts({ series, loading, showAverage, activeMonth, onMon
       {loading ? <ChartLoading /> : !hasPrices ? <div className="chart-empty">No disclosed prices</div> : <Chart definition={priceDefinition} className="chart-host" height={270} ariaLabel={`Monthly sale prices for ${names} in Australian dollars`} ariaDescription="Arrow keys move between recorded price points. Enter selects a month. Months without disclosed prices have gaps. Solid lines show medians; dashed lines show averages." onFocusChange={point => onMonthFocus(point?.datum.month ?? null)} onSelect={point => { if (point) onMonthSelect(point.datum.month); }} />}
     </section>
     <section className="chart-card volume-card" aria-busy={loading}>
-      <div className="card-top"><h3>Recorded sales</h3><div className="chart-values">{monthlySeries.map(item => {
+      <div className="card-top"><div className="chart-heading"><span className="chart-kicker">Monthly activity</span><h3>Recorded sales</h3></div><div className="chart-values">{monthlySeries.map(item => {
         const selected = selectedMonth ? item.byMonth.get(selectedMonth) : undefined;
         return <div className="chart-value" key={item.key}>{selected ? countFormat(selected.sales) : "—"}<span>{comparing ? `${item.label} · ` : ""}{selected?.label ?? "Sales"}</span></div>;
       })}</div></div>
@@ -146,7 +156,7 @@ function comparisonDefinition(data: PeriodDatum[], metric: "median" | "sales", c
   const values = data.map(row => metric === "median" ? row.median : row.sales);
   return {
     marks: [
-      ...(["Current", "Prior"] as const).map(period => barX(data.filter(row => row.period === period), { id: `${period} ${metric}`, x: row => metric === "median" ? row.median : row.sales, y: "label", key: "key", fill: row => row.color, fillOpacity: period === "Current" ? 1 : 0.45, radius: { end: 3 }, maxThickness: 22 })),
+      ...(["Current", "Prior"] as const).map(period => barX(data.filter(row => row.period === period), { id: `${period} ${metric}`, x: row => metric === "median" ? row.median : row.sales, y: "label", key: "key", fill: row => row.color, fillOpacity: period === "Current" ? 1 : 0.45, radius: { end: 5 }, maxThickness: 22 })),
     ],
     theme: palette, margin: { top: 12, right: 12, bottom: 30, left: comparing ? 160 : 58 }, svgAnimation: false, motion: false, keyboard: true,
     scales: {
@@ -179,7 +189,7 @@ export function PeriodComparison({ series, loading }: { series: MarketSeries[]; 
   const hasMedian = periods.some(period => period.median !== null);
   const names = series.map(item => item.label).join(" and ");
   return <section className={`chart-card comparison-card${comparing ? " comparing" : ""}`} aria-busy={loading}>
-    <div className="card-top"><h3>Period comparison</h3><div className="chart-legend">{series.map((item, index) => <Fragment key={item.key}>
+    <div className="card-top"><div className="chart-heading"><span className="chart-kicker">Rolling window</span><h3>Period comparison</h3></div><div className="chart-legend">{series.map((item, index) => <Fragment key={item.key}>
       <SeriesKey label={comparing ? `${item.label} · Current` : "Current"} color={seriesColor(index)} />
       <SeriesKey label={comparing ? `${item.label} · Prior` : "Prior"} color={seriesColor(index)} prior />
     </Fragment>)}</div></div>
@@ -208,7 +218,7 @@ export function BedroomChart({ series, activeBedroom, loading, onSelect }: { ser
     }));
   }, [series]);
   const definition = useMemo<ChartDefinition<BedroomDatum, string, number>>(() => ({
-    marks: [barY(data, { id: "Bedrooms", x: "bedroom", y: "sales", z: "seriesLabel", key: row => `${row.seriesKey}:${row.bedroom}`, fill: row => row.color, layout: group({ padding: 0.15 }), radius: { end: 3 }, maxThickness: 56, states: [{ when: ({ datum }) => activeBedroom !== "all" && datum.bedroom !== activeBedroom, style: { fillOpacity: 0.45 } }] })],
+    marks: [barY(data, { id: "Bedrooms", x: "bedroom", y: "sales", z: "seriesLabel", key: row => `${row.seriesKey}:${row.bedroom}`, fill: row => row.color, layout: group({ padding: 0.15 }), radius: { end: 5 }, maxThickness: 56, states: [{ when: ({ datum }) => activeBedroom !== "all" && datum.bedroom !== activeBedroom, style: { fillOpacity: 0.45 } }] })],
     theme: palette, margin: { top: 16, right: 14, bottom: 30, left: 48 }, svgAnimation: false, motion: false, focus: "group-x", keyboard: true,
     scales: {
       x: { scale: scaleBand<string>().domain([...new Set(data.map(row => row.bedroom))]).padding(0.35), axis: { line: false, ticks: { line: false, format: value => `${value} bed` }, tickLabels: { fontSize: 11 } } },
@@ -227,7 +237,7 @@ export function BedroomChart({ series, activeBedroom, loading, onSelect }: { ser
     } },
   }), [data, activeBedroom, comparing]);
   return <section className="chart-card bedroom-card" aria-busy={loading}>
-    <div className="card-top"><h3>Bedrooms</h3><span className="chart-subtitle">Recorded sales</span></div>
+    <div className="card-top"><div className="chart-heading"><span className="chart-kicker">Bedroom mix</span><h3>Bedrooms</h3></div><span className="chart-subtitle">Recorded sales</span></div>
     {comparing && <div className="chart-legend">{series.map((item, index) => <SeriesKey key={item.key} label={item.label} color={seriesColor(index)} />)}</div>}
     {loading ? <ChartLoading /> : data.length === 0 ? <div className="chart-empty">No bedroom observations</div> : <Chart definition={definition} className="chart-host" height={230} ariaLabel={`Recorded sales by bedroom count for ${series.map(item => item.label).join(" and ")}`} ariaDescription="Arrow keys move between bedroom counts. Enter filters the dashboard to that bedroom count. Suburbs have separate bars on the same sales scale. Zero means no recorded observations." onSelect={point => { if (point) onSelect(point.datum.bedroom); }} />}
     <div className="bedroom-picker" role="group" aria-label="Bedroom filter">
