@@ -155,6 +155,48 @@ details > summary::marker { content: ""; }
 .month-readout button:hover { border-color: var(--accent); }
 .month-empty { margin-top: 7px; color: var(--muted); font-size: 10px; }
 .secondary-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 12px; margin-top: 12px; }
+.heatmap-section { margin-top: 14px; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(155deg, var(--surface), var(--paper)); box-shadow: 0 8px 24px rgb(63 41 40 / 5%); }
+.heatmap-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px 20px; }
+.heatmap-header h2 { margin-top: 3px; color: var(--rose-dark); font-size: clamp(22px, 2.6vw, 29px); line-height: 1.2; }
+.heatmap-header p { margin-top: 6px; color: var(--muted); font-size: 11px; }
+.heatmap-kicker { color: var(--rose-dark); font-size: 9px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+.heatmap-source { padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 9px; white-space: nowrap; }
+.heatmap-controls { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 22px; margin-top: 16px; }
+.heatmap-period-control, .heatmap-metric-control { display: grid; gap: 4px; }
+.heatmap-period-label { color: var(--muted); font-size: 9px; font-weight: 600; }
+.heatmap-controls .segmented button { min-height: 28px; padding: 5px 8px; font-size: 10px; }
+.heatmap-timeline { margin-top: 15px; padding: 12px 14px 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); }
+.heatmap-timeline-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.heatmap-timeline-heading > strong { color: var(--ink); font-size: 13px; font-variant-numeric: tabular-nums; }
+.heatmap-timeline-heading > span { margin-left: auto; color: var(--muted); font-size: 10px; }
+.heatmap-play, .heatmap-error button { min-height: 29px; padding: 5px 11px; border: 1px solid var(--line); background: var(--paper); color: var(--rose-dark); font-size: 10px; font-weight: 600; }
+.heatmap-play:hover, .heatmap-error button:hover { border-color: var(--accent); }
+.heatmap-slider { display: block; width: 100%; height: 22px; margin: 8px 0 1px; accent-color: var(--accent); cursor: pointer; }
+.heatmap-slider:disabled { cursor: default; }
+.heatmap-timeline-ends { display: flex; justify-content: space-between; color: var(--muted); font-size: 9px; font-variant-numeric: tabular-nums; }
+.heatmap-layout { display: grid; grid-template-columns: minmax(0, 1fr) 235px; align-items: stretch; gap: 12px; margin-top: 12px; }
+.heatmap-map-frame { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 300px; overflow: hidden; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); }
+.heatmap-map { width: 100%; height: auto; max-height: 600px; }
+.heatmap-area { cursor: pointer; stroke: var(--surface); stroke-width: .8px; stroke-linejoin: round; vector-effect: non-scaling-stroke; transition: fill .14s ease, stroke .14s ease, stroke-width .14s ease; }
+.heatmap-area:hover, .heatmap-area:focus-visible { stroke: var(--rose-dark); stroke-width: 2px; }
+.heatmap-area.active { stroke: var(--ink); stroke-width: 2.2px; }
+.heatmap-map-message { padding: 30px; color: var(--muted); font-size: 11px; text-align: center; }
+.heatmap-detail { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding: 16px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); }
+.heatmap-detail h3 { margin-top: 8px; color: var(--ink); font-size: 21px; line-height: 1.2; }
+.heatmap-postcode { margin-top: 4px; color: var(--muted); font-size: 10px; }
+.heatmap-detail-value { margin-top: 25px; color: var(--rose-dark); font-size: clamp(29px, 3vw, 40px); font-weight: 500; line-height: 1; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.heatmap-detail-label { margin-top: 6px; color: var(--muted); font-size: 10px; }
+.heatmap-detail-secondary { margin-top: 17px; color: var(--ink); font-size: 10px; line-height: 1.5; }
+.heatmap-legend { display: flex; align-items: center; gap: 4px; width: 100%; margin-top: auto; padding-top: 22px; color: var(--muted); font-size: 8px; }
+.heatmap-legend > span:first-child { margin-right: 3px; }
+.heatmap-legend > span:last-child { margin-left: 3px; }
+.heatmap-legend i { flex: 1; height: 9px; border-radius: 2px; }
+.heatmap-no-data-key { display: inline-flex; align-items: center; gap: 6px; margin-top: 9px; color: var(--muted); font-size: 9px; }
+.heatmap-no-data-key i { width: 10px; height: 10px; border: 1px solid var(--line); border-radius: 2px; background: var(--map-no-data); }
+.heatmap-footnote { margin-top: 12px; color: var(--muted); font-size: 9px; line-height: 1.55; }
+.heatmap-error { margin-top: 11px; color: var(--negative); font-size: 10px; }
+.heatmap-error button { margin-left: 7px; }
+.heatmap-section { --map-no-data: #fffdfb; }
 .comparison-controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; margin-top: 13px; }
 .comparison-periods { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 11px; color: var(--muted); font-size: 10px; }
 .comparison-periods > div { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
@@ -302,6 +344,14 @@ details > summary::marker { content: ""; }
   .comparison-metric .chart-host { height: 170px; }
   .comparison-metric .chart-empty, .comparison-metric .chart-placeholder { min-height: 170px; }
   .bedroom-card .chart-host { height: 260px; }
+  .heatmap-layout { grid-template-columns: minmax(0, 1fr) 210px; }
+}
+@media (max-width: 620px) {
+  .heatmap-layout { grid-template-columns: 1fr; }
+  .heatmap-map-frame { min-height: 220px; }
+  .heatmap-detail { min-height: 210px; }
+  .heatmap-detail-value { margin-top: 17px; }
+  .heatmap-legend { margin-top: 17px; padding-top: 0; }
 }
 @media (max-width: 480px) {
   .app-shell { padding: 16px 13px; }
@@ -335,6 +385,13 @@ details > summary::marker { content: ""; }
   .metric-value { font-size: clamp(21px, 6.2vw, 28px); }
   .metric-caption, .metric-delta { font-size: 9px; }
   .chart-card { padding: 16px 12px 13px; border-radius: 8px; }
+  .heatmap-section { padding: 15px 12px; border-radius: 8px; }
+  .heatmap-header { gap: 8px; }
+  .heatmap-controls { gap: 8px 12px; }
+  .heatmap-controls .segmented button { min-height: 27px; padding: 4px 6px; font-size: 9px; }
+  .heatmap-timeline { padding: 10px; }
+  .heatmap-map-frame { min-height: 180px; }
+  .heatmap-detail { min-height: 190px; padding: 13px; }
   .chart-card h3 { font-size: 19px; }
   .chart-value { font-size: 12px; }
   .chart-host { height: 258px; }

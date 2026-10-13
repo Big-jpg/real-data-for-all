@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnnualMarketAppreciation } from "./AnnualMarketAppreciation";
 import { BedroomChart, MonthlyCharts, PeriodComparison } from "./MarketCharts";
+import { SuburbHeatmap } from "./SuburbHeatmap";
 import { datesFor, displayMoney, monthLabel, monthlySeries, number, periodLabel, periods, salesCsv, variance, type BedroomFilter, type DateRange, type Insights, type MonthlyDatum, type SaleRow, type SnapshotTheme, type Suburb } from "@/lib/market-view";
 
 type Dataset = { suburbKey: string; comparisonKey: string | null; months: number; bedroom: BedroomFilter; range: DateRange; series: { key: string; rows: SaleRow[]; insights: Insights }[] };
@@ -229,6 +230,7 @@ export default function SalesExplorer() {
 
       <div className="chart-controls"><label><input type="checkbox" checked={showAverage} onChange={event => setShowAverage(event.target.checked)} /> Average price</label><span>{pinnedMonth ? "Month pinned" : "Select a month"}</span></div>
       <MonthlyCharts series={chartSeries} loading={loading} showAverage={showAverage} activeMonth={focusedMonth} onMonthFocus={focusMonth} onMonthSelect={pinMonth} />
+      <SuburbHeatmap />
       <div className="month-readouts">{chartSeries.map(item => <MonthReadout key={item.key} label={compared ? item.label : undefined} month={item.months.find(row => row.month === focusedMonth) ?? null} loading={loading} pinned={Boolean(pinnedMonth)} onClear={() => setPinnedMonth(null)} />)}</div>
       <div className="secondary-grid"><PeriodComparison series={chartSeries} loading={loading} /><BedroomChart series={chartSeries} activeBedroom={bedroom} loading={loading} onSelect={chooseBedroom} /></div>
       <PostcodePeerComparison data={currentPeers} selectedKey={suburbKey} postcode={selected?.canonical_postcode ?? null} loading={peerLoading || !currentPeers} error={currentPeerFailure} />

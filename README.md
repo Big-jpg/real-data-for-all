@@ -43,6 +43,7 @@ The production application provides:
 
 - Suburb and postcode discovery
 - Monthly sale counts and price distributions
+- Interactive suburb sales heatmap with a month-by-month timeline, selectable trailing windows, and suburb inspection
 - Rolling annual medians and year-over-year comparisons
 - Sales-velocity measures based on completed sales
 - Postcode peer distributions that compare each suburb's sales volume, price coverage, median and average prices, observed price bounds, and within-postcode percentiles under the same date and bedroom filters
@@ -53,6 +54,7 @@ The production application provides:
 - Perth Warm, Microsoft Corporate, Excel Analysis, and PowerPoint Sales snapshot styles
 
 Sales velocity means completed detached-house sales per month over the latest rolling 12 months. It is not an inventory-turnover or days-on-market measure.
+The heatmap's **Sales / month** measure divides recorded house sales by the number of months in the selected window; it is not adjusted for housing stock. It uses the published `suburb_sale_facts` table so the map follows the explorer's house and postcode scope. Its static, simplified suburb polygons come from the ABS [ASGS Edition 3 Suburbs and Localities boundaries](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files) (2021), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The initial asset includes 261 boundaries matched by suburb name; suburbs without a matching 2021 boundary are omitted until the asset is refreshed. A blank area means no captured sales in that period, not that the suburb had no market activity.
 Postcode peer percentiles are descriptive positions within the recorded suburb cohort for the selected filters; they are not forecasts or causal estimates.
 The Experimental Repeat-Sales Index measures appreciation among matched repeat-sale properties. It is not a complete market valuation, forecast, or causal explanation; its published annual dataset records the model version, source snapshot, execution time, and eligibility criteria.
 
@@ -239,6 +241,14 @@ GET /api/analytics/suburb-insights?suburb_key=yokine&from=2020-01-01&to=2025-12-
 ```
 
 The response includes rolling and prior-period medians, explicit sample sizes, land-to-price correlation, plausible median land size, and bedroom segments.
+
+### Sales heatmap
+
+```http
+GET /api/analytics/sales-heatmap?month=2026-09&window=3
+```
+
+`month` is the final (completed) month and `window` is the trailing calendar-month count, from 1 to 12. Omit `month` to use the latest completed month. The response counts published house-sale facts by suburb for the selected range.
 
 ### System statistics
 
