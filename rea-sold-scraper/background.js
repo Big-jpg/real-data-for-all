@@ -427,7 +427,20 @@ const processJobOnTab = async (tabId, job) => {
     }
   }
 
-  job.status       = "complete";
+  const expectedTotal = job.detectedTotalResults;
+  const expectedPages = job.calculatedPageCeiling;
+  const underReportedTotal = Number.isSafeInteger(expectedTotal) && allRecords.length < expectedTotal;
+  const expectedPagesNotReached = Number.isSafeInteger(expectedPages) && job.currentPage < expectedPages;
+  const incomplete = underReportedTotal || expectedPagesNotReached;
+  job.status       = incomplete ? "capped" : "complete";
+  job.error        = incomplete ? [
+    underReportedTotal
+      ? `captured ${allRecords.length} of ${expectedTotal} reported records`
+      : null,
+    expectedPagesNotReached
+      ? `stopped at page ${job.currentPage} of ${expectedPages}`
+      : null,
+  ].filter(Boolean).join("; ") : null;
   job.totalRecords = allRecords.length;
   await chrome.storage.local.set({ [storageKey]: allRecords });
   tabPool.set(tabId, null);

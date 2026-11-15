@@ -65,7 +65,7 @@ The Experimental Repeat-Sales Index measures appreciation among matched repeat-s
 - Neon Postgres as the canonical system of record
 - MotherDuck as the analytical serving layer
 - TypeScript, Zod, Vitest, and ESLint
-- A local extraction queue with a visible Playwright Chrome worker; the earlier extension remains in `rea-sold-scraper`
+- A local extraction queue with a visible Playwright Chrome worker; the earlier extension remains in `rea-sold-scraper` and marks underfilled captures as capped rather than complete
 
 ## Local setup
 

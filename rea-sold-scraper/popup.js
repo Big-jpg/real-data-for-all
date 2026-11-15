@@ -283,6 +283,9 @@ const render = () => {
     } else if (job.status === "complete") {
       const detected = job.detectedTotalResults ? ` of ${job.detectedTotalResults}` : "";
       meta = `${job.totalRecords}${detected} records · ${job.currentPage} pages`;
+    } else if (job.status === "capped") {
+      const detected = job.detectedTotalResults != null ? ` of ${job.detectedTotalResults} reported` : "";
+      meta = `${job.totalRecords}${detected} records · ${job.currentPage} pages · incomplete`;
     } else if (job.status === "error") {
       meta = job.error || "Unknown error";
     } else {

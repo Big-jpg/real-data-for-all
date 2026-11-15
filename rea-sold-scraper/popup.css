@@ -229,6 +229,7 @@ select:disabled {
 .status-pending  { background: #e8e8e8; color: #666; }
 .status-running  { background: #d4edda; color: #155724; }
 .status-complete { background: #cce5ff; color: #004085; }
+.status-capped   { background: #fff3cd; color: #856404; }
 .status-error    { background: #f8d7da; color: #721c24; }
 
 .queue-item .job-actions {
