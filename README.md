@@ -281,3 +281,28 @@ For production operations:
 ## Disclaimer
 
 Perth House Data is an independent project and is not affiliated with realestate.com.au. The dataset may contain source errors, omissions, delayed records, and inferred identities. Results are provided for exploration and should not be treated as financial advice or a formal valuation.
+
+## Apify refresh pilot
+
+The Apify tooling supports inventory discovery, one locality per paid run, and dataset validation. The chosen actor's dataset does not provide the source totals, exact resolved search scope, or terminal-page evidence needed to establish complete coverage. A successful actor run is not a completeness guarantee. Do not substitute these outputs for a complete Chrome capture manifest.
+
+Generate the inventory from the retained July archive and verified complete October captures:
+
+```powershell
+node node_modules/tsx/dist/cli.mjs scripts/apify-refresh.ts inventory captures/apify/inventory.json
+```
+
+The output date window starts on the first day of the previous calendar month and ends on the current date in Australia/Perth, inclusively. Inventory query names from the historical archive can contain aliases that fail exact locality resolution; they remain candidates, not proof that the actor resolved the intended location.
+
+To run a single captured locality after setting `APIFY_TOKEN` in the shell, specify a per-run Apify event-charge ceiling in USD and a new output directory under `captures/`:
+
+```powershell
+node node_modules/tsx/dist/cli.mjs scripts/apify-run.ts HOCKING 6065 1.00 captures/apify/hocking-run-1
+node node_modules/tsx/dist/cli.mjs scripts/apify-refresh.ts prepare captures/apify/hocking-run-1/dataset.json HOCKING 6065 captures/apify/hocking-run-1/review.json
+```
+
+The runner creates its output directory exclusively, records the submission intent before starting a paid actor, records the run and dataset IDs, and downloads the dataset. If the start response is lost, inspect Apify for the run before attempting another submission. A failed download or interrupted run must be retrieved by its recorded ID rather than started again blindly. The ceiling applies to one run's actor charges; assess other account usage and check actual billing in Apify. The tool does not orchestrate a portfolio-wide budget or guarantee a run completes before reaching its ceiling.
+
+`prepare` checks exact address locality, sold House type, identity and date, flags conflicts, deduplicates identical listing IDs, and reports out-of-window rows. It retains exceptions and marks every result `publishable: false`. Raw actor datasets can contain agent contact details and other fields not used by this application; keep `captures/` private. The pilot's 10-result cap is intentional and cannot establish locality coverage or estimate an entire refresh reliably.
+
+The November 2026 partial refresh was explicitly approved for publication as incomplete. Its retained preparation and ingestion manifests identify the source hash, excluded withheld-address listings and held conflicting sold dates. `scripts/ingest-apify-snapshot.ts` verifies the prepared hash, deduplicates listing identities, checks existing selected observations for regressions, and loads and curates the approved snapshot transactionally. The dashboard labels the recent coverage as incomplete. This one-off approval does not establish completeness for other captures.
