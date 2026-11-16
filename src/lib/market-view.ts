@@ -23,7 +23,7 @@ export function datesFor(months: number, now = new Date()): DateRange {
   const parts = new Intl.DateTimeFormat("en-AU", { timeZone: "Australia/Perth", year: "numeric", month: "numeric" }).formatToParts(now);
   const year = Number(parts.find(part => part.type === "year")!.value);
   const month = Number(parts.find(part => part.type === "month")!.value);
-  const to = new Date(Date.UTC(year, month - 1, 0));
+  const to = new Date(Date.UTC(year, month, 0));
   const from = new Date(Date.UTC(to.getUTCFullYear(), to.getUTCMonth() - months + 1, 1));
   return { from: from.toISOString().slice(0, 10), to: to.toISOString().slice(0, 10) };
 }

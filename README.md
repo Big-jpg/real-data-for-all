@@ -248,7 +248,7 @@ The response includes rolling and prior-period medians, explicit sample sizes, l
 GET /api/analytics/sales-heatmap?month=2026-09&window=3
 ```
 
-`month` is the final (completed) month and `window` is the trailing calendar-month count, from 1 to 12. Omit `month` to use the latest completed month. The response counts published house-sale facts by suburb for the selected range.
+`month` is the final month and `window` is the trailing calendar-month count, from 1 to 12. Omit `month` to use the latest month with recorded sales, including the current month. The response counts published house-sale facts by suburb for the selected range; the current month may be partial.
 
 ### System statistics
 
@@ -305,4 +305,4 @@ The runner creates its output directory exclusively, records the submission inte
 
 `prepare` checks exact address locality, sold House type, identity and date, flags conflicts, deduplicates identical listing IDs, and reports out-of-window rows. It retains exceptions and marks every result `publishable: false`. Raw actor datasets can contain agent contact details and other fields not used by this application; keep `captures/` private. The pilot's 10-result cap is intentional and cannot establish locality coverage or estimate an entire refresh reliably.
 
-The November 2026 partial refresh was explicitly approved for publication as incomplete. Its retained preparation and ingestion manifests identify the source hash, excluded withheld-address listings and held conflicting sold dates. `scripts/ingest-apify-snapshot.ts` verifies the prepared hash, deduplicates listing identities, checks existing selected observations for regressions, and loads and curates the approved snapshot transactionally. The dashboard labels the recent coverage as incomplete. This one-off approval does not establish completeness for other captures.
+The November 2026 partial refresh was explicitly approved for publication as incomplete. Its retained preparation and ingestion manifests identify the source hash, excluded withheld-address listings and held conflicting sold dates. `scripts/ingest-apify-snapshot.ts` verifies the prepared hash, deduplicates listing identities, checks existing selected observations for regressions, and loads and curates the approved snapshot transactionally. Coverage varies by suburb and period. This one-off approval does not establish completeness for other captures.

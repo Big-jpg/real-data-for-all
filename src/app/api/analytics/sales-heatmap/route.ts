@@ -1,5 +1,6 @@
 import { motherduck } from "@/lib/motherduck";
 import { z } from "zod";
+import { datesFor } from "@/lib/market-view";
 
 export const dynamic = "force-dynamic";
 
@@ -14,11 +15,12 @@ export async function GET(request: Request) {
 
   const sql = motherduck();
   try {
+    const currentMonthEnd = datesFor(1).to;
     const [bounds] = await sql`
       SELECT
         to_char(min(date_trunc('month', sold_date)), 'YYYY-MM') AS first_month,
         to_char(max(date_trunc('month', sold_date)) FILTER (
-          WHERE sold_date < date_trunc('month', current_date)
+          WHERE sold_date <= DATE ${sql.unsafe(`'${currentMonthEnd}'`)}
         ), 'YYYY-MM') AS latest_month
       FROM suburb_sale_facts
     `;
@@ -30,7 +32,7 @@ export async function GET(request: Request) {
 
     const month = parsed.data.month ?? bounds.latest_month;
     if (month < bounds.first_month || month > bounds.latest_month) {
-      return Response.json({ error: "Month is outside the available completed sales history." }, { status: 400 });
+      return Response.json({ error: "Month is outside the available sales history." }, { status: 400 });
     }
 
     const [year, monthNumber] = month.split("-").map(Number);

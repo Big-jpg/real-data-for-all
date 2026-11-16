@@ -86,7 +86,6 @@ details > summary::marker { content: ""; }
 .dashboard-title h1 { color: var(--rose-dark); font-size: clamp(27px, 3.3vw, 39px); line-height: 1.16; letter-spacing: -.035em; }
 .dashboard-title h1 > span { margin-left: 11px; color: var(--muted); font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; letter-spacing: 0; }
 .dashboard-title .context-chips { margin-top: 8px; }
-.refresh-coverage-note { margin: -5px 0 16px; color: var(--muted); font-size: 12px; line-height: 1.5; }
 .context-chips { position: relative; }
 .coverage-info > summary { display: flex; align-items: center; min-height: 25px; padding: 3px 8px; border: 1px solid var(--line); border-radius: 5px; color: var(--muted); font-size: 10px; }
 .coverage-info > summary:hover, .coverage-info[open] > summary { color: var(--rose-dark); border-color: var(--accent); }

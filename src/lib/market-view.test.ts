@@ -25,25 +25,36 @@ function insights(overrides: Partial<Insights>): Insights {
 }
 
 describe("market view data contracts", () => {
-  it("changes the completed-month window at midnight in Perth", () => {
+  it("includes the current month and changes the window at midnight in Perth", () => {
     expect(datesFor(6, new Date("2026-09-30T15:59:59Z"))).toEqual({
-      from: "2026-03-01",
-      to: "2026-08-31",
-    });
-    expect(datesFor(6, new Date("2026-09-30T16:30:00Z"))).toEqual({
       from: "2026-04-01",
       to: "2026-09-30",
+    });
+    expect(datesFor(6, new Date("2026-09-30T16:30:00Z"))).toEqual({
+      from: "2026-05-01",
+      to: "2026-10-31",
     });
   });
 
   it("retains complete leap months and crosses the year boundary", () => {
     expect(datesFor(6, new Date("2024-02-29T16:00:00Z"))).toEqual({
-      from: "2023-09-01",
-      to: "2024-02-29",
+      from: "2023-10-01",
+      to: "2024-03-31",
     });
     expect(datesFor(12, new Date("2025-12-31T16:00:00Z"))).toEqual({
-      from: "2025-01-01",
-      to: "2025-12-31",
+      from: "2025-02-01",
+      to: "2026-01-31",
+    });
+  });
+
+  it("bounds a partial November to its calendar month end", () => {
+    expect(datesFor(6, new Date("2026-11-16T04:00:00Z"))).toEqual({
+      from: "2026-06-01",
+      to: "2026-11-30",
+    });
+    expect(datesFor(1, new Date("2024-02-15T04:00:00Z"))).toEqual({
+      from: "2024-02-01",
+      to: "2024-02-29",
     });
   });
 
